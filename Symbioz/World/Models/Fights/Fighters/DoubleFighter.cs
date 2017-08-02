@@ -1,10 +1,5 @@
 ﻿using Symbioz.DofusProtocol.Types;
-using Symbioz.Providers.ActorIA.Actions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Fights.Fighters
 {
@@ -12,7 +7,7 @@ namespace Symbioz.World.Models.Fights.Fighters
     {
         public Fighter Master { get; set; }
 
-        public DoubleFighter(FightTeam team,Fighter master):base(team)
+        public DoubleFighter(FightTeam team, Fighter master) : base(team)
         {
 
         }
@@ -33,7 +28,7 @@ namespace Symbioz.World.Models.Fights.Fighters
         public override void StartTurn()
         {
             base.StartTurn();
-            
+
         }
         public override void RefreshStats()
         {

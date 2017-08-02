@@ -1,14 +1,10 @@
-﻿using Symbioz.Enums;
+﻿using Symbioz.DofusProtocol.Messages;
+using Symbioz.Enums;
 using Symbioz.Providers;
 using Symbioz.World.Models.Fights.Fighters;
-using Symbioz.World.Records.Spells;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.DofusProtocol.Messages;
 using Symbioz.World.PathProvider;
+using Symbioz.World.Records.Spells;
+using System.Collections.Generic;
 
 namespace Symbioz.World.Models.Fights.Marks
 {
@@ -23,7 +19,7 @@ namespace Symbioz.World.Models.Fights.Marks
                 Caster.Fight.RemoveMarkTrigger(Caster, this);
         }
         public Glyph(Fighter caster, short centercell, char shapetype, short radius, short associatedspellid, sbyte spellgrade, int markcolor, short duration)
-            : base(caster, centercell,centercell, shapetype, radius, associatedspellid, spellgrade, markcolor)
+            : base(caster, centercell, centercell, shapetype, radius, associatedspellid, spellgrade, markcolor)
         {
             this.Duration = duration;
         }
@@ -40,7 +36,7 @@ namespace Symbioz.World.Models.Fights.Marks
 
         public void ActivateOnTurnStart(Fighter fighter)
         {
-           
+
             var spellLevel = SpellLevelRecord.GetLevel((ushort)AssociatedSpellId, AssociatedSpellGrade);
             DisplayTriggered(fighter);
             foreach (var effect in spellLevel.Effects)
@@ -60,8 +56,8 @@ namespace Symbioz.World.Models.Fights.Marks
         }
         public void ActivateZone(Fighter fighter)
         {
-          //  fighter.Fight.TryEndSequence(1, 0);
-      //    fighter.Fight.TryStartSequence(1, 0);
+            //  fighter.Fight.TryEndSequence(1, 0);
+            //    fighter.Fight.TryStartSequence(1, 0);
             var spellLevel = SpellLevelRecord.GetLevel((ushort)AssociatedSpellId, AssociatedSpellGrade);
             DisplayTriggered(fighter);
             Caster.HandleSpellEffects(spellLevel, CenterCell, FightSpellCastCriticalEnum.NORMAL);

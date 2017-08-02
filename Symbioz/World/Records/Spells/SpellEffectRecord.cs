@@ -1,10 +1,5 @@
-﻿using Symbioz.Enums;
-using Symbioz.ORM;
-using System;
+﻿using Symbioz.ORM;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records.Spells
 {
@@ -13,8 +8,8 @@ namespace Symbioz.World.Records.Spells
     {
         public static List<SpellEffectRecord> SpellsEffects = new List<SpellEffectRecord>();
 
-        public SpellEffectRecord(int effectuid,int spelllevelid,short effectid,string rawzone,string targetmask,short dicenum,short diceside,
-            short duration,int value,int delay,int random)
+        public SpellEffectRecord(int effectuid, int spelllevelid, short effectid, string rawzone, string targetmask, short dicenum, short diceside,
+            short duration, int value, int delay, int random)
         {
             this.SpellLevelId = spelllevelid;
             this.EffectId = effectid;
@@ -30,7 +25,7 @@ namespace Symbioz.World.Records.Spells
         }
         public static List<ExtendedSpellEffect> GetSpellLevelEffects(int levelid)
         {
-            return SpellsEffects.FindAll(x => x.SpellLevelId == levelid).ConvertAll<ExtendedSpellEffect>(w=>new ExtendedSpellEffect(w));
+            return SpellsEffects.FindAll(x => x.SpellLevelId == levelid).ConvertAll<ExtendedSpellEffect>(w => new ExtendedSpellEffect(w));
         }
     }
 }

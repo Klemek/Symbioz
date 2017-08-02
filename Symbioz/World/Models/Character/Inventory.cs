@@ -1,20 +1,15 @@
 ﻿using Symbioz.DofusProtocol.Messages;
 using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
-using Symbioz.Network.Clients;
 using Symbioz.ORM;
+using Symbioz.Provider;
+using Symbioz.Providers.Conditions;
+using Symbioz.World.Models.Items;
 using Symbioz.World.Records;
-using System;
+using Symbioz.World.Records.Companions;
+using Symbioz.World.Records.Items;
 using System.Collections.Generic;
 using System.Linq;
-using Symbioz.Helper;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.Provider;
-using Symbioz.World.Records.Companions;
-using Symbioz.Providers.Conditions;
-using Symbioz.World.Records.Items;
-using Symbioz.World.Models.Items;
 
 namespace Symbioz.World.Models
 {
@@ -46,7 +41,7 @@ namespace Symbioz.World.Models
             var item = GetItemByPosition(CharacterInventoryPositionEnum.INVENTORY_POSITION_COMPANION);
             if (item != null)
             {
-                var companionEffect= item.GetFirstEffect<ObjectEffectInteger>(EffectsEnum.Eff_Companion);
+                var companionEffect = item.GetFirstEffect<ObjectEffectInteger>(EffectsEnum.Eff_Companion);
                 Character.EquipedCompanion = CompanionRecord.GetCompanion(companionEffect.value);
             }
             #endregion

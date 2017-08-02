@@ -1,17 +1,12 @@
 ﻿using Symbioz.Core;
 using Symbioz.ORM;
 using Symbioz.World.Models;
-using Symbioz.Helper;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
 
 namespace Symbioz.World.Records
 {
-    [Table("Recipes",true)]
+    [Table("Recipes", true)]
     public class RecipeRecord : ITable
     {
         public static List<RecipeRecord> Recipes = new List<RecipeRecord>();
@@ -29,7 +24,7 @@ namespace Symbioz.World.Records
         [Ignore]
         public Dictionary<ushort, uint> IngredientsWithQuantities { get; set; }
 
-        public RecipeRecord(ushort resultid,int resultnameid,short resulttypeid,byte resultlevel,List<ushort> ingredients,List<uint> quantitites,sbyte jobid,ushort skillid)
+        public RecipeRecord(ushort resultid, int resultnameid, short resulttypeid, byte resultlevel, List<ushort> ingredients, List<uint> quantitites, sbyte jobid, ushort skillid)
         {
             this.ResultId = resultid;
             this.ResultNameId = resultnameid;
@@ -48,15 +43,15 @@ namespace Symbioz.World.Records
         }
         public static RecipeRecord GetRecipe(ushort resultid)
         {
-           return Recipes.Find(x => x.ResultId == resultid);
+            return Recipes.Find(x => x.ResultId == resultid);
         }
-        public static RecipeRecord GetRecipe(List<CharacterItemRecord> crafteditems,ushort skillid)
+        public static RecipeRecord GetRecipe(List<CharacterItemRecord> crafteditems, ushort skillid)
         {
-            Dictionary<ushort,uint> ingredients = new Dictionary<ushort,uint>();
+            Dictionary<ushort, uint> ingredients = new Dictionary<ushort, uint>();
             foreach (var item in crafteditems)
             {
                 if (!ingredients.ContainsKey(item.GID))
-                ingredients.Add(item.GID,item.Quantity);
+                    ingredients.Add(item.GID, item.Quantity);
             }
             var template = RecipeRecord.Recipes.Find(x => x.IngredientsWithQuantities.ScramEqualDictionary<ushort, uint>(ingredients) && x.SkillId == skillid);
             return template;

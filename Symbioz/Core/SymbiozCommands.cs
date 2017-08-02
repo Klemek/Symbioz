@@ -1,22 +1,15 @@
 ﻿
+using Symbioz.Auth;
+using Symbioz.Auth.Models;
+using Symbioz.Core.Startup;
+using Symbioz.Enums;
+using Symbioz.Helper;
+using Symbioz.Network.Messages;
+using Symbioz.Network.Servers;
+using Symbioz.ORM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Symbioz.World;
-using Symbioz.ORM;
-using Symbioz.Auth;
-using Symbioz.Core.Startup;
-using Symbioz.Helper;
-using Symbioz.Network.Servers;
-using Symbioz.Enums;
-using Symbioz.Auth.Handlers;
-using Symbioz.Auth.Models;
-using MySql.Data.MySqlClient;
-using Symbioz.World.Records;
-using Symbioz.World.Records.Monsters;
-using Symbioz.Network.Messages;
-using System.Reflection;
-using Symbioz.Providers;
 using System.Threading;
 
 namespace Symbioz.Core
@@ -33,7 +26,7 @@ namespace Symbioz.Core
         {
             commands.Add("help", HelpRequest);
             commands.Add("infos", Infos);
-            commands.Add("saveworld",SaveTask.Save);
+            commands.Add("saveworld", SaveTask.Save);
             commands.Add("off", Offline);
             commands.Add("on", Online);
             commands.Add("restore", Restore);
@@ -49,7 +42,7 @@ namespace Symbioz.Core
                 string input = Console.ReadLine();
                 Handle(input);
             }
-           
+
         }
 
         private static void Handle(string input)
@@ -81,7 +74,7 @@ namespace Symbioz.Core
             RawDatasManager.Initialize();
             RawList();
             Logger.Init("RawDatas Reloaded");
-           
+
         }
         internal static void RawList()
         {
@@ -119,12 +112,12 @@ namespace Symbioz.Core
         public static void Offline()
         {
             WorldServer.Instance.SetServerState(ServerStatusEnum.NOJOIN);
-            
+
             for (int i = 0; i < WorldServer.Instance.WorldClients.Count(); i++)
             {
                 var client = WorldServer.Instance.WorldClients[i];
                 if (client.Account.Role != ServerRoleEnum.FONDATOR)
-                    client.Disconnect(1000,"Le serveur est desormais inaccessible");
+                    client.Disconnect(1000, "Le serveur est desormais inaccessible");
             }
             Logger.World("Le serveur a été passé hors ligne");
 
@@ -135,5 +128,5 @@ namespace Symbioz.Core
             Logger.World("Le serveur est a présent en ligne");
         }
     }
-  
+
 }

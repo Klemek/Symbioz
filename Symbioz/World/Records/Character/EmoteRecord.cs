@@ -1,11 +1,6 @@
 ﻿using Symbioz.Core;
-using Symbioz.Core.Startup;
 using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
@@ -21,7 +16,7 @@ namespace Symbioz.World.Records
         public string Name { get; set; }
         public bool IsAura;
 
-        public EmoteRecord(byte id,int nameid,string defaultanim,bool isaura)
+        public EmoteRecord(byte id, int nameid, string defaultanim, bool isaura)
         {
             this.Id = id;
             this.NameId = nameid;

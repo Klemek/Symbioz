@@ -1,13 +1,9 @@
 ﻿using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
-    [Table("MapsElements",true)]
+    [Table("MapsElements", true)]
     public class MapElementRecord : ITable
     {
         public static List<MapElementRecord> MapsElements = new List<MapElementRecord>();
@@ -18,7 +14,7 @@ namespace Symbioz.World.Records
         public int MapId;
         public ushort CellId;
 
-        public MapElementRecord(int id,int elementid,int mapid,ushort cellid)
+        public MapElementRecord(int id, int elementid, int mapid, ushort cellid)
         {
             this.Id = id;
             this.ElementId = elementid;

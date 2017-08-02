@@ -1,18 +1,15 @@
-﻿using Symbioz.DofusProtocol.Types;
+﻿using Symbioz.DofusProtocol.Messages;
+using Symbioz.DofusProtocol.Types;
+using Symbioz.Enums;
+using Symbioz.Helper;
+using Symbioz.Network.Clients;
+using Symbioz.Network.Servers;
+using Symbioz.World.Models.Guilds;
+using Symbioz.World.Records;
 using Symbioz.World.Records.Alliances;
+using Symbioz.World.Records.Guilds;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.DofusProtocol.Messages;
-using Symbioz.World.Records.Guilds;
-using Symbioz.Network.Clients;
-using Symbioz.World.Models.Guilds;
-using Symbioz.Network.Servers;
-using Symbioz.World.Records;
-using Symbioz.Helper;
-using Symbioz.Enums;
 
 namespace Symbioz.World.Models.Alliances
 {
@@ -70,7 +67,7 @@ namespace Symbioz.World.Models.Alliances
         {
             AllianceRecord Alliance = AllianceProvider.GetAlliance(id);
             List<GuildAllianceRecord> AllianceMembers = GuildAllianceRecord.GuildsAlliances.FindAll(x => x.AllianceId == id);
-            foreach(GuildAllianceRecord member in AllianceMembers)
+            foreach (GuildAllianceRecord member in AllianceMembers)
             {
                 LeaveAlliance(member.GuildId);
                 member.RemoveElement();
@@ -82,9 +79,9 @@ namespace Symbioz.World.Models.Alliances
         {
             GuildAllianceRecord Gmember = new GuildAllianceRecord(Guild.Id, Alliance.Id);
             Gmember.AddElement();
-            if(Inviter != null)
+            if (Inviter != null)
                 Inviter.Send(new AllianceInvitationAnswerMessage(true));
-            foreach(CharacterGuildRecord member in CharacterGuildRecord.CharactersGuilds.FindAll(x=>x.GuildId == Guild.Id))
+            foreach (CharacterGuildRecord member in CharacterGuildRecord.CharactersGuilds.FindAll(x => x.GuildId == Guild.Id))
             {
                 AllianceRecord.OnCharacterJoinAlliance(CharacterRecord.GetCharacterRecordById(member.CharacterId), Alliance);
             }
@@ -93,8 +90,8 @@ namespace Symbioz.World.Models.Alliances
         public static void LeaveAlliance(int guildId)
         {
             GuildAllianceRecord AllianceMember = GuildAllianceRecord.GuildsAlliances.Find(x => x.GuildId == guildId);
-            List<CharacterGuildRecord> guildMembers = CharacterGuildRecord.CharactersGuilds.FindAll(x=>x.GuildId == guildId);
-            foreach(CharacterGuildRecord guildMember in guildMembers)
+            List<CharacterGuildRecord> guildMembers = CharacterGuildRecord.CharactersGuilds.FindAll(x => x.GuildId == guildId);
+            foreach (CharacterGuildRecord guildMember in guildMembers)
             {
                 Character record = WorldServer.Instance.GetOnlineClient(guildMember.CharacterId).Character;
                 AllianceRecord.OnCharacterLeftAlliance(record);
@@ -106,7 +103,7 @@ namespace Symbioz.World.Models.Alliances
         {
             List<GuildInsiderFactSheetInformations> guilds = new List<GuildInsiderFactSheetInformations>();
             List<GuildAllianceRecord> records = GuildAllianceRecord.GuildsAlliances.FindAll(x => x.AllianceId == AllianceId);
-            foreach(GuildAllianceRecord record in records)
+            foreach (GuildAllianceRecord record in records)
             {
                 GuildRecord guild = GuildRecord.GetGuild(record.GuildId);
                 GuildInsiderFactSheetInformations a = new GuildInsiderFactSheetInformations((uint)guild.Id, guild.Name, guild.GetEmblemObject(), (uint)guild.GetLeader().CharacterId, (byte)guild.Level, (ushort)GuildProvider.GetMembers(guild.Id).Length, CharacterRecord.GetCharacterRecordById(guild.GetLeader().CharacterId).Name, (ushort)GuildProvider.Instance.ConnectedMembersCount(guild.Id), 0, 0, true);
@@ -120,7 +117,7 @@ namespace Symbioz.World.Models.Alliances
             GuildAllianceRecord allianceMember = GuildAllianceRecord.GetCharacterAlliance(guildId);
             if (allianceMember == null)
                 return null;
-           return AllianceProvider.GetAlliance(allianceMember.AllianceId);
+            return AllianceProvider.GetAlliance(allianceMember.AllianceId);
         }
 
         public static GuildRecord GetLeader(int allianceId)

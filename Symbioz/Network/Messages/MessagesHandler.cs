@@ -1,17 +1,13 @@
-﻿using System.Diagnostics;
-using System.Threading;
-using System.Reflection.Emit;
-using System.Linq.Expressions;
-using Symbioz.DofusProtocol.Messages;
-using Symbioz.Core;
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using Symbioz.Core;
 using Symbioz.Core.Startup;
-using Symbioz.Network.Clients;
+using Symbioz.DofusProtocol.Messages;
 using Symbioz.Helper;
+using Symbioz.Network.Clients;
 using Symbioz.Utils;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Symbioz.Network.Messages
 {

@@ -1,9 +1,6 @@
 ﻿using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
@@ -56,9 +53,9 @@ namespace Symbioz.World.Records
         public static uint GetLastCharacterEntrie()
         {
             uint Result = (uint)Entries;
-            foreach(ExperienceRecord rec in Experiences)
+            foreach (ExperienceRecord rec in Experiences)
             {
-                if(rec.Experience == 0 && rec.Level > 1)
+                if (rec.Experience == 0 && rec.Level > 1)
                 {
                     Result = rec.Level;
                     return Result;

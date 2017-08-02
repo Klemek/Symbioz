@@ -1,15 +1,11 @@
 ﻿using Symbioz.DofusProtocol.Types;
 using Symbioz.ORM;
 using Symbioz.World.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
-    [Table("NpcsTemplates",true)]
+    [Table("NpcsTemplates", true)]
     class NpcTemplateRecord : ITable
     {
         public static List<NpcTemplateRecord> NpcsTemplates = new List<NpcTemplateRecord>();
@@ -20,7 +16,7 @@ namespace Symbioz.World.Records
         [Ignore]
         public ContextActorLook RealLook;
 
-        public NpcTemplateRecord(int id,string look)
+        public NpcTemplateRecord(int id, string look)
         {
             this.Id = id;
             this.Look = look;

@@ -1,18 +1,12 @@
-﻿using Symbioz.Network.Servers;
-using Symbioz.ORM;
-using Symbioz.World.Records.Guilds;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.DofusProtocol.Types;
-using Symbioz.DofusProtocol.Messages;
+﻿using Symbioz.DofusProtocol.Messages;
 using Symbioz.Network.Clients;
+using Symbioz.Network.Servers;
+using Symbioz.ORM;
+using System.Collections.Generic;
 
 namespace Symbioz.World.Records.Alliances
 {
-    [Table("GuildsAlliances",true)]
+    [Table("GuildsAlliances", true)]
     public class GuildAllianceRecord : ITable
     {
 
@@ -31,7 +25,7 @@ namespace Symbioz.World.Records.Alliances
         public void SendToMembers(Message message)
         {
             List<WorldClient> members = WorldServer.Instance.GetAllClientsOnline().FindAll(x => x.Character.GetGuild().Id == GuildId);
-            foreach(WorldClient member in members)
+            foreach (WorldClient member in members)
             {
                 member.Send(message);
             }

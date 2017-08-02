@@ -1,11 +1,7 @@
 ﻿using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
 using Symbioz.Helper;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Items
 {
@@ -29,7 +25,7 @@ namespace Symbioz.World.Models.Items
         {
             List<ObjectEffect> effects = new List<ObjectEffect>();
             effects.Add(new ObjectEffectLadder(232, 1, 2));
-  
+
             item.RemoveAllEffects();
             item.AddEffects(effects);
         }

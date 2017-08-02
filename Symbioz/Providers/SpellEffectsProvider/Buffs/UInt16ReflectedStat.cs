@@ -1,16 +1,11 @@
 ﻿using Symbioz.World.Records;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.SpellEffectsProvider.Buffs
 {
     public class UInt16ReflectedStat
     {
-        public UInt16ReflectedStat(FieldInfo field,StatsRecord host)
+        public UInt16ReflectedStat(FieldInfo field, StatsRecord host)
         {
             this.Field = field;
             this.Host = host;

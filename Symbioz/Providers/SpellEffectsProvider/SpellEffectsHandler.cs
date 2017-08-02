@@ -1,22 +1,18 @@
 ﻿using Symbioz.Core.Startup;
-using System;
+using Symbioz.Enums;
+using Symbioz.Helper;
+using Symbioz.Providers.SpellEffectsProvider;
+using Symbioz.World.Models.Fights.Fighters;
+using Symbioz.World.Records.Spells;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Symbioz;
-using System.Threading.Tasks;
 using System.Reflection;
-using Symbioz.Providers.SpellEffectsProvider;
-using Symbioz.Enums;
-using Symbioz.World.Records.Spells;
-using Symbioz.World.Models.Fights.Fighters;
-using Symbioz.Helper;
 
 namespace Symbioz.Providers
 {
     class SpellEffectsHandler
     {
-        public delegate void SpellHandlerDelegate(Fighter source, SpellLevelRecord level, ExtendedSpellEffect effect,List<Fighter> affecteds, short castcellid);
+        public delegate void SpellHandlerDelegate(Fighter source, SpellLevelRecord level, ExtendedSpellEffect effect, List<Fighter> affecteds, short castcellid);
 
         public static Dictionary<EffectsEnum, SpellHandlerDelegate> Handlers = new Dictionary<EffectsEnum, SpellHandlerDelegate>();
 
@@ -34,12 +30,12 @@ namespace Symbioz.Providers
                 }
             }
         }
-        public static void Handle(Fighter fighter, SpellLevelRecord record, ExtendedSpellEffect effect,List<Fighter> affecteds, short castcellid)
+        public static void Handle(Fighter fighter, SpellLevelRecord record, ExtendedSpellEffect effect, List<Fighter> affecteds, short castcellid)
         {
             var handler = Handlers.FirstOrDefault(x => x.Key == effect.BaseEffect.EffectType);
             if (handler.Value != null)
             {
-                handler.Value(fighter, record, effect,affecteds, castcellid);
+                handler.Value(fighter, record, effect, affecteds, castcellid);
             }
             else
             {

@@ -1,9 +1,5 @@
 ﻿using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records.Companions
 {
@@ -21,8 +17,8 @@ namespace Symbioz.World.Records.Companions
         public short ValuePerLevel;
         [Ignore]
         public CharacteristicRecord CharacteristicTemplate { get { return CharacteristicRecord.GetCharacteristic(CaracId); } }
-        
-        public CompanionCharacteristic(int id,short caracid,short companionid,sbyte order,short initialvalue,short levelpervalue,
+
+        public CompanionCharacteristic(int id, short caracid, short companionid, sbyte order, short initialvalue, short levelpervalue,
             short valueperlevel)
         {
             this.Id = id;

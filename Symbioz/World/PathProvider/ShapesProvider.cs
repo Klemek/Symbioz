@@ -1,18 +1,11 @@
 ﻿
 using Symbioz.Core.Startup;
-using Symbioz.DofusProtocol.Messages;
 using Symbioz.Enums;
-using Symbioz.Network.Clients;
-using Symbioz.Providers;
 using Symbioz.World.Models.Maps;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.PathProvider
 {
@@ -442,12 +435,12 @@ namespace Symbioz.World.PathProvider
         /// <param name="radius"></param>
         /// <returns></returns>
         [Shape('A')]
-        public static List<short> GetAShape(short startcell,short entitycell,short radius)
+        public static List<short> GetAShape(short startcell, short entitycell, short radius)
         {
             return GetaShape(startcell, entitycell, radius);
         }
         [Shape('a')]
-        public static List<short> GetaShape(short startcell,short entitycell,short radius)
+        public static List<short> GetaShape(short startcell, short entitycell, short radius)
         {
             List<short> results = new List<short>();
             for (short i = 0; i < 559; i++)
@@ -569,7 +562,7 @@ namespace Symbioz.World.PathProvider
             return line;
         }
         [Shape('B')]
-        public static List<short> GetBombLine(short startcell,short entitycell,short radius)
+        public static List<short> GetBombLine(short startcell, short entitycell, short radius)
         {
             var line = GetLineFromDirection(startcell, radius, GetDirectionFromTwoCells(startcell, entitycell));
             line.Remove(line.Last());

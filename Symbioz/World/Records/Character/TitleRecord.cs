@@ -1,10 +1,6 @@
 ﻿using Symbioz.Core;
 using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
@@ -21,7 +17,7 @@ namespace Symbioz.World.Records
         [Ignore]
         public string NameFemale;
 
-        public TitleRecord(int id,int namemaleid,int namefemaleid)
+        public TitleRecord(int id, int namemaleid, int namefemaleid)
         {
             this.Id = id;
             this.NameMaleId = namemaleid;

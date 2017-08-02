@@ -2,16 +2,8 @@
 using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
 using Symbioz.Network.Clients;
-using Symbioz.Providers.FightResults;
-using Symbioz.World.Models.Fights.Fighters;
-using Symbioz.World.PathProvider;
 using Symbioz.World.Records;
-using Symbioz.World.Records.Monsters;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Fights
 {

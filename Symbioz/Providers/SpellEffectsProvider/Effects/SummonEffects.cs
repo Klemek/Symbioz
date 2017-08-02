@@ -1,15 +1,10 @@
-﻿using Symbioz.DofusProtocol.Messages;
-using Symbioz.Enums;
+﻿using Symbioz.Enums;
 using Symbioz.Providers.SpellEffectsProvider.Buffs;
 using Symbioz.World.Models.Fights;
 using Symbioz.World.Models.Fights.Fighters;
-using Symbioz.World.Records.Monsters;
 using Symbioz.World.Records.Spells;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.SpellEffectsProvider.Effects
 {
@@ -44,10 +39,10 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
                 fighter.Fight.SpawnBomb(fighter, record.BaseEffect.DiceNum, fighter.GetSpellLevel(level.SpellId).Grade, castCellid, fighter.Team);
             }
             else
-               
+
             {
                 MarksHelper.Instance.DirectExplosion(fighter, target, record.BaseEffect.DiceNum, level.Grade);
-            
+
             }
 
         }

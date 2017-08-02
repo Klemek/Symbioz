@@ -1,5 +1,4 @@
 ﻿using Symbioz.Auth;
-using Symbioz.Auth.Handlers;
 using Symbioz.Auth.Models;
 using Symbioz.Core;
 using Symbioz.DofusProtocol.Messages;
@@ -8,17 +7,12 @@ using Symbioz.Enums;
 using Symbioz.Helper;
 using Symbioz.Network.Clients;
 using Symbioz.Network.Messages;
-using Symbioz.ORM;
 using Symbioz.Utils;
 using Symbioz.World.Models;
-using Symbioz.World.Models.Guilds;
 using Symbioz.World.Records;
 using Symbioz.World.Records.Guilds;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Handlers
 {

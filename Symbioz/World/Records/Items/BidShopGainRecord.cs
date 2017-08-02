@@ -1,13 +1,10 @@
 ﻿using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
-    [Table("BidShopsGains",true)]
+    [Table("BidShopsGains", true)]
     class BidShopGainRecord : ITable
     {
         public static List<BidShopGainRecord> BidShopsGains = new List<BidShopGainRecord>();
@@ -19,7 +16,7 @@ namespace Symbioz.World.Records
         public uint ItemQuantity;
         public uint ItemPrice;
 
-        public BidShopGainRecord(int id,int characterid,ushort itemgid,uint itemquantity,uint itemprice)
+        public BidShopGainRecord(int id, int characterid, ushort itemgid, uint itemquantity, uint itemprice)
         {
             this.Id = id;
             this.CharacterId = characterid;

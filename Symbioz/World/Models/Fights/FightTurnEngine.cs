@@ -1,9 +1,4 @@
 ﻿using Symbioz.World.Models.Fights.Fighters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace Symbioz.World.Models.Fights
@@ -28,7 +23,7 @@ namespace Symbioz.World.Models.Fights
         public void EndTurn()
         {
             if (m_timer != null)
-            m_timer.Dispose();
+                m_timer.Dispose();
         }
         void m_timer_Elapsed(object sender, ElapsedEventArgs e)
         {

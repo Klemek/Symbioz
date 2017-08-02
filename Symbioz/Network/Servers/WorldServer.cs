@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Symbioz.Core;
-using Symbioz.SSync;
-using System.Threading.Tasks;
-using System.Net.Sockets;
-using Symbioz.Network.Clients;
-using Symbioz.Utils;
-using Symbioz.Helper;
-using Symbioz.Enums;
+﻿using Symbioz.Core;
 using Symbioz.DofusProtocol.Messages;
 using Symbioz.DofusProtocol.Types;
-using Symbioz.World.Records;
-using Symbioz.World.Models;
+using Symbioz.Enums;
+using Symbioz.Helper;
+using Symbioz.Network.Clients;
+using Symbioz.SSync;
 using Symbioz.World.Models.Parties;
+using Symbioz.World.Records;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Sockets;
 
 namespace Symbioz.Network.Servers
 {
@@ -31,7 +27,7 @@ namespace Symbioz.Network.Servers
             this.Server.OnServerStarted += Server_OnServerStarted;
             this.Server.OnServerFailedToStart += Server_OnServerFailedToStart;
             this.Server.OnSocketAccepted += Server_OnSocketAccepted;
-           
+
         }
         void Server_OnSocketAccepted(Socket socket)
         {
@@ -45,7 +41,7 @@ namespace Symbioz.Network.Servers
         {
             Logger.Error("Unable to start WorldServer! : (" + ex.Message + ")");
         }
-        
+
         void Server_OnServerStarted()
         {
             Logger.World("Server Started (" + Server.EndPoint.AsIpString() + ")");
@@ -73,9 +69,9 @@ namespace Symbioz.Network.Servers
         {
             GetAllClientsOnline().ForEach(x => x.Send(message));
         }
-        public void SendOnSubarea(Message message,int subareaid)
+        public void SendOnSubarea(Message message, int subareaid)
         {
-            GetAllClientsOnline().FindAll(x => x.Character.SubAreaId == subareaid).ForEach(x=>x.Send(message));
+            GetAllClientsOnline().FindAll(x => x.Character.SubAreaId == subareaid).ForEach(x => x.Send(message));
         }
         public void RemoveClient(WorldClient client)
         {
@@ -100,11 +96,11 @@ namespace Symbioz.Network.Servers
         }
         public Party GetPartyByCharacterId(int characterId)
         {
-            foreach(WorldClient c in this.WorldClients)
+            foreach (WorldClient c in this.WorldClients)
             {
-                if(c.Character.Id == characterId)
+                if (c.Character.Id == characterId)
                 {
-                    if(c.Character.PartyMember != null)
+                    if (c.Character.PartyMember != null)
                     {
                         return c.Character.PartyMember.Party;
                     }

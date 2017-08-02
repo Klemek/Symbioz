@@ -2,11 +2,8 @@
 using Symbioz.Core.Startup;
 using Symbioz.ORM;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Core
 {
@@ -19,7 +16,7 @@ namespace Symbioz.Core
 
 
 
-        [StartupInvoke("World Connection",StartupInvokeType.Base)]
+        [StartupInvoke("World Connection", StartupInvokeType.Base)]
         public static void Connect()
         {
 

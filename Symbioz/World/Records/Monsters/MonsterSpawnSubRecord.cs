@@ -1,9 +1,6 @@
 ﻿using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records.Monsters
 {
@@ -35,8 +32,8 @@ namespace Symbioz.World.Records.Monsters
             else
             {
                 var subId = MapRecord.GetSubAreaId(mapid);
-                var sub = MonstersSpawnsSub.FindAll(x => x.SubAreaId ==subId);
-                return sub.ConvertAll<MonsterSpawnMapRecord>(x => new MonsterSpawnMapRecord(0, x.MonsterId,mapid, x.Probability));
+                var sub = MonstersSpawnsSub.FindAll(x => x.SubAreaId == subId);
+                return sub.ConvertAll<MonsterSpawnMapRecord>(x => new MonsterSpawnMapRecord(0, x.MonsterId, mapid, x.Probability));
             }
         }
     }

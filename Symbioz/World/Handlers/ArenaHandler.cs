@@ -1,12 +1,7 @@
-﻿using Symbioz.Network.Messages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.DofusProtocol.Messages;
+﻿using Symbioz.DofusProtocol.Messages;
 using Symbioz.Enums;
 using Symbioz.Network.Clients;
+using Symbioz.Network.Messages;
 using Symbioz.Providers;
 
 namespace Symbioz.World.Handlers
@@ -37,7 +32,7 @@ namespace Symbioz.World.Handlers
                 return;
             }
             ArenaProvider.Instance.SearchArena(client);
-           
+
         }
         [MessageHandler]
         public static void HandleArenaUnregister(GameRolePlayArenaUnregisterMessage message, WorldClient client)

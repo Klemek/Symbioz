@@ -1,10 +1,7 @@
 ﻿using Symbioz.Providers.ActorIA.Actions;
 using Symbioz.World.Models.Fights.Fighters;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.ActorIA
 {
@@ -23,23 +20,23 @@ namespace Symbioz.Providers.ActorIA
 
         protected void NextAction()
         {
-        //    try
+            //    try
             {
                 Actions[m_action_Index].Execute(m_fighter);
             }
-       //     catch (Exception ex)
+            //     catch (Exception ex)
             {
-              //  m_fighter.Fight.GetAllCharacterFighters().ForEach(x => x.Client.Character.NotificationError("(" + m_fighter.GetName() + ")" + ex));
+                //  m_fighter.Fight.GetAllCharacterFighters().ForEach(x => x.Client.Character.NotificationError("(" + m_fighter.GetName() + ")" + ex));
 
             }
-      //      finally
+            //      finally
             {
                 OnActionEnded();
             }
         }
         protected void OnActionEnded()
         {
-            
+
             m_action_Index++;
             if (Actions.Count() == m_action_Index)
             {

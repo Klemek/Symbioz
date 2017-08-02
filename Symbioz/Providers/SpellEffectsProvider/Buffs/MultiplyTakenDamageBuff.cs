@@ -3,11 +3,6 @@ using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
 using Symbioz.World.Models.Fights.Damages;
 using Symbioz.World.Models.Fights.Fighters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.SpellEffectsProvider.Buffs
 {
@@ -43,7 +38,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.Buffs
         {
             TakenDamages damages = (TakenDamages)arg2;
             damages.Delta *= (short)(Delta / 100);
-            Fighter.LoseLife(damages,(int)arg1);
+            Fighter.LoseLife(damages, (int)arg1);
             return true;
         }
     }

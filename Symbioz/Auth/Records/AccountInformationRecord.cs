@@ -1,10 +1,6 @@
 ﻿
 using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Auth.Records
 {
@@ -18,23 +14,23 @@ namespace Symbioz.Auth.Records
         [Update]
         public uint BankKamas;
 
-        public AccountInformationsRecord(int id,uint bankkamas)
+        public AccountInformationsRecord(int id, uint bankkamas)
         {
             this.Id = id;
             this.BankKamas = bankkamas;
         }
-        public static void AddAccountInformations(int accountid,int startbankkamas)
+        public static void AddAccountInformations(int accountid, int startbankkamas)
         {
-            AccountsProvider.CreateAccountInformation(accountid,startbankkamas);
-            AccountsInformations.Add(new AccountInformationsRecord(accountid,(uint)startbankkamas));
+            AccountsProvider.CreateAccountInformation(accountid, startbankkamas);
+            AccountsInformations.Add(new AccountInformationsRecord(accountid, (uint)startbankkamas));
         }
-        public static void CheckAccountInformations(int accountid,int startbankkamas)
+        public static void CheckAccountInformations(int accountid, int startbankkamas)
         {
-           
-           if (AccountsInformations.Find(x=>x.Id == accountid) == null)
-           {
-               AddAccountInformations(accountid,startbankkamas);
-           }
+
+            if (AccountsInformations.Find(x => x.Id == accountid) == null)
+            {
+                AddAccountInformations(accountid, startbankkamas);
+            }
         }
         public static AccountInformationsRecord GetInformations(int accountid)
         {

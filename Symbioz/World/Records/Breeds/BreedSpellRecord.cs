@@ -1,15 +1,10 @@
 ﻿using Symbioz.DofusProtocol.Types;
-using Symbioz.Enums;
 using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
-    [Table("BreedsSpells",true)]
+    [Table("BreedsSpells", true)]
     public class BreedSpellRecord : ITable
     {
         public static List<BreedSpellRecord> BreedsSpells = new List<BreedSpellRecord>();
@@ -19,8 +14,8 @@ namespace Symbioz.World.Records
         public ushort SpellId;
         public ushort Level;
         public sbyte Breed;
-        
-        public BreedSpellRecord(int id,ushort spellid,ushort level,sbyte breed)
+
+        public BreedSpellRecord(int id, ushort spellid, ushort level, sbyte breed)
         {
             this.Id = id;
             this.SpellId = spellid;
@@ -42,6 +37,6 @@ namespace Symbioz.World.Records
             }
             return results;
         }
-        
+
     }
 }

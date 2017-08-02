@@ -1,9 +1,5 @@
 ﻿using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
@@ -16,7 +12,7 @@ namespace Symbioz.World.Records
         public DungeonsIdRecord(int id, string name)
         {
             this.Id = id;
-            this.Name = name;   
+            this.Name = name;
         }
     }
 }

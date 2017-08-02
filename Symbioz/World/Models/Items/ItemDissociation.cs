@@ -1,9 +1,4 @@
 ﻿using Symbioz.ORM;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models
 {
@@ -11,9 +6,9 @@ namespace Symbioz.World.Models
     {
         public CharacterItemRecord newItem { get; set; }
         public CharacterItemRecord BaseItem { get; set; }
-        public ItemCut(CharacterItemRecord item,uint quantity,byte newItempos)
+        public ItemCut(CharacterItemRecord item, uint quantity, byte newItempos)
         {
-            
+
             newItem = item.CloneAndGetNewUID();
             item.Position = newItempos;
             item.Quantity = quantity;
@@ -22,9 +17,9 @@ namespace Symbioz.World.Models
             BaseItem = item;
             SaveTask.UpdateElement(BaseItem);
         }
-        public static ItemCut Cut(CharacterItemRecord item,uint quantity,byte newItempos)
+        public static ItemCut Cut(CharacterItemRecord item, uint quantity, byte newItempos)
         {
-            return new ItemCut(item, quantity,newItempos);
+            return new ItemCut(item, quantity, newItempos);
         }
     }
 }

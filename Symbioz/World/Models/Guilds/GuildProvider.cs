@@ -1,17 +1,13 @@
 ﻿using Symbioz.DofusProtocol.Messages;
-using Symbioz.Helper;
-using Symbioz.World.Records.Guilds;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Symbioz.Enums;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.Network.Servers;
 using Symbioz.DofusProtocol.Types;
+using Symbioz.Enums;
+using Symbioz.Helper;
 using Symbioz.Network.Clients;
-using Symbioz.World.Records.Alliances;
+using Symbioz.Network.Servers;
 using Symbioz.World.Models.Alliances;
+using Symbioz.World.Records.Alliances;
+using Symbioz.World.Records.Guilds;
+using System.Collections.Generic;
 
 namespace Symbioz.World.Models.Guilds
 {
@@ -43,7 +39,7 @@ namespace Symbioz.World.Models.Guilds
             character.LearnEmote(GuildProvider.EMOTE_ID);
             if (character.HasAlliance)
             {
-                character.HumanOptions.Add(new HumanOptionAlliance(character.GetAlliance().GetAllianceInformations(),(sbyte)0));
+                character.HumanOptions.Add(new HumanOptionAlliance(character.GetAlliance().GetAllianceInformations(), (sbyte)0));
                 character.Client.Send(new AllianceJoinedMessage(character.GetAlliance().GetAllianceInformations(), true));
                 character.RefreshOnMapInstance();
                 character.LearnEmote(AllianceProvider.EMOTE_ID);

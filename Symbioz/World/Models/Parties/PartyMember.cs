@@ -1,14 +1,7 @@
-﻿using Symbioz.DofusProtocol.Types;
-using Symbioz.DofusProtocol.Messages;
-using Symbioz.Enums;
-using Symbioz.World.PathProvider;
+﻿using Symbioz.DofusProtocol.Messages;
+using Symbioz.DofusProtocol.Types;
 using Symbioz.World.Records;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Parties
 {
@@ -40,7 +33,7 @@ namespace Symbioz.World.Models.Parties
             int mapid = (int)(short)record.MapId;
             PlayerStatus status = this.Character.PlayerStatus;
             PartyCompanionMemberInformations[] memberInformationsArray = new PartyCompanionMemberInformations[0];
-            return new PartyMemberInformations((uint)id, (byte)level, name, entityLook, 
+            return new PartyMemberInformations((uint)id, (byte)level, name, entityLook,
                 (sbyte)breed, sex, (uint)hp, (uint)maxhp, (ushort)stats.Prospecting,
                 (byte)regen, (ushort)this.Character.Initiative, (sbyte)align, (short)this.Character.Map.Position.x, (short)this.Character.Map.Position.y, this.Character.Map.Id, (ushort)this.Character.SubAreaId, status, (IEnumerable<PartyCompanionMemberInformations>)memberInformationsArray);
         }
@@ -58,8 +51,8 @@ namespace Symbioz.World.Models.Parties
             int mapid = (int)(short)record.MapId;
             PartyCompanionMemberInformations[] memberInformationsArray = new PartyCompanionMemberInformations[0];
 
-            return new PartyInvitationMemberInformations((uint)id, (byte)level, 
-                name, entityLook, (sbyte)breed, sex,(short)this.Character.Map.Position.x, (short)this.Character.Map.Position.y, this.Character.Map.Id,
+            return new PartyInvitationMemberInformations((uint)id, (byte)level,
+                name, entityLook, (sbyte)breed, sex, (short)this.Character.Map.Position.x, (short)this.Character.Map.Position.y, this.Character.Map.Id,
                 (ushort)this.Character.SubAreaId, memberInformationsArray);
         }
 

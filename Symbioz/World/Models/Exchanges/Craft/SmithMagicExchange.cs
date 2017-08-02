@@ -1,15 +1,10 @@
-﻿using Symbioz.Enums;
-using Symbioz.Network.Clients;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.DofusProtocol.Messages;
-using Symbioz.World.Records;
-using System.Timers;
+﻿using Symbioz.DofusProtocol.Messages;
 using Symbioz.DofusProtocol.Types;
+using Symbioz.Enums;
+using Symbioz.Network.Clients;
 using Symbioz.World.Models.Exchanges.Craft.Replay;
+using Symbioz.World.Records;
+using System.Collections.Generic;
 
 namespace Symbioz.World.Models.Exchanges.Craft
 {
@@ -90,7 +85,7 @@ namespace Symbioz.World.Models.Exchanges.Craft
         }
         public void PerformCraft()
         {
-           
+
         }
         public override void AddItemToPanel(CharacterItemRecord obj, uint quantity)
         {
@@ -196,8 +191,8 @@ namespace Symbioz.World.Models.Exchanges.Craft
         {
             if (ready)
             {
-            ReplayEngine = new SmithMagicReplayEngine(this);
-            ReplayEngine.Start();
+                ReplayEngine = new SmithMagicReplayEngine(this);
+                ReplayEngine.Start();
             }
         }
         public List<ObjectEffect> GetRuneEffects()

@@ -3,16 +3,11 @@ using Symbioz.DofusProtocol.Types;
 using Symbioz.Helper;
 using Symbioz.Network.Clients;
 using Symbioz.Providers;
-using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.Models.Maps;
 using Symbioz.World.Records;
 using Symbioz.World.Records.Monsters;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.Enums;
 
 namespace Symbioz.World.Models
 {

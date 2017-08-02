@@ -2,16 +2,9 @@
 using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
 using Symbioz.Network.Clients;
-using Symbioz.World.Models;
-using Symbioz.World.Records;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.Helper;
-using System.Timers;
 using Symbioz.World.Models.Exchanges.Craft.Replay;
+using Symbioz.World.Records;
+using System.Collections.Generic;
 
 namespace Symbioz.World.Models.Exchanges.Craft
 {

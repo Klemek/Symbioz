@@ -1,24 +1,21 @@
-﻿using Symbioz.Core;
-using Symbioz.Core.Startup;
+﻿using Symbioz.Core.Startup;
+using Symbioz.DofusProtocol.Messages;
 using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
 using Symbioz.Network.Clients;
+using Symbioz.Providers.Conditions;
 using Symbioz.World.Models;
+using Symbioz.World.Records.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.DofusProtocol.Messages;
-using Symbioz.World.Records.Spells;
-using Symbioz.Providers.Conditions;
 
 namespace Symbioz.Providers
 {
     class ItemUseEffectsProvider
     {
-        private delegate bool HandlerDelegate(WorldClient client, ObjectEffect effect,uint objectuid);
-        private static Dictionary<EffectsEnum, HandlerDelegate> Functions = new Dictionary<EffectsEnum,HandlerDelegate>();
+        private delegate bool HandlerDelegate(WorldClient client, ObjectEffect effect, uint objectuid);
+        private static Dictionary<EffectsEnum, HandlerDelegate> Functions = new Dictionary<EffectsEnum, HandlerDelegate>();
         [StartupInvoke(StartupInvokeType.Others)]
         public static void LoadFunctions()
         {
@@ -30,7 +27,7 @@ namespace Symbioz.Providers
             Functions.Add(EffectsEnum.Eff_AddRessources, AddRessources);
             Functions.Add(EffectsEnum.Eff_LearnSpell, LearnSpell);
             Functions.Add(EffectsEnum.Eff_AddPermanentStrength, AddStrength);
-            Functions.Add(EffectsEnum.Eff_AddPermanentAgility ,AddAgility);
+            Functions.Add(EffectsEnum.Eff_AddPermanentAgility, AddAgility);
             Functions.Add(EffectsEnum.Eff_AddPermanentChance, AddChance);
             Functions.Add(EffectsEnum.Eff_AddPermanentIntelligence, AddIntelligence);
             Functions.Add(EffectsEnum.Eff_AddPermanentWisdom, AddWisdom);
@@ -41,9 +38,9 @@ namespace Symbioz.Providers
         }
         public static bool HandleEffects(WorldClient client, CharacterItemRecord item)
         {
-            
+
             bool remove = false;
-            if (!ConditionProvider.ParseAndEvaluate(client,item.GetTemplate().Criteria))
+            if (!ConditionProvider.ParseAndEvaluate(client, item.GetTemplate().Criteria))
             {
                 client.Character.Reply("Vous ne possédez pas les critères nécessaires pour utiliser cet objet.");
                 return remove;
@@ -91,9 +88,9 @@ namespace Symbioz.Providers
         {
             short value = (short)(effect as ObjectEffectInteger).value;
             if (value > 0)
-                client.Character.AddKamas(value,true);
+                client.Character.AddKamas(value, true);
             else
-                client.Character.RemoveKamas(-value,true);
+                client.Character.RemoveKamas(-value, true);
             return true;
         }
         static bool AddIntelligence(WorldClient client, ObjectEffect effect, uint id)
@@ -108,7 +105,7 @@ namespace Symbioz.Providers
         {
             short value = (short)(effect as ObjectEffectInteger).value;
             client.Character.StatsRecord.PermanentChance += value;
-            client.Character.Reply("Vous avez obtenu "+value+" en chance.");
+            client.Character.Reply("Vous avez obtenu " + value + " en chance.");
             client.Character.RefreshStats();
             return true;
         }
@@ -116,25 +113,25 @@ namespace Symbioz.Providers
         {
             short value = (short)(effect as ObjectEffectInteger).value;
             client.Character.StatsRecord.PermanentAgility += value;
-            client.Character.Reply("Vous avez obtenu "+value+" en agilité.");
+            client.Character.Reply("Vous avez obtenu " + value + " en agilité.");
             client.Character.RefreshStats();
             return true;
         }
-        static bool AddStrength(WorldClient client,ObjectEffect effect,uint id)
+        static bool AddStrength(WorldClient client, ObjectEffect effect, uint id)
         {
             short value = (short)(effect as ObjectEffectInteger).value;
             client.Character.StatsRecord.PermanentStrenght += value;
-            client.Character.Reply("Vous avez obtenu "+value+" en force.");
+            client.Character.Reply("Vous avez obtenu " + value + " en force.");
             client.Character.RefreshStats();
             return true;
         }
-        static bool AddSpellPoints(WorldClient client,ObjectEffect effect,uint id)
+        static bool AddSpellPoints(WorldClient client, ObjectEffect effect, uint id)
         {
             client.Character.Record.SpellPoints += (effect as ObjectEffectInteger).value;
             client.Character.RefreshStats();
             return true;
         }
-        static bool LearnSpell(WorldClient client,ObjectEffect effect,uint uid)
+        static bool LearnSpell(WorldClient client, ObjectEffect effect, uint uid)
         {
             var level = SpellLevelRecord.GetLevel((int)(effect as ObjectEffectInteger).value);
             return client.Character.LearnSpell(level.SpellId);

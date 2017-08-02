@@ -1,9 +1,6 @@
 ﻿using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records.Spells
 {
@@ -69,13 +66,13 @@ namespace Symbioz.World.Records.Spells
             this.MinPlayerLevel = minplayerlevel;
             this.StatesRequired = statesrequired;
             this.StatesForbidden = statesforbidden;
-            
+
         }
         public static SpellLevelRecord GetLevel(int levelid)
         {
             return SpellsLevels.Find(x => x.Id == levelid);
         }
-        public static SpellLevelRecord GetLevel(ushort spellid,sbyte grade)
+        public static SpellLevelRecord GetLevel(ushort spellid, sbyte grade)
         {
             var spell = SpellsLevels.Find(x => x.SpellId == spellid && x.Grade == grade);
             if (spell != null)

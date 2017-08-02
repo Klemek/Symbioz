@@ -1,14 +1,9 @@
-﻿using Symbioz.DofusProtocol.Messages;
-using Symbioz.DofusProtocol.Types;
+﻿using Symbioz.DofusProtocol.Types;
 using Symbioz.Providers.ActorIA;
 using Symbioz.World.Records;
 using Symbioz.World.Records.Monsters;
 using Symbioz.World.Records.Spells;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Fights.Fighters
 {

@@ -6,20 +6,17 @@ using Symbioz.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Symbioz.ORM;
-using System.Text;
-using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Threading;
 
 namespace Symbioz.Auth.Records
 {
-    class AccountsProvider     
+    class AccountsProvider
     {
         static ReaderWriterLockSlim Locker = new ReaderWriterLockSlim();
-        public static void CreateAccountInformation(int accountid,int startbankkamas)
+        public static void CreateAccountInformation(int accountid, int startbankkamas)
         {
-           
+
             Locker.EnterReadLock();
             try
             {
@@ -30,7 +27,7 @@ namespace Symbioz.Auth.Records
             {
                 Locker.ExitReadLock();
             }
-        } 
+        }
         public static void Ban(string accountName)
         {
             Locker.EnterReadLock();
@@ -42,7 +39,7 @@ namespace Symbioz.Auth.Records
             {
                 Locker.ExitReadLock();
             }
-           
+
         }
         public static void BanIp(string ip)
         {
@@ -81,7 +78,7 @@ namespace Symbioz.Auth.Records
             }
             finally
             {
-                Locker.ExitReadLock(); 
+                Locker.ExitReadLock();
             }
         }
         public static bool RemovePoints(Account account)

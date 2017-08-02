@@ -1,5 +1,4 @@
 ﻿using Symbioz.Enums;
-using System;
 using System.Collections.Generic;
 
 namespace Symbioz.World.PathProvider
@@ -23,7 +22,7 @@ namespace Symbioz.World.PathProvider
         public static int GetCellXCoord(int cellid)
         {
             int num = 15;
-            return checked(cellid - (num - 1) *GetCellYCoord(cellid)) / num;
+            return checked(cellid - (num - 1) * GetCellYCoord(cellid)) / num;
         }
         public static int GetCellYCoord(int cellid)
         {

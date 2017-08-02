@@ -5,16 +5,10 @@ using Symbioz.Enums;
 using Symbioz.Network.Clients;
 using Symbioz.Network.Messages;
 using Symbioz.Network.Servers;
-using Symbioz.World.Handlers;
-using Symbioz.World.Models.Guilds;
-using Symbioz.World.Records;
 using Symbioz.World.Records.Guilds;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Handlers
 {
@@ -48,7 +42,7 @@ namespace Symbioz.World.Handlers
         [MessageHandler]
         public static void HandleChatClientMultiWithObject(ChatClientMultiWithObjectMessage message, WorldClient client)
         {
-           
+
         }
         [MessageHandler]
         public static void HandleChatMultiClient(ChatClientMultiMessage message, WorldClient client)
@@ -66,18 +60,19 @@ namespace Symbioz.World.Handlers
             var target = WorldServer.Instance.GetOnlineClient(message.receiver);
             if (target != null)
             {
-                if(target.Character.PlayerStatus.statusId == (sbyte)PlayerStatusEnum.PLAYER_STATUS_PRIVATE)
+                if (target.Character.PlayerStatus.statusId == (sbyte)PlayerStatusEnum.PLAYER_STATUS_PRIVATE)
                 {
                     client.Character.ReplyImportant(target.Character.Record.Name + " est actuellement en mode privé");
                     return;
-                }else if(target.Character.PlayerStatus.statusId == (sbyte)PlayerStatusEnum.PLAYER_STATUS_SOLO)
+                }
+                else if (target.Character.PlayerStatus.statusId == (sbyte)PlayerStatusEnum.PLAYER_STATUS_SOLO)
                 {
                     client.Character.ReplyImportant(target.Character.Record.Name + " est actuellement en mode solo");
                     return;
                 }
                 target.Send(new ChatServerMessage((sbyte)ChatActivableChannelsEnum.PSEUDO_CHANNEL_PRIVATE, message.content, 1, client.Character.Record.Name, client.Character.Id, client.Character.Record.Name, client.Account.Id));
                 client.Send(new ChatServerCopyMessage((sbyte)ChatActivableChannelsEnum.PSEUDO_CHANNEL_PRIVATE, message.content, 1, client.Character.Record.Name, (uint)target.Character.Record.Id, target.Character.Record.Name));
-                if(target.Character.PlayerStatus.statusId == (sbyte)PlayerStatusEnum.PLAYER_STATUS_AFK)
+                if (target.Character.PlayerStatus.statusId == (sbyte)PlayerStatusEnum.PLAYER_STATUS_AFK)
                 {
                     client.Character.ReplyImportant(target.Character.Record.Name + " est asbent");
                     /*if(target.Character.AFKMessage != null)
@@ -141,9 +136,9 @@ namespace Symbioz.World.Handlers
         public static void Group(WorldClient client, string message)
         {
             sbyte channel = (sbyte)ChatActivableChannelsEnum.CHANNEL_PARTY;
-            if(client.Character.PartyMember != null && client.Character.PartyMember.Party != null)
+            if (client.Character.PartyMember != null && client.Character.PartyMember.Party != null)
             {
-                foreach(WorldClient c in client.Character.PartyMember.Party.Members)
+                foreach (WorldClient c in client.Character.PartyMember.Party.Members)
                 {
                     c.Send(new ChatServerMessage(channel, message, 1, "Symbioz", client.Character.Id, client.Character.Record.Name, client.Account.Id));
                 }
@@ -155,7 +150,7 @@ namespace Symbioz.World.Handlers
             if (client.Character.GetGuild() != null)
             {
                 GuildRecord guild = client.Character.GetGuild();
-                foreach (WorldClient c in WorldServer.Instance.GetAllClientsOnline().FindAll(x=>x.Character.GetGuild() == guild))
+                foreach (WorldClient c in WorldServer.Instance.GetAllClientsOnline().FindAll(x => x.Character.GetGuild() == guild))
                 {
                     c.Send(new ChatServerMessage(channel, message, 1, "Symbioz", client.Character.Id, client.Character.Record.Name, client.Account.Id));
                 }

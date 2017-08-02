@@ -4,15 +4,11 @@ using Symbioz.Enums;
 using Symbioz.Network.Clients;
 using Symbioz.Network.Messages;
 using Symbioz.Network.Servers;
-using Symbioz.World.Models;
 using Symbioz.World.Models.Parties;
 using Symbioz.World.Models.Parties.Dungeon;
 using Symbioz.World.Records;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Handlers
 {
@@ -51,7 +47,7 @@ namespace Symbioz.World.Handlers
                 p.BossCharacterId = client.Character.Id;
                 p.NewMember(client);
             }
-            
+
         }
         [MessageHandler]
         public static void PartyAcceptInvitation(PartyAcceptInvitationMessage message, WorldClient client)
@@ -162,7 +158,7 @@ namespace Symbioz.World.Handlers
         {
             List<DungeonsIdRecord> record = DungeonsIdRecord.DungeonsId;
             List<ushort> ids = new List<ushort>();
-            foreach(DungeonsIdRecord dj in record)
+            foreach (DungeonsIdRecord dj in record)
             {
                 ids.Add((ushort)dj.Id);
             }

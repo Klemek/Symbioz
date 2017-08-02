@@ -1,14 +1,10 @@
-﻿using Symbioz.Network.Clients;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Symbioz.DofusProtocol.Messages;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Symbioz.Enums;
+using Symbioz.Network.Clients;
 using Symbioz.Providers;
-using Symbioz.Enums;
 using Symbioz.World.Handlers;
 using Symbioz.World.Records;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Symbioz.World.Models.Fights
 {
@@ -71,7 +67,7 @@ namespace Symbioz.World.Models.Fights
         }
         void AcceptFight(WorldClient client)
         {
-            
+
             TemporaryArenaClient arenaClient = GetClient(client);
             arenaClient.Ready = true;
             arenaClient.UpdateRegistrationStatus(false, PvpArenaStepEnum.ARENA_STEP_WAITING_FIGHT);
@@ -86,7 +82,7 @@ namespace Symbioz.World.Models.Fights
             }
             if (RedTeam.All(x => x.Ready) && BlueTeam.All(x => x.Ready))
                 StartFighting();
-         
+
 
 
 
@@ -106,10 +102,10 @@ namespace Symbioz.World.Models.Fights
         }
         public void StartFighting()
         {
-           
+
 
             Clients.ForEach(x => x.UpdateRegistrationStatus(false, PvpArenaStepEnum.ARENA_STEP_STARTING_FIGHT));
-           
+
             int arenaMapId = ArenaProvider.Instance.RandomArenaMap();
 
             BlueTeam.ForEach(x => MapsHandler.SendCurrentMapMessage(x.WorldClient, arenaMapId));

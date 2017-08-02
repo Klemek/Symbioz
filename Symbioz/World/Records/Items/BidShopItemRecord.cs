@@ -3,15 +3,11 @@ using Symbioz.Enums;
 using Symbioz.ORM;
 using Symbioz.World.Models;
 using Symbioz.World.Models.Exchanges;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
-    [Table("BidShopsItems",true)]
+    [Table("BidShopsItems", true)]
     public class BidShopItemRecord : ITable
     {
         public static List<BidShopItemRecord> BidShopsItems = new List<BidShopItemRecord>();
@@ -27,8 +23,8 @@ namespace Symbioz.World.Records
         public uint Price;
         public uint Quantity;
         [Ignore]
-        public string EffectsLinkedToList { get { return CharacterItemRecord.EffectsToString(m_realEffect); } } 
-        public BidShopItemRecord(int bidshopid,int ownerid,uint uid,ushort gid,string effects,uint price,uint quantity)
+        public string EffectsLinkedToList { get { return CharacterItemRecord.EffectsToString(m_realEffect); } }
+        public BidShopItemRecord(int bidshopid, int ownerid, uint uid, ushort gid, string effects, uint price, uint quantity)
         {
             this.BidShopId = bidshopid;
             this.OwnerId = ownerid;
@@ -39,7 +35,7 @@ namespace Symbioz.World.Records
             this.Quantity = quantity;
             this.m_realEffect = CharacterItemRecord.StringToObjectEffects(Effects);
         }
-        public BidShopItemRecord(int bidshopid,uint price,int quantity,CharacterItemRecord item)
+        public BidShopItemRecord(int bidshopid, uint price, int quantity, CharacterItemRecord item)
         {
             this.BidShopId = bidshopid;
             this.OwnerId = item.CharacterId;
@@ -62,9 +58,9 @@ namespace Symbioz.World.Records
         {
             return BidShopsItems.Find(x => x.UID == uid);
         }
-        public static List<ObjectItemToSellInBid> GetCharactersBidItems(int characterid,int bidshopid)
+        public static List<ObjectItemToSellInBid> GetCharactersBidItems(int characterid, int bidshopid)
         {
-            return BidShopsItems.FindAll(x => x.OwnerId == characterid && x.BidShopId == bidshopid).ConvertAll<ObjectItemToSellInBid>(x=>x.GetObjectItemToSellInBid());
+            return BidShopsItems.FindAll(x => x.OwnerId == characterid && x.BidShopId == bidshopid).ConvertAll<ObjectItemToSellInBid>(x => x.GetObjectItemToSellInBid());
         }
         public static List<uint> GetAllItemsUIDs()
         {
@@ -82,8 +78,8 @@ namespace Symbioz.World.Records
                 Exchange.GetOnlineClientsExchanging(ExchangeTypeEnum.BIDHOUSE_BUY).ForEach(x => x.Character.BidShopInstance.RemoveItem(item));
             }
         }
-        
-        
+
+
 
     }
 }

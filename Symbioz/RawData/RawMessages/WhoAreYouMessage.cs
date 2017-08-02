@@ -1,9 +1,4 @@
 ﻿using Symbioz.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.RawData.RawMessages
 {
@@ -15,7 +10,7 @@ namespace Symbioz.RawData.RawMessages
         public string Username { get; set; }
 
         public WhoAreYouMessage() { }
-        public WhoAreYouMessage(string os,string username)
+        public WhoAreYouMessage(string os, string username)
         {
             this.OS = os;
             this.Username = username;

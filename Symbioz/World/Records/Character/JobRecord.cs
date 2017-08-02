@@ -1,14 +1,10 @@
 ﻿using Symbioz.Core;
 using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
-    [Table("Jobs",true)]
+    [Table("Jobs", true)]
     class JobRecord : ITable
     {
         public static List<JobRecord> Jobs = new List<JobRecord>();
@@ -16,7 +12,7 @@ namespace Symbioz.World.Records
         public sbyte Id;
         public int NameId;
         public string Name { get; set; }
-        public JobRecord(sbyte id,int nameid)
+        public JobRecord(sbyte id, int nameid)
         {
             this.Id = id;
             this.NameId = nameid;

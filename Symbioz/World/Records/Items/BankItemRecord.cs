@@ -1,11 +1,7 @@
 ﻿using Symbioz.DofusProtocol.Types;
 using Symbioz.ORM;
 using Symbioz.World.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
@@ -25,7 +21,7 @@ namespace Symbioz.World.Records
         [Ignore]
         public string EffectsLinkedToList { get { return CharacterItemRecord.EffectsToString(m_realEffect); } }
 
-        public BankItemRecord(uint uid,ushort gid,int accountid,uint quantity,string effects)
+        public BankItemRecord(uint uid, ushort gid, int accountid, uint quantity, string effects)
         {
             this.UID = uid;
             this.GID = gid;

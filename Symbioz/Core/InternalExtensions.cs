@@ -6,9 +6,6 @@ using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.Records.Spells;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using YAXLib;
 
 namespace Symbioz
@@ -37,7 +34,7 @@ namespace Symbioz
         {
             return (T)XMLDeserialize(typeof(T), content);
         }
-        public static void SendTo(this IEnumerable<WorldClient> clients,Message message)
+        public static void SendTo(this IEnumerable<WorldClient> clients, Message message)
         {
             foreach (var client in clients)
             {

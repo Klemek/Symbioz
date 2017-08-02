@@ -1,19 +1,14 @@
-﻿using Symbioz.DofusProtocol.Messages;
-using Symbioz.Enums;
+﻿using Symbioz.Enums;
 using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.Records.Spells;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Fights.Marks
 {
     public class Trap : MarkTrigger
     {
-        public Trap(Fighter caster, short centercell,char shapetype, short radius, short associatedspellid, sbyte spellgrade, int markcolor)
-            : base(caster, centercell,centercell, shapetype, radius, associatedspellid, spellgrade, markcolor)
+        public Trap(Fighter caster, short centercell, char shapetype, short radius, short associatedspellid, sbyte spellgrade, int markcolor)
+            : base(caster, centercell, centercell, shapetype, radius, associatedspellid, spellgrade, markcolor)
         {
 
         }
@@ -43,7 +38,7 @@ namespace Symbioz.World.Models.Fights.Marks
             Caster.Fight.RemoveMarkTrigger(fighter, this);
             Caster.HandleSpellEffects(spellLevel, CenterCell, FightSpellCastCriticalEnum.NORMAL);
             Caster.Fight.CheckFightEnd();
-          
+
         }
     }
 }

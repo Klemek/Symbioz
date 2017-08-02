@@ -1,20 +1,12 @@
-﻿using Symbioz.Network.Messages;
-using Symbioz.DofusProtocol.Messages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.Network.Clients;
-using Symbioz.Enums;
-using Symbioz.World.Records;
-using Symbioz.World.Models.Maps;
-using System.Diagnostics;
+﻿using Symbioz.DofusProtocol.Messages;
 using Symbioz.DofusProtocol.Types;
-using Symbioz.World.Models;
-using Symbioz.Providers.SpellEffectsProvider.Buffs;
+using Symbioz.Enums;
+using Symbioz.Network.Clients;
+using Symbioz.Network.Messages;
 using Symbioz.Network.Servers;
+using Symbioz.Providers.SpellEffectsProvider.Buffs;
 using Symbioz.World.Models.Parties.Dungeon;
+using Symbioz.World.Records;
 
 namespace Symbioz.World.Handlers
 {
@@ -22,7 +14,7 @@ namespace Symbioz.World.Handlers
     {
         static UInt16ReflectedStat GetReflectedStat(StatsRecord stats, StatsBoostTypeEnum type)
         {
-            var fieldInfo = StatsRecord.GetFieldInfo("Base"+type.ToString());
+            var fieldInfo = StatsRecord.GetFieldInfo("Base" + type.ToString());
             return new UInt16ReflectedStat(fieldInfo, stats);
         }
         [MessageHandler]
@@ -40,7 +32,7 @@ namespace Symbioz.World.Handlers
             }
             if (message.boostPoint > 0)
             {
-                UInt16ReflectedStat linkedStat = GetReflectedStat(client.Character.StatsRecord,statId);
+                UInt16ReflectedStat linkedStat = GetReflectedStat(client.Character.StatsRecord, statId);
 
                 BreedRecord breed = BreedRecord.GetBreed(client.Character.Record.Breed);
                 int num = linkedStat.GetValue();
@@ -75,8 +67,8 @@ namespace Symbioz.World.Handlers
                         num2 -= (ushort)num4;
                         thresholdIndex = breed.GetThresholdIndex(num, thresholds);
                     }
-          
-                   
+
+
                     if (statId == StatsBoostTypeEnum.Vitality)
                     {
                         var previousVitality = linkedStat.GetValue();
@@ -156,7 +148,7 @@ namespace Symbioz.World.Handlers
             client.Send(new ShortcutBarRemovedMessage(message.barType, message.slot));
         }
         [MessageHandler]
-        public static void HandleFriendJoin(FriendJoinRequestMessage message,WorldClient client)
+        public static void HandleFriendJoin(FriendJoinRequestMessage message, WorldClient client)
         {
             WorldClient target = WorldServer.Instance.GetOnlineClient(message.name);
             if (target != null)
@@ -203,9 +195,9 @@ namespace Symbioz.World.Handlers
         public static void HandePlayerStatusChangeRequest(PlayerStatusUpdateRequestMessage message, WorldClient client)
         {
             client.Character.PlayerStatus = message.status;
-            if((PlayerStatusEnum)message.status.statusId == PlayerStatusEnum.PLAYER_STATUS_AFK || (PlayerStatusEnum)message.status.statusId == PlayerStatusEnum.PLAYER_STATUS_PRIVATE || (PlayerStatusEnum)message.status.statusId == PlayerStatusEnum.PLAYER_STATUS_SOLO)
+            if ((PlayerStatusEnum)message.status.statusId == PlayerStatusEnum.PLAYER_STATUS_AFK || (PlayerStatusEnum)message.status.statusId == PlayerStatusEnum.PLAYER_STATUS_PRIVATE || (PlayerStatusEnum)message.status.statusId == PlayerStatusEnum.PLAYER_STATUS_SOLO)
             {
-                if(DungeonPartyProvider.Instance.GetDPCByCharacterId(client.Character.Id) != null)
+                if (DungeonPartyProvider.Instance.GetDPCByCharacterId(client.Character.Id) != null)
                 {
                     DungeonPartyProvider.Instance.RemoveCharacter(client.Character);
                 }

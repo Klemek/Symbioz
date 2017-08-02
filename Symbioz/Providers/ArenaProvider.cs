@@ -3,11 +3,8 @@ using Symbioz.Enums;
 using Symbioz.Helper;
 using Symbioz.Network.Clients;
 using Symbioz.World.Models.Fights;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers
 {
@@ -18,17 +15,17 @@ namespace Symbioz.Providers
         public int[] ARENA_MAPS = new int[]
         {
             94634497,
-			94634499,
-			94634501,
-			94634507,
-			94634509,
-			94634511,
-			94634513,
-			94634515,
-			94634517,
-			94634519,
-			94634505,
-			94634503
+            94634499,
+            94634501,
+            94634507,
+            94634509,
+            94634511,
+            94634513,
+            94634515,
+            94634517,
+            94634519,
+            94634505,
+            94634503
         };
 
         public const int ARENA_REQUEST_TIMOUT = 0;//30;

@@ -1,13 +1,9 @@
 ﻿using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
 using Symbioz.ORM;
-using Symbioz.World.Models.Guilds;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records.Guilds
 {

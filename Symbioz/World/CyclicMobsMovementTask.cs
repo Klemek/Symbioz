@@ -1,15 +1,11 @@
-﻿using Symbioz.Core.Startup;
-using Symbioz.DofusProtocol.Messages;
+﻿using Symbioz.DofusProtocol.Messages;
 using Symbioz.Helper;
 using Symbioz.PathProvider;
 using Symbioz.World.Models;
 using Symbioz.World.PathProvider;
 using Symbioz.World.Records;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 
@@ -24,13 +20,13 @@ namespace Symbioz.World
         public const short MoveCellsCount = 3;
 
         static System.Timers.Timer m_timer { get; set; }
-  //      [StartupInvoke(StartupInvokeType.Cyclics)]
+        //      [StartupInvoke(StartupInvokeType.Cyclics)]
         public static void Start()
         {
             m_timer = new System.Timers.Timer(MoveInstanceInterval); // pourquoi j'ai eut la flemme d'ajouter la réference system.timers? u_u
             m_timer.Elapsed += m_timer_Elapsed;
             m_timer.Start();
-            
+
         }
         static void m_timer_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -46,7 +42,7 @@ namespace Symbioz.World
             }
 
         }
-        static void MoveGroup(MapRecord map,MonsterGroup group)
+        static void MoveGroup(MapRecord map, MonsterGroup group)
         {
 
             var random = new AsyncRandom();
@@ -82,9 +78,9 @@ namespace Symbioz.World
                 {
                     MonsterGroup group = groups[i];
                     MoveGroup(map, group);
-                  ///  Thread.Sleep(2000);
+                    ///  Thread.Sleep(2000);
                 }
-                
+
             });
         }
     }

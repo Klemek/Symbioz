@@ -1,12 +1,5 @@
 ﻿using Symbioz.DofusProtocol.Messages;
 using Symbioz.DofusProtocol.Types;
-using Symbioz.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.SpellEffectsProvider.Buffs
 {
@@ -18,8 +11,8 @@ namespace Symbioz.Providers.SpellEffectsProvider.Buffs
         short RealDelta { get; set; }
         uint DisplayableId { get; set; }
         UInt16ReflectedStat StatDefiniton { get; set; }
-        public StatBuff(uint uid, UInt16ReflectedStat statdefinition,uint displayableid, short delta, short duration, int sourceid, short sourcespellid, short realdelta,int delay)
-            : base(uid, delta, duration, sourceid, sourcespellid,delay)
+        public StatBuff(uint uid, UInt16ReflectedStat statdefinition, uint displayableid, short delta, short duration, int sourceid, short sourcespellid, short realdelta, int delay)
+            : base(uid, delta, duration, sourceid, sourcespellid, delay)
         {
             this.StatDefiniton = statdefinition;
             this.DisplayableId = displayableid;
@@ -28,7 +21,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.Buffs
         public override void SetBuff()
         {
             this.Fighter.Fight.Send(new GameActionFightDispellableEffectMessage((ushort)DisplayableId, SourceId,
-                new FightTemporaryBoostEffect(UID, Fighter.ContextualId, Duration, 1, (ushort)SourceSpellId,DisplayableId, 0, Delta)));
+                new FightTemporaryBoostEffect(UID, Fighter.ContextualId, Duration, 1, (ushort)SourceSpellId, DisplayableId, 0, Delta)));
             this.StatDefiniton.AddValue(RealDelta);
 
         }

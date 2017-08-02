@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace Symbioz.World.Models.Exchanges.Craft.Replay
@@ -24,7 +20,7 @@ namespace Symbioz.World.Models.Exchanges.Craft.Replay
         {
             ReplayTimer = new Timer(ReplayInterval);
             ReplayTimer.Elapsed += ReplayTimer_Elapsed;
-  
+
         }
         public virtual void Start()
         {

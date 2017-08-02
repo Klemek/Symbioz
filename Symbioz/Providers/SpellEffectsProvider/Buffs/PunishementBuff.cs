@@ -4,11 +4,7 @@ using Symbioz.Enums;
 using Symbioz.World.Models.Fights.Damages;
 using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.Records;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.SpellEffectsProvider.Buffs
 {
@@ -26,8 +22,8 @@ namespace Symbioz.Providers.SpellEffectsProvider.Buffs
         public short PunishementDelay { get; set; }
         public UInt16ReflectedStat StatDefinition { get; set; }
 
-        public PunishementBuff(uint uid, short delta, short duration, int sourceid, short sourcespellid, short punishementaction,short punishementdelay,int delay)
-            : base(uid, delta, duration, sourceid, sourcespellid,delay)
+        public PunishementBuff(uint uid, short delta, short duration, int sourceid, short sourcespellid, short punishementaction, short punishementdelay, int delay)
+            : base(uid, delta, duration, sourceid, sourcespellid, delay)
         {
             this.PunishementAction = punishementaction;
             this.PunishementDelay = punishementdelay;
@@ -48,19 +44,19 @@ namespace Symbioz.Providers.SpellEffectsProvider.Buffs
         /// Called when the player takes damages
         /// </summary>
         /// <param name="obj">damages taken</param>
-        public override bool OnEventCalled(object arg1,object arg2,object arg3) 
+        public override bool OnEventCalled(object arg1, object arg2, object arg3)
         {
             TakenDamages damages = (TakenDamages)arg2;
             if (Fighter.ContextualId == (int)arg1 || damages.Delta <= 0)
                 return false;
             short statBuffDelta = (short)damages.Delta;
-            int num = Fighter.GetAllBuffs<StatBuff>(x=>x.SourceSpellId == SourceSpellId).FindAll(x=>x.Duration == PunishementDelay).Sum(x=>x.Delta);
+            int num = Fighter.GetAllBuffs<StatBuff>(x => x.SourceSpellId == SourceSpellId).FindAll(x => x.Duration == PunishementDelay).Sum(x => x.Delta);
             if (num < Delta)
             {
                 if (statBuffDelta + num > (int)Delta)
                     statBuffDelta = (short)(Delta - num);
 
-                StatBuff buff = new StatBuff((uint)Fighter.BuffIdProvider.Pop(), StatDefinition, (uint)GetBuffEffectType(StatDefinition.FieldName), statBuffDelta, PunishementDelay, Fighter.ContextualId, SourceSpellId, statBuffDelta,0);
+                StatBuff buff = new StatBuff((uint)Fighter.BuffIdProvider.Pop(), StatDefinition, (uint)GetBuffEffectType(StatDefinition.FieldName), statBuffDelta, PunishementDelay, Fighter.ContextualId, SourceSpellId, statBuffDelta, 0);
                 Fighter.AddBuff(buff);
             }
             return false;
@@ -108,7 +104,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.Buffs
                 case "ContextIntelligence":
                     result = EffectsEnum.Eff_AddIntelligence;
                     break;
-               
+
             }
             return result;
         }

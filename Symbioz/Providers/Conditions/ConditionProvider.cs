@@ -4,16 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.Conditions
 {
     class ConditionProvider
     {
-        public static Dictionary<string,Type> ConditionsTypes = new Dictionary<string, Type>();
+        public static Dictionary<string, Type> ConditionsTypes = new Dictionary<string, Type>();
 
-        [StartupInvoke("Criterias",StartupInvokeType.Others)]
+        [StartupInvoke("Criterias", StartupInvokeType.Others)]
         public static void Intialize()
         {
             foreach (var type in Assembly.GetExecutingAssembly().GetTypesWithAttribute(typeof(ConditionAttribute)))
@@ -22,7 +20,7 @@ namespace Symbioz.Providers.Conditions
                 ConditionsTypes.Add(attribute.Identifier, type);
             }
         }
-        public static bool ParseAndEvaluate(WorldClient client,string conditions)
+        public static bool ParseAndEvaluate(WorldClient client, string conditions)
         {
             foreach (var condition in conditions.Split('&'))
             {
@@ -44,7 +42,7 @@ namespace Symbioz.Providers.Conditions
                 }
             }
             return true;
-            
+
         }
     }
 }

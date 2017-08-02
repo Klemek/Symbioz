@@ -1,15 +1,9 @@
-﻿using Symbioz.DofusProtocol.Messages;
-using Symbioz.Enums;
-using Symbioz.Helper;
+﻿using Symbioz.Enums;
 using Symbioz.Providers.SpellEffectsProvider.Buffs;
 using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.Records;
 using Symbioz.World.Records.Spells;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.SpellEffectsProvider.Effects
 {
@@ -79,7 +73,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
         [EffectHandler(EffectsEnum.Eff_IncreaseDamage_1054)]
         public static void IncreaseDamage1054(Fighter fighter, SpellLevelRecord level, ExtendedSpellEffect effect, List<Fighter> affected, short castcellid)
         {
-           
+
             IncreaseDamage(fighter, level, effect, affected, castcellid);
         }
         [EffectHandler(EffectsEnum.Eff_AddDamageBonus)]
@@ -176,7 +170,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
                 target.AddBuff(buff);
             }
         }
-      
+
 
 
     }

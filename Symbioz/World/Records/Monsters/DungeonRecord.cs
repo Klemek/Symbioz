@@ -1,9 +1,5 @@
 ﻿using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records.Monsters
 {
@@ -19,7 +15,7 @@ namespace Symbioz.World.Records.Monsters
         public short TeleportCellId;
         public List<ushort> MonsterGroup;
 
-        public DungeonRecord(int mapid,string dungeonname,int teleportmapid,short teleportcellid,List<ushort> monstergroup)
+        public DungeonRecord(int mapid, string dungeonname, int teleportmapid, short teleportcellid, List<ushort> monstergroup)
         {
             this.MapId = mapid;
             this.DungeonName = dungeonname;

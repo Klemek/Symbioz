@@ -1,11 +1,7 @@
 ﻿using Symbioz.DofusProtocol.Messages;
-using Symbioz.Enums;
 using Symbioz.World.Models.Fights.Fighters;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace Symbioz.World.Models.Fights
@@ -35,13 +31,13 @@ namespace Symbioz.World.Models.Fights
                     if (laggingFighters.Count == 1)
                     {
 
-                     //   m_fight.Send(new TextInformationMessage((sbyte)TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 28, new string[] { laggingFighters[0].GetName() }));
+                        //   m_fight.Send(new TextInformationMessage((sbyte)TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 28, new string[] { laggingFighters[0].GetName() }));
                     }
                     else
                     {
-                    //    string[] array = new string[1] { string.Join(",", from entry in laggingFighters select entry.GetName()) };
+                        //    string[] array = new string[1] { string.Join(",", from entry in laggingFighters select entry.GetName()) };
 
-                    //    m_fight.Send(new TextInformationMessage((sbyte)TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 29, array));
+                        //    m_fight.Send(new TextInformationMessage((sbyte)TextInformationTypeEnum.TEXT_INFORMATION_ERROR, 29, array));
                     }
                 }
             }
@@ -52,7 +48,7 @@ namespace Symbioz.World.Models.Fights
         public void ToggleReady(CharacterFighter fighter)
         {
             fighter.ReadyToSee = true;
-            if (m_fight.GetAllCharacterFighters(true).FindAll(x =>x.Available).All(x => x.ReadyToSee))
+            if (m_fight.GetAllCharacterFighters(true).FindAll(x => x.Available).All(x => x.ReadyToSee))
             {
                 // Action
                 m_fight.OnCharacterFighters(x => x.Character.FighterInstance.ReadyToSee = false);

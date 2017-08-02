@@ -1,12 +1,8 @@
-﻿using Symbioz.DofusProtocol.Types;
-using Symbioz.Enums;
+﻿using Symbioz.Enums;
 using Symbioz.ORM;
 using Symbioz.World.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
@@ -31,7 +27,7 @@ namespace Symbioz.World.Records
 
 
         public BreedRecord(int id, string malelook, string femalelook, List<int> malecolors, List<int> femalecolors, short startlifepoints, short startprospecting,
-            BreedStatField spforintelligence,BreedStatField spforagility,BreedStatField spforstrenght,BreedStatField spforvitality,BreedStatField spforwisdom,BreedStatField spforchance)
+            BreedStatField spforintelligence, BreedStatField spforagility, BreedStatField spforstrenght, BreedStatField spforvitality, BreedStatField spforwisdom, BreedStatField spforchance)
         {
             this.Id = id;
             this.MaleLook = malelook;
@@ -100,16 +96,16 @@ namespace Symbioz.World.Records
             }
         }
         public static readonly List<PlayableBreedEnum> AvailableBreeds = new List<PlayableBreedEnum>
-		{
-			PlayableBreedEnum.Feca,
-			PlayableBreedEnum.Osamodas,
-			PlayableBreedEnum.Enutrof,
-			PlayableBreedEnum.Ecaflip,
-			PlayableBreedEnum.Eniripsa,
-			PlayableBreedEnum.Iop,
-			PlayableBreedEnum.Cra,
-			PlayableBreedEnum.Sacrieur,
-			PlayableBreedEnum.Zobal,
+        {
+            PlayableBreedEnum.Feca,
+            PlayableBreedEnum.Osamodas,
+            PlayableBreedEnum.Enutrof,
+            PlayableBreedEnum.Ecaflip,
+            PlayableBreedEnum.Eniripsa,
+            PlayableBreedEnum.Iop,
+            PlayableBreedEnum.Cra,
+            PlayableBreedEnum.Sacrieur,
+            PlayableBreedEnum.Zobal,
             PlayableBreedEnum.Eliotrope,
             PlayableBreedEnum.Sadida,
             PlayableBreedEnum.Sram,
@@ -117,8 +113,8 @@ namespace Symbioz.World.Records
             PlayableBreedEnum.Steamer,
             PlayableBreedEnum.Xelor,
             PlayableBreedEnum.Pandawa
-      
-		};
+
+        };
         static int GetDefaultBreedColor(int breedid, bool sex, int colorindex)
         {
             var breed = Breeds.Find(x => x.Id == breedid);
@@ -188,7 +184,7 @@ namespace Symbioz.World.Records
                     }
                     list.Add(subList.ToArray());
                 }
-                
+
                 return new BreedStatField(list.ToArray());
             }
         }

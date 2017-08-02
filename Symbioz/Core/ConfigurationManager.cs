@@ -1,12 +1,7 @@
 ﻿using Symbioz.Core.Startup;
 using Symbioz.Helper;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 using YAXLib;
 
 namespace Symbioz.Core
@@ -42,7 +37,7 @@ namespace Symbioz.Core
                 }
                 catch (Exception ex)
                 {
-                label:
+                    label:
                     Logger.Error(ex.Message);
                     Logger.Init("[Config] Unable to load configuration do you want to use default configuration?");
                     Logger.Init("y/n?");
@@ -148,6 +143,6 @@ namespace Symbioz.Core
 
 
 
-      
+
     }
 }

@@ -1,21 +1,17 @@
-﻿using Symbioz.Network.Messages;
-using System;
+﻿using Shader.DofusProtocol.Enums.HomeMade;
+using Symbioz.Core;
+using Symbioz.DofusProtocol.Messages;
+using Symbioz.DofusProtocol.Types;
+using Symbioz.Enums;
+using Symbioz.Network.Clients;
+using Symbioz.Network.Messages;
+using Symbioz.Provider;
+using Symbioz.World.Models.Maps;
+using Symbioz.World.PathProvider;
+using Symbioz.World.Records;
+using Symbioz.World.Records.Maps;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.DofusProtocol.Messages;
-using Symbioz.Network.Clients;
-using Symbioz.DofusProtocol.Types;
-using Symbioz.World.Records;
-using Symbioz.World.PathProvider;
-using Symbioz.Enums;
-using Symbioz.World.Models.Maps;
-using Symbioz.Core;
-using Symbioz.Provider;
-using Symbioz.World.Records.Monsters;
-using Symbioz.World.Records.Maps;
-using Shader.DofusProtocol.Enums.HomeMade;
 
 namespace Symbioz.World.Handlers
 {
@@ -80,7 +76,7 @@ namespace Symbioz.World.Handlers
         {
             client.Character.Record.CellId = client.Character.MovedCell;
             List<MapTriggerRecord> triggers = MapTriggerRecord.GetMapTriggerByMap(client.Character.Record.MapId);
-            for(int i=0;i<triggers.Count(); i++)
+            for (int i = 0; i < triggers.Count(); i++)
             {
                 if (triggers[i].CellId == client.Character.MovedCell)
                 {
@@ -89,7 +85,7 @@ namespace Symbioz.World.Handlers
                         client.Character.Teleport(triggers[i].TargetMapId, (short)triggers[i].TargetCellId);
                     }
                 }
-            } 
+            }
             client.Character.MovedCell = 0;
         }
         [MessageHandler]

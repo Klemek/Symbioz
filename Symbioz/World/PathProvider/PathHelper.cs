@@ -1,13 +1,12 @@
-﻿using System;
+﻿using Symbioz.Enums;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
-using Symbioz.Enums;
+using System.Linq;
 
 namespace Symbioz.PathProvider
 {
-    public class PathHelper  
+    public class PathHelper
     {
         #region constants
         private static readonly Point VECTOR_RIGHT = new Point(1, 1);

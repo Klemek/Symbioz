@@ -1,14 +1,10 @@
 ﻿using Symbioz.DofusProtocol.Types;
 using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
-    [Table("BidShops",true)]
+    [Table("BidShops", true)]
     class BidShopRecord : ITable
     {
         public static List<BidShopRecord> BidShops = new List<BidShopRecord>();
@@ -18,7 +14,7 @@ namespace Symbioz.World.Records
         public List<uint> ItemTypes;
         public uint MaxItemPerAccount;
 
-        public BidShopRecord(int id,List<uint> quantities,List<uint> itemtypes,uint maxitemperaccount)
+        public BidShopRecord(int id, List<uint> quantities, List<uint> itemtypes, uint maxitemperaccount)
         {
             this.Id = id;
             this.Quantities = quantities;

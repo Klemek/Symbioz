@@ -1,14 +1,11 @@
-﻿using Symbioz.RawData.RawMessages;
+﻿using Symbioz.Core.Startup;
+using Symbioz.DofusProtocol.Messages;
+using Symbioz.RawData.RawMessages;
+using Symbioz.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.Helper;
-using Symbioz.DofusProtocol.Messages;
-using Symbioz.Utils;
-using Symbioz.Core.Startup;
 
 namespace Symbioz.RawData
 {
@@ -40,7 +37,7 @@ namespace Symbioz.RawData
                 }
             }
         }
-        public static RawMessage BuildMessage(short id,BigEndianReader reader)
+        public static RawMessage BuildMessage(short id, BigEndianReader reader)
         {
             if (!Messages.ContainsKey(id))
             {

@@ -1,9 +1,6 @@
 ﻿using Symbioz.World.Records.Spells;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Fights
 {
@@ -11,15 +8,15 @@ namespace Symbioz.World.Models.Fights
     {
         private List<CastedSpell> m_castedSpells = new List<CastedSpell>();
 
-        public void Add(SpellLevelRecord level,int targetId)
+        public void Add(SpellLevelRecord level, int targetId)
         {
-            m_castedSpells.Add(new CastedSpell(level.SpellId,targetId,level.MinCastInterval));
+            m_castedSpells.Add(new CastedSpell(level.SpellId, targetId, level.MinCastInterval));
         }
         public void Clear()
         {
             m_castedSpells.Clear();
         }
-        public bool CanCast(SpellLevelRecord level,int targetId)
+        public bool CanCast(SpellLevelRecord level, int targetId)
         {
             int count = m_castedSpells.FindAll(x => x.SpellId == level.SpellId).Count(); // nombre de fois lancer ce tour
             int countPerTarget = m_castedSpells.FindAll(x => x.SpellId == level.SpellId && x.TargetId == targetId).Count(); // nombre de fois lancer ce tour
@@ -47,7 +44,7 @@ namespace Symbioz.World.Models.Fights
     }
     public class CastedSpell
     {
-        public CastedSpell(ushort spellId,int targetId,short castInterval)
+        public CastedSpell(ushort spellId, int targetId, short castInterval)
         {
             this.SpellId = spellId;
             this.TargetId = targetId;

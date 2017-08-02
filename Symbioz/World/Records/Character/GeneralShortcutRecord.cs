@@ -1,11 +1,6 @@
 ﻿using Symbioz.DofusProtocol.Types;
 using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Symbioz;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
@@ -23,7 +18,7 @@ namespace Symbioz.World.Records
         [Update]
         public sbyte SlotId;
 
-        public GeneralShortcutRecord(int id,int characterid,int shortcuttype,int value1,int value2,sbyte slotid)
+        public GeneralShortcutRecord(int id, int characterid, int shortcuttype, int value1, int value2, sbyte slotid)
         {
             this.Id = id;
             this.CharacterId = characterid;
@@ -34,17 +29,17 @@ namespace Symbioz.World.Records
         }
         public static void RemoveAll(int characterid)
         {
-           GeneralShortcuts.FindAll(x=>x.CharacterId == characterid).ForEach(x => SaveTask.RemoveElement(x));
+            GeneralShortcuts.FindAll(x => x.CharacterId == characterid).ForEach(x => SaveTask.RemoveElement(x));
         }
-        public static void RemoveShortcut(int characterid,sbyte slot)
+        public static void RemoveShortcut(int characterid, sbyte slot)
         {
             SaveTask.RemoveElement(GetShorcut(characterid, slot));
         }
-        public static void AddShortcut(int characterid,sbyte slotid,int shortcuttype,int value1,int value2)
+        public static void AddShortcut(int characterid, sbyte slotid, int shortcuttype, int value1, int value2)
         {
             var existing = GetShorcut(characterid, slotid);
             if (existing != null)
-                RemoveShortcut(existing.CharacterId,existing.SlotId);
+                RemoveShortcut(existing.CharacterId, existing.SlotId);
             SaveTask.AddElement(new GeneralShortcutRecord(GeneralShortcuts.PopNextId<GeneralShortcutRecord>(x => x.Id)
                 , characterid, shortcuttype, value1, value2, slotid));
         }
@@ -82,10 +77,10 @@ namespace Symbioz.World.Records
                 switch (shortcut.ShortcutType)
                 {
                     case ShortcutObjectItem.Id:
-                        results.Add(new ShortcutObjectItem(shortcut.SlotId,shortcut.Value1, shortcut.Value2));
+                        results.Add(new ShortcutObjectItem(shortcut.SlotId, shortcut.Value1, shortcut.Value2));
                         break;
                     case ShortcutSmiley.Id:
-                        results.Add(new ShortcutSmiley(shortcut.SlotId,(sbyte)shortcut.Value1));
+                        results.Add(new ShortcutSmiley(shortcut.SlotId, (sbyte)shortcut.Value1));
                         break;
                     case ShortcutEmote.Id:
                         results.Add(new ShortcutEmote(shortcut.SlotId, (byte)shortcut.Value1));

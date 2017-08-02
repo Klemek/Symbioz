@@ -1,13 +1,8 @@
 ﻿using Symbioz.DofusProtocol.Messages;
 using Symbioz.DofusProtocol.Types;
 using Symbioz.World.Records.Companions;
-using Symbioz.World.Records.Monsters;
 using Symbioz.World.Records.Spells;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Fights.Fighters
 {
@@ -30,7 +25,7 @@ namespace Symbioz.World.Models.Fights.Fighters
             this.Spells = Template.GetSpellItems(Master.Client.Character);
             this.Shortcuts = GenerateShortcuts();
             if (this.Template.StartingSpellLevelId != 0)
-            this.AutoCastSpell = SpellLevelRecord.GetLevel(Template.StartingSpellLevelId);
+                this.AutoCastSpell = SpellLevelRecord.GetLevel(Template.StartingSpellLevelId);
             this.ReadyToFight = true;
 
         }
@@ -81,7 +76,7 @@ namespace Symbioz.World.Models.Fights.Fighters
             else
                 return this.AutoCastSpell.SpellId == spellid ? this.AutoCastSpell : SpellLevelRecord.GetLevel(spellid, CompanionRecord.GetSpellGrade(Master.Client.Character));
         }
-  
+
         public override int GetInitiative()
         {
             return Master.GetInitiative() - 10;

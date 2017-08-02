@@ -1,10 +1,6 @@
 ﻿using Symbioz.Enums;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using YAXLib;
 
 namespace Symbioz.Providers.ActorIA
@@ -14,14 +10,14 @@ namespace Symbioz.Providers.ActorIA
     {
         public static string FILES_DIRECTORY = Environment.CurrentDirectory + "/SpellCategories/";
         public static YAXSerializer Serializer = new YAXSerializer(typeof(SpellCategory));
-    
+
         public SpellCategoryEnum Category { get; set; }
         public EffectsEnum[] Effects { get; set; }
 
-        public SpellCategory(SpellCategoryEnum category,EffectsEnum[] effects)
+        public SpellCategory(SpellCategoryEnum category, EffectsEnum[] effects)
         {
             this.Category = category;
-            this.Effects = effects ;
+            this.Effects = effects;
         }
         public SpellCategory() { }
         public void Serialize()

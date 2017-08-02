@@ -1,5 +1,4 @@
 ﻿using Shader.DofusProtocol.Enums.HomeMade;
-using Symbioz.Auth;
 using Symbioz.Auth.Handlers;
 using Symbioz.Auth.Models;
 using Symbioz.Auth.Records;
@@ -11,24 +10,15 @@ using Symbioz.Enums;
 using Symbioz.Helper;
 using Symbioz.Network.Clients;
 using Symbioz.Network.Servers;
-using Symbioz.Providers.Maps;
 using Symbioz.World.Models;
-using Symbioz.World.Models.Fights.Marks;
 using Symbioz.World.Models.Guilds;
-using Symbioz.World.PathProvider;
 using Symbioz.World.Records;
-using Symbioz.World.Records.Guilds;
 using Symbioz.World.Records.Maps;
-using Symbioz.World.Records.Monsters;
-using Symbioz.World.Records.Spells;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Handlers
 {
@@ -111,34 +101,34 @@ namespace Symbioz.World.Handlers
                     else
 
                         if (com != null)
+                    {
+                        var action = Commands.First(x => x.Key.Value == cominfo.Split('.')[1]);
+                        var param = content.Split(null).ToList();
+                        param.Remove(param[0]);
+                        if (param.Count > 0)
                         {
-                            var action = Commands.First(x => x.Key.Value == cominfo.Split('.')[1]);
-                            var param = content.Split(null).ToList();
-                            param.Remove(param[0]);
-                            if (param.Count > 0)
+                            try
                             {
-                                try
-                                {
-                                    action.Value.DynamicInvoke(string.Join(" ", param), client);
-                                }
-                                catch (Exception ex)
-                                {
-                                    client.Character.NotificationError("Unable to execute command : " + ex.InnerException.Message);
-                                }
+                                action.Value.DynamicInvoke(string.Join(" ", param), client);
                             }
-                            else
+                            catch (Exception ex)
                             {
-                                try
-                                {
-                                    action.Value.DynamicInvoke(null, client);
-                                }
-                                catch (Exception ex)
-                                {
-                                    client.Character.NotificationError("Unable to execute command : " + ex.InnerException.Message);
-                                }
+                                client.Character.NotificationError("Unable to execute command : " + ex.InnerException.Message);
                             }
-                            break;
                         }
+                        else
+                        {
+                            try
+                            {
+                                action.Value.DynamicInvoke(null, client);
+                            }
+                            catch (Exception ex)
+                            {
+                                client.Character.NotificationError("Unable to execute command : " + ex.InnerException.Message);
+                            }
+                        }
+                        break;
+                    }
 
 
                 }
@@ -310,20 +300,20 @@ namespace Symbioz.World.Handlers
         {
             TrySendRaw(client, value, "hibernate");
         }
-        [InGameCommand("pointsb",ServerRoleEnum.PLAYER)]
-        public static void PointShopCommand(string value,WorldClient client)
+        [InGameCommand("pointsb", ServerRoleEnum.PLAYER)]
+        public static void PointShopCommand(string value, WorldClient client)
         {
             if (client.Account.PointsCount == 0)
             {
                 client.Character.Reply("Vous ne possedez pas de points, votez sur " + ConstantsRepertory.VOTE_URL, Color.MediumPurple);
                 return;
             }
-       
-            client.Character.Reply("Vous avez converti vos " + client.Account.PointsCount + " point(s) en Krosmorbes",Color.MediumPurple,true);
-           
+
+            client.Character.Reply("Vous avez converti vos " + client.Account.PointsCount + " point(s) en Krosmorbes", Color.MediumPurple, true);
+
             if (AccountsProvider.RemovePoints(client.Account))
             {
-                client.Character.Inventory.Add(ConstantsRepertory.TOKEN_ID,(uint) client.Account.PointsCount);
+                client.Character.Inventory.Add(ConstantsRepertory.TOKEN_ID, (uint)client.Account.PointsCount);
                 client.Account.PointsCount = 0;
             }
             else
@@ -331,19 +321,19 @@ namespace Symbioz.World.Handlers
                 client.Character.NotificationError("Unable to remove points, unknow error");
             }
         }
-        [InGameCommand("notif",ServerRoleEnum.ANIMATOR)]
-        public static void Notif(string value,WorldClient client)
+        [InGameCommand("notif", ServerRoleEnum.ANIMATOR)]
+        public static void Notif(string value, WorldClient client)
         {
             WorldServer.Instance.GetAllClientsOnline().ForEach(x => x.Character.ShowNotification(value));
         }
-        [InGameCommand("lion",ServerRoleEnum.FONDATOR)]
-        public static void LionCommand(string value,WorldClient client)
+        [InGameCommand("lion", ServerRoleEnum.FONDATOR)]
+        public static void LionCommand(string value, WorldClient client)
         {
-              var target = WorldServer.Instance.GetOnlineClient(value);
-              if (target != null)
-                  Look("{1003}", target);
-              else
-                  client.Character.ReplyError("Le client n'existe pas.");
+            var target = WorldServer.Instance.GetOnlineClient(value);
+            if (target != null)
+                Look("{1003}", target);
+            else
+                client.Character.ReplyError("Le client n'existe pas.");
         }
         [InGameCommand("pointsk", ServerRoleEnum.PLAYER)]
         public static void PointKamasCommand(string value, WorldClient client)
@@ -360,7 +350,7 @@ namespace Symbioz.World.Handlers
             {
                 client.Character.AddKamas(client.Account.PointsCount * 1000, true);
                 client.Account.PointsCount = 0;
-          
+
             }
             else
             {
@@ -476,18 +466,18 @@ namespace Symbioz.World.Handlers
                 client.Character.Reply("Element > " + ele.ElementId + " CellId > " + ele.CellId, Colors[i]);
             }
         }
-        [InGameCommand("token",ServerRoleEnum.MODERATOR)]
-        public static void TokenCommand(string value,WorldClient client)
+        [InGameCommand("token", ServerRoleEnum.MODERATOR)]
+        public static void TokenCommand(string value, WorldClient client)
         {
             uint quantity = uint.Parse(value);
             client.Character.Inventory.Add(ConstantsRepertory.TOKEN_ID, quantity);
-            client.Send(new ObtainedItemMessage(ConstantsRepertory.TOKEN_ID,quantity ));
+            client.Send(new ObtainedItemMessage(ConstantsRepertory.TOKEN_ID, quantity));
         }
-        [InGameCommand("spawn",ServerRoleEnum.MODERATOR)]
-        public static void SpawnCommand(string value,WorldClient client)
+        [InGameCommand("spawn", ServerRoleEnum.MODERATOR)]
+        public static void SpawnCommand(string value, WorldClient client)
         {
 
-           // client.Character.Map.Instance.MonstersGroups.Add(new MonsterGroup(MonsterGroup.START_ID+value, monsters,client.Character.Record.CellId));
+            // client.Character.Map.Instance.MonstersGroups.Add(new MonsterGroup(MonsterGroup.START_ID+value, monsters,client.Character.Record.CellId));
         }
         [InGameCommand("walkable", ServerRoleEnum.FONDATOR)]
         public static void WalkableCommand(string value, WorldClient client)
@@ -509,23 +499,23 @@ namespace Symbioz.World.Handlers
         {
             client.Character.Teleport(99090957, 413);
         }
-        [InGameCommand("koriandre",ServerRoleEnum.PLAYER)]
-        public static void Koriandre(string value,WorldClient client)
+        [InGameCommand("koriandre", ServerRoleEnum.PLAYER)]
+        public static void Koriandre(string value, WorldClient client)
         {
             client.Character.Teleport(60036612, 301);
         }
-        [InGameCommand("givrefoux",ServerRoleEnum.PLAYER)]
-        public static void GivreFoux(string value,WorldClient client)
+        [InGameCommand("givrefoux", ServerRoleEnum.PLAYER)]
+        public static void GivreFoux(string value, WorldClient client)
         {
             client.Character.Teleport(54174027, 410);
         }
-        [InGameCommand("obsi",ServerRoleEnum.PLAYER)]
-        public static void ObsiCommand(string value,WorldClient client)
+        [InGameCommand("obsi", ServerRoleEnum.PLAYER)]
+        public static void ObsiCommand(string value, WorldClient client)
         {
             client.Character.Teleport(54169427, 271);
         }
-        [InGameCommand("mutemap",ServerRoleEnum.MODERATOR)]
-        public static void MuteMap(string value,WorldClient client)
+        [InGameCommand("mutemap", ServerRoleEnum.MODERATOR)]
+        public static void MuteMap(string value, WorldClient client)
         {
             if (client.Character.Map.Instance.Muted)
             {
@@ -538,8 +528,8 @@ namespace Symbioz.World.Handlers
                 client.Character.Reply("La map a été mute.");
             }
         }
-        [InGameCommand("banip",ServerRoleEnum.MODERATOR)]
-        public static void BanIpCommand(string value,WorldClient client)
+        [InGameCommand("banip", ServerRoleEnum.MODERATOR)]
+        public static void BanIpCommand(string value, WorldClient client)
         {
             var target = WorldServer.Instance.GetOnlineClient(value);
             if (target != null)
@@ -562,10 +552,10 @@ namespace Symbioz.World.Handlers
              client.Character.Teleport(id, client.Character.Record.CellId);*/
         }
         #endregion
-        [InGameCommand("guild",ServerRoleEnum.PLAYER)]
+        [InGameCommand("guild", ServerRoleEnum.PLAYER)]
         public static void CreateGuildCommand(string value, WorldClient client)
         {
-            if(!client.Character.HasGuild)
+            if (!client.Character.HasGuild)
                 client.Send(new GuildCreationStartedMessage());
             else
                 client.Send(new GuildCreationResultMessage((sbyte)GuildCreationResultEnum.GUILD_CREATE_ERROR_ALREADY_IN_GUILD));
@@ -573,22 +563,22 @@ namespace Symbioz.World.Handlers
         [InGameCommand("alliance", ServerRoleEnum.PLAYER)]
         public static void CreateAllianceCommand(string value, WorldClient client)
         {
-            if(!client.Character.HasGuild)
+            if (!client.Character.HasGuild)
                 client.Send(new AllianceCreationResultMessage((sbyte)GuildCreationResultEnum.GUILD_CREATE_ERROR_REQUIREMENT_UNMET));
             if (!client.Character.HasAlliance)
                 client.Send(new AllianceCreationStartedMessage());
             else if (GuildProvider.GetLeader(client.Character.GuildId).CharacterId != client.Character.Id)
                 client.Send(new AllianceCreationResultMessage((sbyte)GuildCreationResultEnum.GUILD_CREATE_ERROR_REQUIREMENT_UNMET));
-            else if(client.Character.HasAlliance)
+            else if (client.Character.HasAlliance)
                 client.Send(new AllianceCreationResultMessage((sbyte)GuildCreationResultEnum.GUILD_CREATE_ERROR_ALREADY_IN_GUILD));
         }
         [InGameCommand("addtrigger", ServerRoleEnum.ADMINISTRATOR)]
         public static void CreateTriggerCommand(string value, WorldClient client)
         {
             List<MapTriggerRecord> maptriggers = MapTriggerRecord.GetMapTriggerByMap(client.Character.Record.MapId);
-            for(int i=0; i<maptriggers.Count(); i++)
+            for (int i = 0; i < maptriggers.Count(); i++)
             {
-                if(maptriggers[i].CellId == client.Character.Record.CellId)
+                if (maptriggers[i].CellId == client.Character.Record.CellId)
                 {
                     client.Character.Reply("Trigger Allready exist");
                     return;
@@ -618,7 +608,7 @@ namespace Symbioz.World.Handlers
             int Number = Int32.Parse(value.Split(' ')[1]);
 
             WorldClient Target = WorldServer.Instance.GetOnlineClient(CharacterName);
-            if(Target != null)
+            if (Target != null)
             {
                 Target.Character.Record.StatsPoints += (ushort)Number;
                 client.Character.ReplyImportant(CharacterName + " à reçu " + Number + " point(s)");
@@ -636,13 +626,14 @@ namespace Symbioz.World.Handlers
         {
             string CharacterName = value.Split(' ')[0];
             WorldClient Target = null;
-             if (CharacterName != "")
+            if (CharacterName != "")
                 Target = WorldServer.Instance.GetOnlineClient(CharacterName);
             if (Target != null && CharacterName != "")
             {
                 Target.Character.SetGodMod(client);
             }
-            else if(CharacterName == ""){
+            else if (CharacterName == "")
+            {
                 client.Character.SetGodMod(client);
             }
             else
@@ -653,4 +644,3 @@ namespace Symbioz.World.Handlers
         }
     }
 }
- 

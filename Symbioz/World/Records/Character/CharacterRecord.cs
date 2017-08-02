@@ -4,12 +4,9 @@ using Symbioz.Network.Servers;
 using Symbioz.ORM;
 using Symbioz.Providers;
 using Symbioz.World.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
@@ -99,7 +96,7 @@ namespace Symbioz.World.Records
             int ornamentid, sbyte alignside, sbyte alignvalue, sbyte aligngrade, uint characterpower, ushort statspoints,
             ushort spellpoints, ushort honor, List<ushort> knowntiles, List<ushort> knownornaments, ushort activetitle,
             ushort activeornament, List<byte> knownemotes, int spawnpointmapid, short equipedskitterid, List<int> knowntips,
-            ushort actualRank,ushort bestDailyRank,ushort maxRank,ushort arenaVictoryCount,ushort arenaFightsCount,bool pvpEnlable)
+            ushort actualRank, ushort bestDailyRank, ushort maxRank, ushort arenaVictoryCount, ushort arenaFightsCount, bool pvpEnlable)
         {
             this.Id = id;
             this.Name = name;
@@ -158,8 +155,8 @@ namespace Symbioz.World.Records
             return new CharacterRecord(CharacterRecord.FindFreeId(), name, accountid, look, 1, breed, sex,
             ConfigurationManager.Instance.StartMapId, ConfigurationManager.Instance.StartCellId, 3, ConfigurationManager.Instance.StartKamas,
             1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            new List<ushort>(), new List<ushort>(), 0, 0, new List<byte>() { 1 }, -1, 0, new List<int>(),ArenaProvider.DEFAULT_RANK,ArenaProvider.DEFAULT_RANK,
-            ArenaProvider.DEFAULT_RANK,0,0,false);
+            new List<ushort>(), new List<ushort>(), 0, 0, new List<byte>() { 1 }, -1, 0, new List<int>(), ArenaProvider.DEFAULT_RANK, ArenaProvider.DEFAULT_RANK,
+            ArenaProvider.DEFAULT_RANK, 0, 0, false);
         }
         public static bool CheckCharacterNameExist(string name)
         {

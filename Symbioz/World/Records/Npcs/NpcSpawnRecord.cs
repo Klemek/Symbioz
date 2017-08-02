@@ -1,10 +1,6 @@
 ﻿using Symbioz.DofusProtocol.Types;
 using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
@@ -19,8 +15,8 @@ namespace Symbioz.World.Records
         public int MapId;
         public short CellId;
         public sbyte Direction;
-        
-        public NpcSpawnRecord(int id,ushort templateid,int mapid,short cellid,sbyte direction)
+
+        public NpcSpawnRecord(int id, ushort templateid, int mapid, short cellid, sbyte direction)
         {
             this.Id = id;
             this.TemplateId = templateid;

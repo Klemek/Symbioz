@@ -2,14 +2,11 @@
 using Symbioz.DofusProtocol.Messages;
 using Symbioz.Enums;
 using Symbioz.Network.Clients;
-using Symbioz.World.Models;
 using Symbioz.World.Models.Exchanges;
 using Symbioz.World.Records;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers
 {
@@ -43,7 +40,7 @@ namespace Symbioz.Providers
             }
 
         }
-        
+
         public static List<NpcReplyRecord> GetPossibleReply(WorldClient client, List<NpcReplyRecord> replies)
         {
             List<NpcReplyRecord> results = new List<NpcReplyRecord>();
@@ -59,7 +56,7 @@ namespace Symbioz.Providers
                     {
                         if (reply.ConditionExplanation != null && reply.ConditionExplanation != string.Empty)
                         {
-                            client.Character.ShowNotification("Critère: "+reply.ConditionExplanation);
+                            client.Character.ShowNotification("Critère: " + reply.ConditionExplanation);
                         }
                     }
                 }
@@ -82,7 +79,7 @@ namespace Symbioz.Providers
                 client.Character.TeleportToSpawnPoint();
             }
         }
-        static void Reset(WorldClient client,NpcReplyRecord reply)
+        static void Reset(WorldClient client, NpcReplyRecord reply)
         {
             client.Character.StatsRecord.BaseAgility = 0;
             client.Character.StatsRecord.BaseChance = 0;
@@ -91,14 +88,14 @@ namespace Symbioz.Providers
             client.Character.StatsRecord.LifePoints -= (short)(client.Character.StatsRecord.BaseVitality);
             client.Character.CurrentStats.LifePoints -= (uint)(client.Character.StatsRecord.BaseVitality);
             client.Character.StatsRecord.BaseVitality = 0;
-          
+
             client.Character.StatsRecord.BaseWisdom = 0;
-            client.Character.Record.StatsPoints = (ushort)((client.Character.Record.Level * 5) -5);
+            client.Character.Record.StatsPoints = (ushort)((client.Character.Record.Level * 5) - 5);
             client.Character.RefreshStats();
             client.Character.ShowNotification("Vos points de caracteristiques ont été remis a zéro.");
-         
+
         }
-        static void Cinematic(WorldClient client,NpcReplyRecord reply)
+        static void Cinematic(WorldClient client, NpcReplyRecord reply)
         {
             client.Send(new CinematicMessage(ushort.Parse(reply.OptionalValue1)));
         }
@@ -111,7 +108,7 @@ namespace Symbioz.Providers
             client.Character.BankInstance = new BankExchange(client);
             client.Character.BankInstance.OpenPanel();
         }
-        static void Align(WorldClient client,NpcReplyRecord reply)
+        static void Align(WorldClient client, NpcReplyRecord reply)
         {
             AlignmentSideEnum side = (AlignmentSideEnum)(sbyte.Parse(reply.OptionalValue1));
             client.Character.SetAlign(side);

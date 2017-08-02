@@ -1,11 +1,7 @@
 ﻿using Symbioz.ORM;
 using Symbioz.World.Models.Fights;
 using Symbioz.World.Models.Fights.Fighters;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records.Monsters
 {
@@ -19,7 +15,7 @@ namespace Symbioz.World.Records.Monsters
         public sbyte Probability;
         [Ignore]
         public sbyte ActualGrade;
-        public MonsterSpawnMapRecord(int id, ushort monsterid,int mapid, sbyte probability)
+        public MonsterSpawnMapRecord(int id, ushort monsterid, int mapid, sbyte probability)
         {
             this.Id = id;
             this.MonsterId = monsterid;
@@ -28,7 +24,7 @@ namespace Symbioz.World.Records.Monsters
         }
         public MonsterFighter CreateFighter(FightTeam team)
         {
-            return new MonsterFighter(this,team);
+            return new MonsterFighter(this, team);
         }
         public static List<MonsterSpawnMapRecord> GetSpawn(int mapid)
         {

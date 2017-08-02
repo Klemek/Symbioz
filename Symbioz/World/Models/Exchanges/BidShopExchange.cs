@@ -2,16 +2,12 @@
 using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
 using Symbioz.Network.Clients;
+using Symbioz.Network.Servers;
 using Symbioz.ORM;
+using Symbioz.World.Handlers;
 using Symbioz.World.Records;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.Helper;
-using Symbioz.World.Handlers;
-using Symbioz.Network.Servers;
 
 namespace Symbioz.World.Models.Exchanges
 {
@@ -82,8 +78,8 @@ namespace Symbioz.World.Models.Exchanges
                 Client.Character.Inventory.Add(item);
                 RemoveItem(item);
             }
-           
-         
+
+
         }
         public void RemoveItem(BidShopItemRecord item)
         {

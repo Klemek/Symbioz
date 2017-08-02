@@ -1,10 +1,5 @@
 ﻿using Symbioz.DofusProtocol.Messages;
 using Symbioz.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace Symbioz.World.Models.Exchanges.Craft.Replay
@@ -39,7 +34,7 @@ namespace Symbioz.World.Models.Exchanges.Craft.Replay
 
             Instance.Client.Send(new ExchangeCraftResultMagicWithObjectDescMessage((sbyte)CraftResultEnum.CRAFT_SUCCESS,
                new DofusProtocol.Types.ObjectItemNotInContainer(700, Instance.UsedItem.GetEffects(), Instance.UsedItem.UID, 1), 2));
-       
+
 
         }
         public override void Stop()

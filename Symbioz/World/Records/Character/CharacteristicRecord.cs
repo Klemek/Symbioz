@@ -1,10 +1,6 @@
 ﻿using Symbioz.ORM;
 using Symbioz.Providers.SpellEffectsProvider.Buffs;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
@@ -35,8 +31,8 @@ namespace Symbioz.World.Records
         {
             return Characteristics.Find(x => x.Id == id);
         }
-       
-        public static UInt16ReflectedStat GetReflectedStat(StatsRecord host,int characteristicid)
+
+        public static UInt16ReflectedStat GetReflectedStat(StatsRecord host, int characteristicid)
         {
             CharacteristicRecord record = Characteristics.Find(x => x.Id == characteristicid);
             return new UInt16ReflectedStat(StatsRecord.GetFieldInfo(record.Keyword), host);

@@ -3,8 +3,6 @@ using Symbioz.World.Models.Fights.Fighters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.SpellEffectsProvider.TargetsMasksProvider
 {
@@ -32,18 +30,18 @@ namespace Symbioz.Providers.SpellEffectsProvider.TargetsMasksProvider
             var handler = Handlers.FirstOrDefault(x => identifier.StartsWith(x.Key));
             if (handler.Value != null)
             {
-                string value = identifier.Remove(0,handler.Key.Length);
+                string value = identifier.Remove(0, handler.Key.Length);
                 return handler.Value(fighter, value);
             }
             else
             {
-                if (!TargetMaskValidator.HandlerExist(identifier)) 
-                Logger.Log("Unknown TargetMask Identifier " + identifier);
+                if (!TargetMaskValidator.HandlerExist(identifier))
+                    Logger.Log("Unknown TargetMask Identifier " + identifier);
                 return new List<Fighter>();
             }
         }
 
-       
+
         [TargetMask("A")]
         public static List<Fighter> AllEnemies(Fighter fighter, string value)
         {
@@ -65,17 +63,17 @@ namespace Symbioz.Providers.SpellEffectsProvider.TargetsMasksProvider
         [TargetMask("M")]
         public static List<Fighter> Monsters(Fighter fighter, string value)
         {
-            return AllEnemies(fighter, value).FindAll(x=>x is MonsterFighter);
+            return AllEnemies(fighter, value).FindAll(x => x is MonsterFighter);
         }
 
-        [TargetMask("C")] 
+        [TargetMask("C")]
         public static List<Fighter> Self(Fighter fighter, string value)
         {
             return new List<Fighter>() { fighter };
         }
 
         [TargetMask("c")]
-        public static List<Fighter> OnlySelf(Fighter fighter,string value)
+        public static List<Fighter> OnlySelf(Fighter fighter, string value)
         {
             return new List<Fighter>() { fighter };
         }
@@ -89,7 +87,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.TargetsMasksProvider
         }
 
         [TargetMask("i")]
-        public static List<Fighter> Invocations(Fighter fighter,string value)
+        public static List<Fighter> Invocations(Fighter fighter, string value)
         {
             return fighter.Fight.GetAllSummons();
         }

@@ -6,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.ActorIA
 {
@@ -21,7 +19,7 @@ namespace Symbioz.Providers.ActorIA
 
         public const sbyte DEFAULT_SEARCH_GRADE = 1;
 
-        [StartupInvoke("SpellBuilter",StartupInvokeType.Others)]
+        [StartupInvoke("SpellBuilter", StartupInvokeType.Others)]
         public static void Sort()
         {
             foreach (SpellCategoryEnum category in Enum.GetValues(typeof(SpellCategoryEnum)))

@@ -1,12 +1,7 @@
 ﻿using Symbioz.Core;
-using Symbioz.DofusProtocol.Types;
 using Symbioz.ORM;
 using Symbioz.World.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records.Monsters
 {
@@ -39,7 +34,7 @@ namespace Symbioz.World.Records.Monsters
             return Grades.Find(x => x.GradeId == id);
         }
 
-        public MonsterRecord(ushort id,int nameid,int race,string look,bool usesummondslot,bool usebombslot,bool isboss,List<ushort> spells,List<int> iaactions,int minkamas,int maxkamas)
+        public MonsterRecord(ushort id, int nameid, int race, string look, bool usesummondslot, bool usebombslot, bool isboss, List<ushort> spells, List<int> iaactions, int minkamas, int maxkamas)
         {
             this.Id = id;
             this.NameId = nameid;
@@ -47,7 +42,7 @@ namespace Symbioz.World.Records.Monsters
             this.Race = race;
             this.Look = look;
             if (Look != string.Empty)
-            this.RealLook = ContextActorLook.Parse(Look);
+                this.RealLook = ContextActorLook.Parse(Look);
             this.UseSummonSlot = usesummondslot;
             this.UseBombSlot = usebombslot;
             this.IsBoss = isboss;
@@ -56,18 +51,18 @@ namespace Symbioz.World.Records.Monsters
             this.MinKamas = minkamas;
             this.MaxKamas = maxkamas;
         }
-        public FighterStats GetFighterStats(sbyte gradeId,bool summon = false,int summonerid = 0)
+        public FighterStats GetFighterStats(sbyte gradeId, bool summon = false, int summonerid = 0)
         {
             var grade = GetGrade(gradeId);
-            return new FighterStats(new StatsRecord(-1, (short)grade.LifePoints, 0, grade.Level, 0,  (short)grade.ActionPoints, grade.MovementPoints, grade.Power, 0,(short) grade.Wisdom, grade.Power, grade.Power, grade.Power, 0, 0,
-                (short)grade.DamageReflect, 0, 0, 0, 0 ,0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, grade.PaDodge, grade.PmDodge,grade.NeutralResistance, grade.EarthResistance, grade.WaterResistance,
-                grade.AirResistance, grade.FireResistance,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),summon,summonerid);
+            return new FighterStats(new StatsRecord(-1, (short)grade.LifePoints, 0, grade.Level, 0, (short)grade.ActionPoints, grade.MovementPoints, grade.Power, 0, (short)grade.Wisdom, grade.Power, grade.Power, grade.Power, 0, 0,
+                (short)grade.DamageReflect, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, grade.PaDodge, grade.PmDodge, grade.NeutralResistance, grade.EarthResistance, grade.WaterResistance,
+                grade.AirResistance, grade.FireResistance, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), summon, summonerid);
         }
 
         public static MonsterRecord GetMonster(ushort id)
         {
             return Monsters.Find(x => x.Id == id);
         }
-        
+
     }
 }

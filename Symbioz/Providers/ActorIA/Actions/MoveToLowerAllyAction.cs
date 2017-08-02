@@ -1,14 +1,10 @@
 ﻿using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.PathProvider;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.ActorIA.Actions
 {
-  //  [IAAction(IAActionsEnum.MOVE_TO_ALLY)]
+    //  [IAAction(IAActionsEnum.MOVE_TO_ALLY)]
     class MoveToLowerAllyAction : AbstractIAAction
     {
         public override void Execute(MonsterFighter fighter)

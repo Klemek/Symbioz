@@ -5,9 +5,6 @@ using Symbioz.Network.Clients;
 using Symbioz.World.Records;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Fights.FightsTypes
 {
@@ -40,7 +37,7 @@ namespace Symbioz.World.Models.Fights.FightsTypes
 
         public override void ShowFightResults(List<FightResultListEntry> results, WorldClient client)
         {
-           
+
             client.Send(new GameFightEndMessage((ushort)TimeLine.m_round, 0, 0, results, new NamedPartyTeamWithOutcome[0]));
         }
         public override void OnFightEnded(TeamColorEnum winner)
@@ -68,11 +65,11 @@ namespace Symbioz.World.Models.Fights.FightsTypes
 
             foreach (var _winner in winners.GetCharacterFighters(true))
             {
-               if (_winner.Client.Character.Record.ActualRank > _winner.Client.Character.Record.MaxRank)
-               {
-                   _winner.Client.Character.Record.MaxRank = _winner.Client.Character.Record.ActualRank;
-                   _winner.Client.Character.Record.BestDailyRank = _winner.Client.Character.Record.ActualRank;
-               }
+                if (_winner.Client.Character.Record.ActualRank > _winner.Client.Character.Record.MaxRank)
+                {
+                    _winner.Client.Character.Record.MaxRank = _winner.Client.Character.Record.ActualRank;
+                    _winner.Client.Character.Record.BestDailyRank = _winner.Client.Character.Record.ActualRank;
+                }
             }
 
             loosers.GetCharacterFighters(true).ForEach(x => x.Client.Character.Record.ActualRank -= (ushort)(x.Client.Character.Record.Level));

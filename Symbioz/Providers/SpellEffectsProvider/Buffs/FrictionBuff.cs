@@ -3,11 +3,7 @@ using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
 using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.PathProvider;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.SpellEffectsProvider.Buffs
 {
@@ -36,7 +32,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.Buffs
         }
         public override bool OnEventCalled(object arg1, object arg2, object arg3)
         {
-           
+
             Fighter source = Fighter.Fight.GetFighter(SourceId);
 
             if (!Fighter.IsAligned(source))
@@ -45,7 +41,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.Buffs
             DirectionsEnum dir = ShapesProvider.GetDirectionFromTwoCells(Fighter.CellId, source.CellId);
             List<short> cells = Fighter.Fight.BreakAtFirstObstacles(ShapesProvider.GetLineFromDirection(Fighter.CellId, 1, dir));
 
-            if (cells.Count > 0) 
+            if (cells.Count > 0)
                 Fighter.Slide(SourceId, new List<short>() { Fighter.CellId, cells[0] });
 
             return false;

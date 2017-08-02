@@ -1,23 +1,19 @@
 ﻿using MySql.Data.MySqlClient;
 using Symbioz.Core.Startup;
-using Symbioz.Helper;
 using Symbioz.ORM;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Core
 {
     public class AuthDatabaseProvider
     {
-        [StartupInvoke("Auth Connection",StartupInvokeType.Sql)]
-        public static void Initialize() 
+        [StartupInvoke("Auth Connection", StartupInvokeType.Sql)]
+        public static void Initialize()
         {
-           m_connection = (MySqlConnection)DatabaseManager.GetInstance().UseProvider().Clone();
-           m_connection.Open();
+            m_connection = (MySqlConnection)DatabaseManager.GetInstance().UseProvider().Clone();
+            m_connection.Open();
         }
         private static void CheckConnectionState()
         {
@@ -43,7 +39,7 @@ namespace Symbioz.Core
             string query = "UPDATE " + table + " SET " + colum + "='" + value + "' WHERE " + where + "='" + wherevalue + "'";
             Execute(query);
         }
-        public static void Insert(string tablename,List<string> fields,List<string> values)
+        public static void Insert(string tablename, List<string> fields, List<string> values)
         {
             string fieldsStr = fields.ToSplitedString();
             string valuesStr = string.Empty;
@@ -54,25 +50,25 @@ namespace Symbioz.Core
             valuesStr = valuesStr.Remove(valuesStr.Length - 1);
             string query = "INSERT INTO " + tablename + " (" + fieldsStr + ") VALUES (" + valuesStr + ")";
             Execute(query);
-           
+
         }
-        public static void Delete(string tablename,object where,string werefield = "Id")
+        public static void Delete(string tablename, object where, string werefield = "Id")
         {
-            Execute(string.Format("DELETE FROM {0} WHERE {1}={2}",tablename,werefield,where));
+            Execute(string.Format("DELETE FROM {0} WHERE {1}={2}", tablename, werefield, where));
         }
         public static void Execute(string query)
         {
             CheckConnectionState();
             if (m_connection.State == ConnectionState.Open)
             {
-                MySqlCommand cmd = new MySqlCommand(query,m_connection);
+                MySqlCommand cmd = new MySqlCommand(query, m_connection);
                 try
                 {
                     cmd.ExecuteNonQuery();
                 }
-                catch (Exception ex) 
+                catch (Exception ex)
                 {
-                    Logger.Error("[SQL Execute Query]"+ ex.Message);
+                    Logger.Error("[SQL Execute Query]" + ex.Message);
                 }
 
             }
@@ -89,7 +85,7 @@ namespace Symbioz.Core
                 query = "delete from " + table + "";
                 Execute(query);
                 Logger.Init2(table + " deleted...");
-            } 
+            }
         }
         public static string SelectData(string table, string where, string wherevalue, string resultcolum)
         {

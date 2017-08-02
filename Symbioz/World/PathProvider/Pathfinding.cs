@@ -178,15 +178,15 @@ namespace Symbioz.World.PathProvider
             return Cells;
         }
 
-  
 
-      
+
+
         public static _cell GetCell(short cell)
         {
             return FIXEDCELLS.FirstOrDefault(x => x.ID == cell);
         }
 
-     
+
         public static List<_cell> GetRectangleCells(_cell start, _cell end)
         {
             int minX = Math.Min(start.X, end.X),

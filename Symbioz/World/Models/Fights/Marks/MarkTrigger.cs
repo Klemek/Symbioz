@@ -1,14 +1,10 @@
 ﻿using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
-using Symbioz.Providers.SpellEffectsProvider.Buffs;
 using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.Models.Fights.Marks;
 using Symbioz.World.PathProvider;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Fights
 {

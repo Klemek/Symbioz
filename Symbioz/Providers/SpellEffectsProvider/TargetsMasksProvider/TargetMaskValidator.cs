@@ -3,8 +3,6 @@ using Symbioz.World.Models.Fights.Fighters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.SpellEffectsProvider.TargetsMasksProvider
 {
@@ -12,12 +10,12 @@ namespace Symbioz.Providers.SpellEffectsProvider.TargetsMasksProvider
     {
         private static Dictionary<string, ValidatorParserDel> Handlers = new Dictionary<string, ValidatorParserDel>();
 
-        public delegate List<Fighter> ValidatorParserDel(Fighter fighter, string value,List<Fighter> allfighters);
+        public delegate List<Fighter> ValidatorParserDel(Fighter fighter, string value, List<Fighter> allfighters);
 
         [StartupInvoke(StartupInvokeType.Others)]
         public static void Initialize()
         {
-             foreach (var method in typeof(TargetMaskValidator).GetMethods())
+            foreach (var method in typeof(TargetMaskValidator).GetMethods())
             {
                 var attribute = method.GetCustomAttributes(typeof(TMValidator), false);
                 if (attribute.Count() > 0)
@@ -41,7 +39,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.TargetsMasksProvider
             if (handler.Value != null)
             {
                 string value = identifier.Remove(0, handler.Key.Length);
-                return handler.Value(fighter, value,allfighters);
+                return handler.Value(fighter, value, allfighters);
             }
             else
             {
@@ -70,7 +68,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.TargetsMasksProvider
             return exisiting.FindAll(x => x is BombFighter);
         }
         [TMValidator("F")]
-        public static List<Fighter> SelectedMonster(Fighter fighter, string value,List<Fighter> existing)
+        public static List<Fighter> SelectedMonster(Fighter fighter, string value, List<Fighter> existing)
         {
             List<Fighter> results = new List<Fighter>();
             foreach (var target in existing)

@@ -1,17 +1,11 @@
 ﻿using Symbioz.DofusProtocol.Messages;
+using Symbioz.Enums;
 using Symbioz.Network.Clients;
 using Symbioz.Network.Messages;
-using Symbioz.Enums;
-using Symbioz.World.Records.Guilds;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.DofusProtocol.Types;
+using Symbioz.Network.Servers;
 using Symbioz.World.Models.Guilds;
 using Symbioz.World.Records;
-using Symbioz.Network.Servers;
+using Symbioz.World.Records.Guilds;
 
 namespace Symbioz.World.Handlers
 {
@@ -63,7 +57,7 @@ namespace Symbioz.World.Handlers
             if (WorldServer.Instance.IsConnected(member.CharacterId))
             {
                 WorldClient c = WorldServer.Instance.GetOnlineClient(member.CharacterId);
-                c.Send(new GuildMembershipMessage(c.Character.GetGuild().GetGuildInformations(),message.rights,true));
+                c.Send(new GuildMembershipMessage(c.Character.GetGuild().GetGuildInformations(), message.rights, true));
             }
         }
         [MessageHandler]

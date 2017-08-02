@@ -1,16 +1,12 @@
 ﻿using Symbioz.Core.Startup;
-using Symbioz.Helper;
 using Symbioz.ORM;
 using Symbioz.World.Models;
 using Symbioz.World.Models.Maps;
 using Symbioz.World.PathProvider;
 using Symbioz.World.Records.Maps;
 using Symbioz.World.Records.Monsters;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
@@ -33,8 +29,13 @@ namespace Symbioz.World.Records
         public bool DugeonMap { get { return DungeonRecord.IsDungeonMap(this.Id); } }
 
         public bool HaveZaap { get { return Zaap != null; } }
-        public InteractiveRecord Zaap { get { return InteractiveRecord.GetInteractivesOnMap(Id).Find(x => x.ElementTypeId == 16);
-        } }
+        public InteractiveRecord Zaap
+        {
+            get
+            {
+                return InteractiveRecord.GetInteractivesOnMap(Id).Find(x => x.ElementTypeId == 16);
+            }
+        }
         public Point Position { get { return MapPositionRecord.GetMapPosition(Id); } }
 
         public string Name { get { return MapPositionRecord.GetMapName(Id); } }

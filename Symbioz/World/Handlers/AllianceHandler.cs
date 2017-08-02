@@ -1,18 +1,14 @@
-﻿using Symbioz.Network.Messages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.DofusProtocol.Messages;
+﻿using Symbioz.DofusProtocol.Messages;
+using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
 using Symbioz.Network.Clients;
+using Symbioz.Network.Messages;
 using Symbioz.World.Models.Alliances;
+using Symbioz.World.Models.Guilds;
 using Symbioz.World.Records.Alliances;
 using Symbioz.World.Records.Guilds;
-using Symbioz.DofusProtocol.Types;
-using Symbioz.World.Models.Guilds;
-using Symbioz.World.Records;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Symbioz.World.Handlers
 {
@@ -49,12 +45,12 @@ namespace Symbioz.World.Handlers
             if (alliance == null)
                 client.Send(new GuildFactsMessage(new GuildFactSheetInformations((uint)guild.Id, guild.Name, guild.GetEmblemObject(), (uint)GuildProvider.GetLeader(guild.Id).CharacterId, (byte)guild.Level, (ushort)CharacterGuildRecord.GetMembers(guild.Id).Count()), 0, 0, true, (IEnumerable<CharacterMinimalInformations>)membersMinimalInfos));
             else
-                client.Send(new GuildInAllianceFactsMessage(new GuildFactSheetInformations((uint)guild.Id, guild.Name, guild.GetEmblemObject(), (uint)GuildProvider.GetLeader(guild.Id).CharacterId, (byte)guild.Level, (ushort)CharacterGuildRecord.GetMembers(guild.Id).Count()),0,0,true, (IEnumerable<CharacterMinimalInformations>)membersMinimalInfos,new BasicNamedAllianceInformations((uint)alliance.Id,alliance.Tag,alliance.Name)));
+                client.Send(new GuildInAllianceFactsMessage(new GuildFactSheetInformations((uint)guild.Id, guild.Name, guild.GetEmblemObject(), (uint)GuildProvider.GetLeader(guild.Id).CharacterId, (byte)guild.Level, (ushort)CharacterGuildRecord.GetMembers(guild.Id).Count()), 0, 0, true, (IEnumerable<CharacterMinimalInformations>)membersMinimalInfos, new BasicNamedAllianceInformations((uint)alliance.Id, alliance.Tag, alliance.Name)));
         }
         [MessageHandler]
         public static void HandleAllianceKickRequest(AllianceKickRequestMessage message, WorldClient client)
         {
-            if(client.Character.HasAlliance && AllianceProvider.GetLeader(client.Character.AllianceId).Id == client.Character.GuildId && GuildProvider.GetLeader(client.Character.GuildId).CharacterId == client.Character.Id)
+            if (client.Character.HasAlliance && AllianceProvider.GetLeader(client.Character.AllianceId).Id == client.Character.GuildId && GuildProvider.GetLeader(client.Character.GuildId).CharacterId == client.Character.Id)
             {
                 AllianceRecord.GetAlliance(client.Character.AllianceId).KickFromAlliance((int)message.kickedId, client);
             }

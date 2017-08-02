@@ -3,11 +3,8 @@ using Symbioz.Enums;
 using Symbioz.ORM;
 using Symbioz.World.Models;
 using Symbioz.World.Records.Spells;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records.Items
 {
@@ -45,7 +42,7 @@ namespace Symbioz.World.Records.Items
 
         public WeaponRecord(ushort id, string name, short minrange, short maxrange, sbyte criticalhitbonus, sbyte maxcastperturn,
             int descriptionid, short level, short realweight, string criteria, sbyte criticalhitprobability, bool twohanded,
-            int price, sbyte apcost, bool castinline, string effects, short typeid,short apperanceid)
+            int price, sbyte apcost, bool castinline, string effects, short typeid, short apperanceid)
         {
             this.Id = id;
             this.Name = name;
@@ -70,7 +67,7 @@ namespace Symbioz.World.Records.Items
         }
         public ItemRecord ToItemRecord()
         {
-            return new ItemRecord(Id, 0, Name, TypeId,AppearenceId, Level, Price, RealWeight, Effects, Criteria);
+            return new ItemRecord(Id, 0, Name, TypeId, AppearenceId, Level, Price, RealWeight, Effects, Criteria);
         }
         public List<ExtendedSpellEffect> GetWeaponEffects(FightSpellCastCriticalEnum critical)
         {

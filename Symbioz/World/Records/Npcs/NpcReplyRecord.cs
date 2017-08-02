@@ -1,13 +1,9 @@
 ﻿using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
-    [Table("NpcsReplies",true)]
+    [Table("NpcsReplies", true)]
     public class NpcReplyRecord : ITable
     {
         public static List<NpcReplyRecord> NpcsReplies = new List<NpcReplyRecord>();
@@ -20,7 +16,7 @@ namespace Symbioz.World.Records
         public string OptionalValue2;
         public string Condition;
         public string ConditionExplanation;
-        public NpcReplyRecord(ushort messageid,int replyid,string actiontype,string optionalvalue1,string optionalvalue2,string condition,string conditionexplanation)
+        public NpcReplyRecord(ushort messageid, int replyid, string actiontype, string optionalvalue1, string optionalvalue2, string condition, string conditionexplanation)
         {
             this.MessageId = messageid;
             this.ReplyId = replyid;

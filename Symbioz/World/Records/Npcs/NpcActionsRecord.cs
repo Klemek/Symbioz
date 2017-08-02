@@ -1,15 +1,11 @@
 ﻿using Symbioz.Enums;
 using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
-    [Table("NpcsActions",true)]
-   public class NpcActionsRecord : ITable
+    [Table("NpcsActions", true)]
+    public class NpcActionsRecord : ITable
     {
         public static List<NpcActionsRecord> NpcsActions = new List<NpcActionsRecord>();
         [Primary]
@@ -21,7 +17,7 @@ namespace Symbioz.World.Records
         public string OptionalValue1;
         public string OptionalValue2;
 
-        public NpcActionsRecord(int id,int npcid,sbyte actionid,string optionalvalue1,string optionalvalue2)
+        public NpcActionsRecord(int id, int npcid, sbyte actionid, string optionalvalue1, string optionalvalue2)
         {
             this.Id = id;
             this.NpcId = npcid;
@@ -29,7 +25,7 @@ namespace Symbioz.World.Records
             this.OptionalValue1 = optionalvalue1;
             this.OptionalValue2 = optionalvalue2;
         }
-        public static NpcActionsRecord GetNpcAction(int npcid,NpcActionTypeEnum type)
+        public static NpcActionsRecord GetNpcAction(int npcid, NpcActionTypeEnum type)
         {
             return NpcsActions.Find(x => x.NpcId == npcid && x.ActionType == type);
         }

@@ -1,11 +1,6 @@
 ﻿using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
 using Symbioz.World.Records;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models
 {
@@ -54,7 +49,7 @@ namespace Symbioz.World.Models
         }
         public GameFightMinimalStats GetMinimalStats()
         {
-            return new GameFightMinimalStats((uint)Stats.LifePoints,(uint)RealStats.LifePoints, (uint)(RealStats.LifePoints + ErodedLife), (uint)Stats.AllDamagesBonus,
+            return new GameFightMinimalStats((uint)Stats.LifePoints, (uint)RealStats.LifePoints, (uint)(RealStats.LifePoints + ErodedLife), (uint)Stats.AllDamagesBonus,
                 (uint)ShieldPoints, Stats.ActionPoints, RealStats.ActionPoints, Stats.MovementPoints, RealStats.MovementPoints,
                 SummonerId, Summoned, Stats.NeutralResistPercent, Stats.EarthResistPercent, Stats.WaterResistPercent, Stats.AirResistPercent, Stats.FireResistPercent,
                 Stats.NeutralReduction, Stats.EarthReduction, Stats.WaterReduction, Stats.AirReduction, Stats.FireReduction,

@@ -1,9 +1,6 @@
 ﻿using Symbioz.World.Models.Fights.Fighters;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Fights
 {
@@ -23,10 +20,10 @@ namespace Symbioz.World.Models.Fights
             m_fighters.Add(fighter);
             Sort();
         }
-        public void Insert(Fighter inserted,Fighter master)
+        public void Insert(Fighter inserted, Fighter master)
         {
             int index = m_fighters.IndexOf(master);
-            m_fighters.Insert(index + 1,inserted);
+            m_fighters.Insert(index + 1, inserted);
         }
         public void Sort()
         {
@@ -63,7 +60,7 @@ namespace Symbioz.World.Models.Fights
             {
                 this.m_currentIndex--;
             }
-            
+
         }
         public Fighter PopNextFighter()
         {
@@ -72,20 +69,20 @@ namespace Symbioz.World.Models.Fights
             {
                 m_round++;
                 if (OnNewRound != null)
-                OnNewRound(m_round);
+                    OnNewRound(m_round);
                 m_currentIndex = 0;
             }
             if (m_currentIndex == -1)
                 m_currentIndex++;
-          
+
             return m_fighters[m_currentIndex];
         }
         public int[] GenerateTimeLine(bool sort = true)
         {
             if (sort)
-            Sort();
+                Sort();
             return m_fighters.ConvertAll<int>(x => x.ContextualId).ToArray();
         }
-        
+
     }
 }

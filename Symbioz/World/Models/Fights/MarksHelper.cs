@@ -6,11 +6,8 @@ using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.Models.Fights.Marks;
 using Symbioz.World.PathProvider;
 using Symbioz.World.Records.Spells;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Fights
 {
@@ -40,7 +37,7 @@ namespace Symbioz.World.Models.Fights
             {
                 BombFighter fighter = fight.GetFighter<BombFighter>(x => x.CellId == cellId && x.MonsterTemplate.Id == bomb.MonsterTemplate.Id);
 
-                if (fighter != null && fighter != bomb && fighter.Fight.GetMarks<Wall>().Find(x=>x.Cells.Contains(cellId)) ==null)
+                if (fighter != null && fighter != bomb && fighter.Fight.GetMarks<Wall>().Find(x => x.Cells.Contains(cellId)) == null)
                 {
                     Wall wall = MarksHelper.Instance.CreateWall(bomb, fighter, (short)bomb.BombWallRecord.SpellId, bomb.Grade, bomb.BombWallRecord.Color);
                     yield return wall;
@@ -63,7 +60,7 @@ namespace Symbioz.World.Models.Fights
             Wall wall = new Wall(source.Master, target.CellId, source.CellId, WALL_SHAPE, (short)wallRadius, spellId, spellGrade, color, source, target);
             return wall;
         }
-        public void DirectExplosion(Fighter master,Fighter target,int bombMonsterId,sbyte spellGrade)
+        public void DirectExplosion(Fighter master, Fighter target, int bombMonsterId, sbyte spellGrade)
         {
             master.Fight.TryEndSequence(1, 0); // During Spell Cast
 
@@ -72,14 +69,14 @@ namespace Symbioz.World.Models.Fights
 
             master.Fight.Send(new GameActionFightSpellCastMessage(0, target.ContextualId, target.ContextualId, target.CellId,
                 (sbyte)FightSpellCastCriticalEnum.NORMAL
-                 , true,bwall.CibleDetonationSpellId, spellGrade, new short[0]));
+                 , true, bwall.CibleDetonationSpellId, spellGrade, new short[0]));
 
             SpellLevelRecord elevel = SpellLevelRecord.GetLevel(bwall.CibleDetonationSpellId, spellGrade);
             target.HandleSpellEffects(elevel, target.CellId, FightSpellCastCriticalEnum.NORMAL);
             master.Fight.CheckFightEnd();
             master.Fight.TryEndSequence(1, 0);
         }
-        public void CastDetonation(Fighter master,Fighter bomb,ushort explosionSpellId,int bombMonsterId,sbyte spellGrade)
+        public void CastDetonation(Fighter master, Fighter bomb, ushort explosionSpellId, int bombMonsterId, sbyte spellGrade)
         {
             master.Fight.TryEndSequence(1, 0); // During Spell Cast
 
@@ -95,12 +92,12 @@ namespace Symbioz.World.Models.Fights
             master.Fight.CheckFightEnd();
             master.Fight.TryEndSequence(1, 0);
         }
-        public static short[] GetPortals(Fight fight,short castCellId)
+        public static short[] GetPortals(Fight fight, short castCellId)
         {
 
             var portals = fight.GetMarks<Portal>().OrderByDescending(x => PathHelper.GetDistanceBetween(castCellId, castCellId)).ToList();
             if (portals.Count > 0)
-            portals.Remove(portals.Last());
+                portals.Remove(portals.Last());
             return portals.ToList().ConvertAll<short>(x => x.CenterCell).ToArray();
         }
 

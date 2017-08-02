@@ -1,22 +1,16 @@
-﻿using Symbioz.Network.Messages;
+﻿using Symbioz.Auth.Handlers;
 using Symbioz.DofusProtocol.Messages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Symbioz.Network.Clients;
+using Symbioz.Network.Messages;
 using Symbioz.Network.Servers;
 using Symbioz.World.Records;
-using Symbioz.ORM;
-using Symbioz.Auth.Handlers;
 
 namespace Symbioz.World.Handlers
 {
     class BidShopsHandler
     {
         [MessageHandler]
-        public static void HandleExchangeBidHouseSearch(ExchangeBidHouseSearchMessage message,WorldClient client)
+        public static void HandleExchangeBidHouseSearch(ExchangeBidHouseSearchMessage message, WorldClient client)
         {
             if (client.Character.BidShopInstance.BidShopItems.Find(x => x.GID == message.genId) != null)
             {
@@ -29,12 +23,12 @@ namespace Symbioz.World.Handlers
             }
         }
         [MessageHandler]
-        public static void HandleExchangeBidHouseList(ExchangeBidHouseListMessage message,WorldClient client)
+        public static void HandleExchangeBidHouseList(ExchangeBidHouseListMessage message, WorldClient client)
         {
             client.Character.BidShopInstance.ShowItemList(message.id);
         }
         [MessageHandler]
-        public static void HandleExchangeBidHouseType(ExchangeBidHouseTypeMessage message,WorldClient client)
+        public static void HandleExchangeBidHouseType(ExchangeBidHouseTypeMessage message, WorldClient client)
         {
             client.Character.BidShopInstance.ShowBidHouseType(message.type);
         }
@@ -44,18 +38,18 @@ namespace Symbioz.World.Handlers
             client.Character.BidShopInstance.AddItem(message.objectUID, message.quantity, message.price);
         }
         [MessageHandler]
-        public static void HandleExchangeItemBidHouseBuy(ExchangeBidHouseBuyMessage message,WorldClient client)
+        public static void HandleExchangeItemBidHouseBuy(ExchangeBidHouseBuyMessage message, WorldClient client)
         {
             client.Character.BidShopInstance.BuyItem(message.uid, message.qty, message.price);
         }
-        public static bool TrySendBishopGainAdded(int ownerid,ushort itemgid,int quantity,int price)
+        public static bool TrySendBishopGainAdded(int ownerid, ushort itemgid, int quantity, int price)
         {
             var client = WorldServer.Instance.GetOnlineClient(ownerid);
             if (client == null)
                 return false;
             var itemname = ItemRecord.GetItem(itemgid).Name;
             client.Account.Informations.BankKamas += (uint)price;
-            client.Character.Reply("Banque : + " + price + " Kamas (vente de " +quantity+ "  <b>[" + itemname + "]</b>).");
+            client.Character.Reply("Banque : + " + price + " Kamas (vente de " + quantity + "  <b>[" + itemname + "]</b>).");
             return true;
         }
         public static void AddEventualBidShopGains(WorldClient client)

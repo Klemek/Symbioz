@@ -1,14 +1,11 @@
-﻿using Symbioz.World.Records.Monsters;
+﻿using Symbioz.DofusProtocol.Types;
+using Symbioz.Helper;
+using Symbioz.World.Models.Fights;
+using Symbioz.World.Models.Fights.Fighters;
+using Symbioz.World.Records;
+using Symbioz.World.Records.Monsters;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.DofusProtocol.Types;
-using Symbioz.World.Records;
-using Symbioz.Helper;
-using Symbioz.World.Models.Fights.Fighters;
-using Symbioz.World.Models.Fights;
 
 namespace Symbioz.World.Models
 {
@@ -19,7 +16,7 @@ namespace Symbioz.World.Models
         public static short STARS_BONUS_LIMIT = 100;
         public const int START_ID = 100000000;
 
-        public MonsterGroup(int monstergroupid,List<MonsterSpawnMapRecord> monsters,ushort cellid)
+        public MonsterGroup(int monstergroupid, List<MonsterSpawnMapRecord> monsters, ushort cellid)
         {
             this.MonsterGroupId = monstergroupid;
             this.Monsters = monsters;
@@ -39,20 +36,20 @@ namespace Symbioz.World.Models
                     num = (double)MonsterGroup.STARS_BONUS_LIMIT;
                 }
                 return (short)num;
-              
-              
+
+
             }
         }
         public List<MonsterSpawnMapRecord> Monsters = new List<MonsterSpawnMapRecord>();
 
 
-     
+
         public List<MonsterFighter> CreateFighters(FightTeam team)
         {
             List<MonsterFighter> result = new List<MonsterFighter>();
             foreach (var monster in Monsters)
             {
-                result.Add(new MonsterFighter(monster,team));
+                result.Add(new MonsterFighter(monster, team));
             }
             return result;
         }
@@ -72,11 +69,11 @@ namespace Symbioz.World.Models
             var staticInfos = new GroupMonsterStaticInformations(light, monstersinGroup);
 
             return new GameRolePlayGroupMonsterInformations(group.MonsterGroupId, firstMonsterTemplate.RealLook.ToEntityLook(),
-                new EntityDispositionInformations((short)group.CellId, 3), false, false, false, staticInfos,group.AgeBonus, 0, 0);
+                new EntityDispositionInformations((short)group.CellId, 3), false, false, false, staticInfos, group.AgeBonus, 0, 0);
         }
-        public static List<GameRolePlayGroupMonsterInformations> GetActorsInformations(MapRecord map,List<MonsterGroup> groups)
+        public static List<GameRolePlayGroupMonsterInformations> GetActorsInformations(MapRecord map, List<MonsterGroup> groups)
         {
-           
+
             List<GameRolePlayGroupMonsterInformations> result = new List<GameRolePlayGroupMonsterInformations>();
             foreach (var group in groups)
             {

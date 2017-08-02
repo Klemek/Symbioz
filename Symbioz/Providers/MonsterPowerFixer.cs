@@ -1,10 +1,5 @@
 ﻿using Symbioz.Core.Startup;
 using Symbioz.World.Records.Monsters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers
 {
@@ -15,7 +10,7 @@ namespace Symbioz.Providers
     {
         public const int MAX_POWER = 400;
 
-        [StartupInvoke("Monsters Power Fix",StartupInvokeType.Internal)]
+        [StartupInvoke("Monsters Power Fix", StartupInvokeType.Internal)]
         public static void FixMonsters()
         {
             foreach (var monster in MonsterGradeRecord.MonstersGrades)

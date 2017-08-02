@@ -5,14 +5,7 @@ using Symbioz.DofusProtocol.Messages;
 using Symbioz.Network.Messages;
 using Symbioz.SSync;
 using Symbioz.Utils;
-using Symbioz.World.Models;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Network.Clients
 {
@@ -39,12 +32,12 @@ namespace Symbioz.Network.Clients
             SSyncClient.Send(packet);
 
             if (ConfigurationManager.Instance.ShowProtocolMessages)
-            Logger.Info(string.Format("[Send] {0}", message.ToString()));
+                Logger.Info(string.Format("[Send] {0}", message.ToString()));
         }
 
         public void SendRaw(string rawname)
         {
-           Send(new RawDataMessage(RawDatasManager.GetRawData(rawname)));
+            Send(new RawDataMessage(RawDatasManager.GetRawData(rawname)));
         }
 
         public void Disconnect(int timeout = 0, string reason = null)

@@ -1,20 +1,15 @@
-﻿using Symbioz.Core;
-using Symbioz.DofusProtocol.Types;
+﻿using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
 using Symbioz.Helper;
-using Symbioz.Network.Clients;
 using Symbioz.ORM;
 using Symbioz.World.Models;
 using Symbioz.World.Records.Items;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
-    [Table("Items",true)]
+    [Table("Items", true)]
     public class ItemRecord : ITable
     {
         public static List<ItemRecord> Items = new List<ItemRecord>();
@@ -35,7 +30,7 @@ namespace Symbioz.World.Records
         public ItemEffectsParser RealEffects;
         public string Criteria;
 
-        public ItemRecord(int id,int nameid,string name,int typeid,int appearanceid,int level,int price,int weight,string effects,string criteria)
+        public ItemRecord(int id, int nameid, string name, int typeid, int appearanceid, int level, int price, int weight, string effects, string criteria)
         {
             this.Id = id;
             this.NameId = nameid;
@@ -48,11 +43,11 @@ namespace Symbioz.World.Records
             this.Name = name;
             this.RealEffects = new ItemEffectsParser(Effects);
             this.Criteria = criteria;
-            
+
         }
         public ObjectItem GenerateRandomObjectItem()
         {
-            return new ObjectItem(63, (ushort)Id, GenerateRandomEffect(), CharacterItemRecord.PopNextUID(),1);
+            return new ObjectItem(63, (ushort)Id, GenerateRandomEffect(), CharacterItemRecord.PopNextUID(), 1);
         }
         public List<ObjectEffect> GenerateRandomEffect()
         {
@@ -71,7 +66,7 @@ namespace Symbioz.World.Records
                 else if (eff.diceConst != 0)
                 {
                     result.Add(new ObjectEffectInteger(eff.actionId, eff.diceConst));
-      
+
                 }
                 else
                 {

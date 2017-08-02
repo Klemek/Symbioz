@@ -1,17 +1,11 @@
 ﻿using Symbioz.DofusProtocol.Messages;
 using Symbioz.Enums;
-using Symbioz.Network.Servers;
 using Symbioz.PathProvider;
-using Symbioz.Providers.SpellEffectsProvider.Buffs;
-using Symbioz.World.Models;
 using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.PathProvider;
 using Symbioz.World.Records.Spells;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.SpellEffectsProvider.Effects
 {
@@ -68,7 +62,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
                 }
                 else
                 {
-                    affected.Teleport(affected.LastPosition.Last(),false);
+                    affected.Teleport(affected.LastPosition.Last(), false);
                 }
                 affected.LastPosition.Remove(affected.LastPosition.Last());
             }
@@ -84,7 +78,8 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
             short destinationCell = (short)((target.CellId * 2) - fighter.CellId);
             if (ShapesProvider.IsDiagonalDirection(direction))
             {
-                if (PathHelper.GetDistanceBetween(fighter.CellId, target.CellId) % 2 != 0) {
+                if (PathHelper.GetDistanceBetween(fighter.CellId, target.CellId) % 2 != 0)
+                {
                     destinationCell = (short)((target.CellId * 2) - fighter.CellId - 1);
                 }
                 else
@@ -92,7 +87,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
             }
             else if (PathHelper.GetDistanceBetween(fighter.CellId, castcellid) % 2 != 0)
             {
-                destinationCell = (short)((target.CellId * 2) - fighter.CellId -1);
+                destinationCell = (short)((target.CellId * 2) - fighter.CellId - 1);
             }
             if (fighter.Fight.IsObstacle(destinationCell) && fighter.Fight.GetFighter(destinationCell) == null)
                 return;
@@ -114,12 +109,12 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
                 short destinationCell = (short)((fighter.CellId * 2) - castcellid);
                 if (ShapesProvider.IsDiagonalDirection(direction))
                 {
-                    if (PathHelper.GetDistanceBetween(fighter.CellId, affected.CellId)%2 != 0)
+                    if (PathHelper.GetDistanceBetween(fighter.CellId, affected.CellId) % 2 != 0)
                         destinationCell = (short)((fighter.CellId * 2) - castcellid + 1);
                     else
                         destinationCell = (short)((fighter.CellId * 2) - castcellid);
                 }
-                else if(PathHelper.GetDistanceBetween(fighter.CellId, affected.CellId) % 2 != 0)
+                else if (PathHelper.GetDistanceBetween(fighter.CellId, affected.CellId) % 2 != 0)
                 {
                     destinationCell = (short)((fighter.CellId * 2) - castcellid + 1);
                 }
@@ -158,15 +153,15 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
         public static void SwitchPosition(Fighter fighter, SpellLevelRecord level, ExtendedSpellEffect effect, List<Fighter> affecteds, short castcellid)
         {
             bool save = true;
-            if(effect != null && effect.BaseEffect.EffectType == EffectsEnum.Eff_1100)
+            if (effect != null && effect.BaseEffect.EffectType == EffectsEnum.Eff_1100)
             {
                 save = false;
             }
             var target = affecteds.Find(x => x.CellId == castcellid);
             if (target != null)
             {
-                target.Teleport(fighter.CellId,save);
-                fighter.Teleport(castcellid,save);
+                target.Teleport(fighter.CellId, save);
+                fighter.Teleport(castcellid, save);
             }
         }
         [EffectHandler(EffectsEnum.Eff_Teleport)]  //Bond de Iop

@@ -1,11 +1,4 @@
 ﻿using Symbioz.Auth.Records;
-using Symbioz.Network.Clients;
-using Symbioz.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Auth.Models
 {
@@ -31,6 +24,6 @@ namespace Symbioz.Auth.Models
 
         public int PointsCount { get; set; }
 
-  
+
     }
 }

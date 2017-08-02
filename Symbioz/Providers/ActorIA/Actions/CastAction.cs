@@ -1,13 +1,6 @@
 ﻿using Symbioz.DofusProtocol.Messages;
-using Symbioz.Helper;
-using Symbioz.World.Models.Fights.Fighters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
+using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.Records;
 
 namespace Symbioz.Providers.ActorIA.Actions

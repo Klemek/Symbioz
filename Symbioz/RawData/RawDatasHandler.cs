@@ -2,17 +2,13 @@
 using Symbioz.DofusProtocol.Messages;
 using Symbioz.Network.Clients;
 using Symbioz.Network.Messages;
+using Symbioz.RawData.RawMessages;
+using Symbioz.RawData.Records;
 using Symbioz.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.Helper;
-using Symbioz.RawData.RawMessages;
-using Symbioz.RawData.Records;
-using Symbioz.ORM;
 
 namespace Symbioz.RawData
 {
@@ -57,18 +53,18 @@ namespace Symbioz.RawData
                 new BugReportRecord(message.Value).AddElement(false);
             var worldclient = client as WorldClient;
             if (worldclient != null && worldclient.Character != null)
-             worldclient.Character.ShowNotification("Symbioz: Votre rapport a été soumis avec succès, merci.");
+                worldclient.Character.ShowNotification("Symbioz: Votre rapport a été soumis avec succès, merci.");
         }
 
         [RawHandlerAttribute(WhoAreYouMessage.Id)]
-        public static void HandleWhoAreYouMessage(DofusClient client,WhoAreYouMessage message)
+        public static void HandleWhoAreYouMessage(DofusClient client, WhoAreYouMessage message)
         {
             Logger.Init("Client Definition:");
-            Logger.Init2("-Ip: "+client.SSyncClient.Ip);
+            Logger.Init2("-Ip: " + client.SSyncClient.Ip);
             Logger.Init2("-OS: " + message.OS);
             Logger.Init2("-Username: " + message.Username);
             if (client.Account != null)
-            Logger.Init2("-Account: " + client.Account.Username);
+                Logger.Init2("-Account: " + client.Account.Username);
             var worldclient = client as WorldClient;
             if (worldclient != null)
             {
@@ -78,11 +74,11 @@ namespace Symbioz.RawData
         }
 
         [RawHandlerAttribute(FilesDirMessage.Id)]
-        public static void HandleFileDir(DofusClient client,FilesDirMessage message)
+        public static void HandleFileDir(DofusClient client, FilesDirMessage message)
         {
             foreach (var bj in message.Files)
             {
-                
+
                 Logger.Log(bj);
             }
 

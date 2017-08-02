@@ -1,5 +1,4 @@
-﻿using Symbioz.Auth.Handlers;
-using Symbioz.Core;
+﻿using Symbioz.Core;
 using Symbioz.DofusProtocol.Messages;
 using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
@@ -7,8 +6,6 @@ using Symbioz.Network.Clients;
 using Symbioz.ORM;
 using Symbioz.Providers;
 using Symbioz.World.Handlers;
-using Symbioz.World.Models;
-using Symbioz.World.Models.Alliances;
 using Symbioz.World.Models.Exchanges;
 using Symbioz.World.Models.Exchanges.Craft;
 using Symbioz.World.Models.Fights;
@@ -27,8 +24,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models
 {

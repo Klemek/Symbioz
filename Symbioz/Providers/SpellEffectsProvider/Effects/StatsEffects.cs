@@ -3,11 +3,7 @@ using Symbioz.Providers.SpellEffectsProvider.Buffs;
 using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.Records;
 using Symbioz.World.Records.Spells;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.SpellEffectsProvider.Effects
 {
@@ -78,7 +74,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
             foreach (var target in affecteds)
             {
                 var definition = new UInt16ReflectedStat(StatsRecord.GetFieldInfo("CriticalHit"), target.FighterStats.Stats);
-                target.AddBuff(new StatBuff((uint)target.BuffIdProvider.Pop(), definition, (uint)effect.BaseEffect.EffectType, effect.BaseEffect.DiceNum, effect.BaseEffect.Duration, fighter.ContextualId, (short)level.SpellId,(short)(-effect.BaseEffect.DiceNum), effect.BaseEffect.Delay));
+                target.AddBuff(new StatBuff((uint)target.BuffIdProvider.Pop(), definition, (uint)effect.BaseEffect.EffectType, effect.BaseEffect.DiceNum, effect.BaseEffect.Duration, fighter.ContextualId, (short)level.SpellId, (short)(-effect.BaseEffect.DiceNum), effect.BaseEffect.Delay));
             }
         }
         /// <summary>
@@ -88,13 +84,13 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
         [EffectHandler(EffectsEnum.Eff_StealRange)]
         public static void StealRange(Fighter fighter, SpellLevelRecord level, ExtendedSpellEffect effect, List<Fighter> affecteds, short castspellid)
         {
-           
-           
+
+
         }
         [EffectHandler(EffectsEnum.Eff_SubRange)]
         public static void SubRange(Fighter fighter, SpellLevelRecord level, ExtendedSpellEffect effect, List<Fighter> affecteds, short castspellid)
         {
-          
+
             foreach (var target in affecteds)
             {
                 var definition = new UInt16ReflectedStat(StatsRecord.GetFieldInfo("_Range"), target.FighterStats.Stats);
@@ -111,7 +107,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
             }
         }
         [EffectHandler(EffectsEnum.Eff_SubDodge)]
-        public static void SubDodge(Fighter fighter,SpellLevelRecord level,ExtendedSpellEffect effect,List<Fighter> affecteds, short castspellid)
+        public static void SubDodge(Fighter fighter, SpellLevelRecord level, ExtendedSpellEffect effect, List<Fighter> affecteds, short castspellid)
         {
             foreach (var target in affecteds)
             {
@@ -120,7 +116,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
             }
         }
         [EffectHandler(EffectsEnum.Eff_AddErosion)]
-        public static void AddErosion(Fighter fighter,SpellLevelRecord level,ExtendedSpellEffect effect,List<Fighter> affecteds,short castSpellId)
+        public static void AddErosion(Fighter fighter, SpellLevelRecord level, ExtendedSpellEffect effect, List<Fighter> affecteds, short castSpellId)
         {
             foreach (var target in affecteds)
             {
@@ -129,11 +125,11 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
             }
         }
         [EffectHandler(EffectsEnum.Eff_StealIntelligence)]
-        public static void StealIntelligence(Fighter fighter,SpellLevelRecord level,ExtendedSpellEffect effect,List<Fighter> affecteds,short castSpellId)
+        public static void StealIntelligence(Fighter fighter, SpellLevelRecord level, ExtendedSpellEffect effect, List<Fighter> affecteds, short castSpellId)
         {
             foreach (var target in affecteds)
             {
-                
+
             }
         }
     }

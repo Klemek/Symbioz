@@ -4,11 +4,8 @@ using Symbioz.Enums;
 using Symbioz.Network.Clients;
 using Symbioz.Network.Servers;
 using Symbioz.World.Models.Parties.Dungeon;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Parties
 {
@@ -130,15 +127,15 @@ namespace Symbioz.World.Models.Parties
 
         public void SendInvitationDetail(WorldClient to)
         {
-      
+
             PartyGuest g = this.PGuests.Find(x => x.Character.Id == to.Character.Id);
 
-            var members = this.PMembers.ConvertAll<PartyInvitationMemberInformations>(x=>x.GetPartyInvitationMemberInformations());
-            var guests = this.PGuests.ConvertAll<PartyGuestInformations>(x=>x.GetPartyGuestInformations());
+            var members = this.PMembers.ConvertAll<PartyInvitationMemberInformations>(x => x.GetPartyInvitationMemberInformations());
+            var guests = this.PGuests.ConvertAll<PartyGuestInformations>(x => x.GetPartyGuestInformations());
 
             to.Send(new PartyInvitationDetailsMessage((uint)this.Id,
                 (sbyte)PartyTypeEnum.PARTY_TYPE_CLASSICAL, this.Name,
-                    (uint)g.InvitedBy.Id, g.InvitedBy.Record.Name, (uint)this.BossCharacterId,members,
+                    (uint)g.InvitedBy.Id, g.InvitedBy.Record.Name, (uint)this.BossCharacterId, members,
               guests));
 
 

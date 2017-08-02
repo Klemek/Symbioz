@@ -3,20 +3,17 @@ using Symbioz.DofusProtocol.Messages;
 using Symbioz.DofusProtocol.Types;
 using Symbioz.Helper;
 using Symbioz.Network.Servers;
-using Symbioz.ORM;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Core.Startup
 {
-    class Startup 
+    class Startup
     {
-       
+
         public static void Initialize()
         {
             Logger.Init2("-- Initialisation --");
@@ -40,8 +37,8 @@ namespace Symbioz.Core.Startup
                         try
                         {
                             del.DynamicInvoke();
-                     
-                            
+
+
                         }
                         catch (Exception e)
                         {
@@ -62,7 +59,7 @@ namespace Symbioz.Core.Startup
             watch.Stop();
             Logger.Init2("-- Initialisation Complete (" + watch.Elapsed.Seconds + "s) --");
         }
-        [StartupInvoke("Messages",StartupInvokeType.Internal)]
+        [StartupInvoke("Messages", StartupInvokeType.Internal)]
         public static void RegisterMessages()
         {
             MessageReceiver.Initialize();
@@ -73,6 +70,6 @@ namespace Symbioz.Core.Startup
             Singleton<AuthServer>.Instance.Start();
             Singleton<WorldServer>.Instance.Start();
         }
-        
+
     }
 }

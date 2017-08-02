@@ -6,14 +6,12 @@ using Symbioz.World.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers
 {
     public class CustomObjectUseHandler
     {
-        public static Dictionary<ushort, Action<WorldClient,CharacterItemRecord>> CustomHandlers = new Dictionary<ushort, Action<WorldClient,CharacterItemRecord>>();
+        public static Dictionary<ushort, Action<WorldClient, CharacterItemRecord>> CustomHandlers = new Dictionary<ushort, Action<WorldClient, CharacterItemRecord>>();
 
         [StartupInvoke(StartupInvokeType.Others)]
         public static void Initialize()
@@ -27,16 +25,16 @@ namespace Symbioz.Providers
             else
                 return false;
         }
-        public static void Handle(WorldClient client,CharacterItemRecord item)
+        public static void Handle(WorldClient client, CharacterItemRecord item)
         {
-            var handler = CustomHandlers.FirstOrDefault(x=>x.Key == item.GID);
-            handler.Value(client,item);
+            var handler = CustomHandlers.FirstOrDefault(x => x.Key == item.GID);
+            handler.Value(client, item);
         }
-        static void Mimicry(WorldClient client,CharacterItemRecord item)
+        static void Mimicry(WorldClient client, CharacterItemRecord item)
         {
             client.Character.CurrentDialogType = DialogTypeEnum.DIALOG_EXCHANGE;
             client.Send(new ClientUIOpenedByObjectMessage(3, item.UID));
         }
-        
+
     }
 }

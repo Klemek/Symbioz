@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using _cell = Symbioz.World.PathProvider.CoordCells.CellData;
 
-namespace  Symbioz.World.PathProvider
+namespace Symbioz.World.PathProvider
 {
     internal class Node : INode
     {

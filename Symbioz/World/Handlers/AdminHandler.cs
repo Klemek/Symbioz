@@ -1,14 +1,9 @@
-﻿using Symbioz.Network.Messages;
+﻿using Symbioz.Auth.Models;
 using Symbioz.DofusProtocol.Messages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Symbioz.Helper;
-using System.Text;
-using System.Threading.Tasks;
 using Symbioz.Network.Clients;
+using Symbioz.Network.Messages;
 using Symbioz.World.Records;
-using Symbioz.Auth.Models;
+using System.Linq;
 
 namespace Symbioz.World.Handlers
 {

@@ -1,9 +1,5 @@
 ﻿using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records.Maps
 {
@@ -15,7 +11,7 @@ namespace Symbioz.World.Records.Maps
         public int MapId;
         public string Tip;
 
-        public MapTipRecord(int mapid,string tip)
+        public MapTipRecord(int mapid, string tip)
         {
             this.MapId = mapid;
             this.Tip = tip;

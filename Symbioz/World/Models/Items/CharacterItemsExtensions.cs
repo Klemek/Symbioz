@@ -1,10 +1,6 @@
 ﻿using Symbioz.DofusProtocol.Types;
 using Symbioz.World.Records;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models
 {
@@ -17,14 +13,14 @@ namespace Symbioz.World.Models
                 return null;
             else return existingItem;
         }
-        public static CharacterItemRecord ExistingItem(this List<CharacterItemRecord> itemlist,BankItemRecord item)
+        public static CharacterItemRecord ExistingItem(this List<CharacterItemRecord> itemlist, BankItemRecord item)
         {
             var existingItem = itemlist.Find(x => x.GID == item.GID && x.EffectsLinkedToList == item.EffectsLinkedToList);
             if (existingItem == null)
                 return null;
             else return existingItem;
         }
-        public static BankItemRecord ExistingItem(this List<BankItemRecord> itemlist,BankItemRecord item)
+        public static BankItemRecord ExistingItem(this List<BankItemRecord> itemlist, BankItemRecord item)
         {
             var existingItem = itemlist.Find(x => x.GID == item.GID && x.EffectsLinkedToList == item.EffectsLinkedToList);
             if (existingItem == null)

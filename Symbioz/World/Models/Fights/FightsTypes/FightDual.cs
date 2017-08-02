@@ -3,11 +3,7 @@ using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
 using Symbioz.Network.Clients;
 using Symbioz.World.Records;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Fights
 {
@@ -28,11 +24,11 @@ namespace Symbioz.World.Models.Fights
         {
             get { return true; }
         }
-        public override bool SpawnJoin { get { return false; }}
+        public override bool SpawnJoin { get { return false; } }
 
         public override bool PvP { get { return true; } }
 
-        public FightDual(int id,MapRecord map,FightTeam blueteam,FightTeam redteam,short fightcellid,short secondplayercellid):base(id,map,blueteam,redteam,fightcellid)
+        public FightDual(int id, MapRecord map, FightTeam blueteam, FightTeam redteam, short fightcellid, short secondplayercellid) : base(id, map, blueteam, redteam, fightcellid)
         {
             this.SecondFighterCellId = secondplayercellid;
         }
@@ -52,9 +48,9 @@ namespace Symbioz.World.Models.Fights
         }
         public override void TryJoin(WorldClient client, int mainfighterid)
         {
-         
+
             var mainFighter = GetAllFighters().Find(x => x.ContextualId == mainfighterid);
-          
+
             if (CanJoin(client, mainFighter.Team))
             {
                 var newFighter = client.Character.CreateFighter(mainFighter.Team);
@@ -63,9 +59,9 @@ namespace Symbioz.World.Models.Fights
                 Map.Instance.OnFighterAdded(Id, mainFighter.Team.Id, newFighter.GetFightMemberInformations());
             }
         }
-        public override void ShowFightResults(List<FightResultListEntry> results,WorldClient client)
+        public override void ShowFightResults(List<FightResultListEntry> results, WorldClient client)
         {
-            client.Send(new GameFightEndMessage((ushort)TimeLine.m_round,0, 0, results, new NamedPartyTeamWithOutcome[0]));
+            client.Send(new GameFightEndMessage((ushort)TimeLine.m_round, 0, 0, results, new NamedPartyTeamWithOutcome[0]));
         }
     }
 }

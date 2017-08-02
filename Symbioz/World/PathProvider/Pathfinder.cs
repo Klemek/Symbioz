@@ -131,7 +131,7 @@ namespace Symbioz.World.PathProvider
         public static List<Node> GetNodes(MapRecord map)
         {
             var nodes = new List<Node>();
-            for (short cell = 0; cell < 560;cell++)
+            for (short cell = 0; cell < 560; cell++)
             {
                 var node = new Node(CoordCells.GetCell(cell));
                 if (map.WalkableCells.Contains(cell))

@@ -1,19 +1,16 @@
-﻿using Symbioz.World.Models.Fights.Fighters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Symbioz.Core;
 using Symbioz.DofusProtocol.Types;
-using Symbioz.World.Models.Fights;
-using Symbioz.World.Records.Monsters;
 using Symbioz.Helper;
-using Symbioz.Core;
 using Symbioz.Network.Clients;
+using Symbioz.Providers.FightResults.Exp;
+using Symbioz.World.Models.Fights;
+using Symbioz.World.Models.Fights.Fighters;
+using Symbioz.World.Models.Fights.FightsTypes;
 using Symbioz.World.Models.Monsters;
 using Symbioz.World.Records;
-using Symbioz.Providers.FightResults.Exp;
-using Symbioz.World.Models.Fights.FightsTypes;
+using Symbioz.World.Records.Monsters;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Symbioz.Providers.FightResults
 {
@@ -38,7 +35,7 @@ namespace Symbioz.Providers.FightResults
             {
                 GenerateArenaLoot();
             }
-           
+
             // if (fighter.Fight is FightAgression && winner == fighter.Team.TeamColor)
             {
                 // add honor
@@ -64,14 +61,14 @@ namespace Symbioz.Providers.FightResults
             client.Character.Inventory.Add(FightArena.ARENA_ITEM_ID, itemQt);
 
 
-            
+
             if (client.Character.Record.Level != 200)
             {
                 var experienceForNextLevel = ExperienceRecord.GetExperienceForLevel((uint)client.Character.Record.Level + 1);
                 var experienceForLevel = ExperienceRecord.GetExperienceForLevel(client.Character.Record.Level);
                 int earnedXp = (int)((double)(experienceForNextLevel - (double)experienceForLevel) / (double)15);
 
-                var expdatas = new FightResultExperienceData(true, true, true,true,false, false, false, client.Character.Record.Exp, experienceForLevel, experienceForNextLevel, earnedXp, 0, 0, 0);
+                var expdatas = new FightResultExperienceData(true, true, true, true, false, false, false, client.Character.Record.Exp, experienceForLevel, experienceForNextLevel, earnedXp, 0, 0, 0);
                 AdditionalDatas.Add(expdatas);
                 client.Character.AddXp((ulong)earnedXp);
             }

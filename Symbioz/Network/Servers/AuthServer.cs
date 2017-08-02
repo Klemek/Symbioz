@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Symbioz.Core;
-using Symbioz.SSync;
-using System.Threading.Tasks;
-using System.Net.Sockets;
-using Symbioz.Network.Clients;
-using Symbioz.Utils;
-using Symbioz.Helper;
-using Symbioz.Enums;
+﻿using Symbioz.Core;
 using Symbioz.DofusProtocol.Messages;
+using Symbioz.Enums;
+using Symbioz.Helper;
+using Symbioz.Network.Clients;
+using Symbioz.SSync;
+using System;
+using System.Collections.Generic;
+using System.Net.Sockets;
 
 namespace Symbioz.Network.Servers
 {
@@ -24,7 +20,7 @@ namespace Symbioz.Network.Servers
 
         public AuthServer()
         {
-            this.Server = new SSyncServer(ConfigurationManager.Instance.Host,ConfigurationManager.Instance.AuthPort);
+            this.Server = new SSyncServer(ConfigurationManager.Instance.Host, ConfigurationManager.Instance.AuthPort);
             this.Server.OnServerStarted += Server_OnServerStarted;
             this.Server.OnServerFailedToStart += Server_OnServerFailedToStart;
             this.Server.OnSocketAccepted += Server_OnSocketAccepted;

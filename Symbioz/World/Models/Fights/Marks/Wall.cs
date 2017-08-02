@@ -1,11 +1,6 @@
 ﻿using Symbioz.Enums;
 using Symbioz.World.Models.Fights.Fighters;
-using Symbioz.World.Records.Spells;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Fights.Marks
 {
@@ -15,10 +10,10 @@ namespace Symbioz.World.Models.Fights.Marks
 
         public BombFighter SecondBomb { get; set; }
 
-        public Wall(Fighter caster,short centercell,short entitycell,char shapetype,
-            short radius,short associatedspellid,sbyte spellgrade,
-            int markcolor,BombFighter firstBomb,BombFighter secondBomb):base(caster,centercell,entitycell,shapetype,radius,
-            associatedspellid,spellgrade,markcolor)
+        public Wall(Fighter caster, short centercell, short entitycell, char shapetype,
+            short radius, short associatedspellid, sbyte spellgrade,
+            int markcolor, BombFighter firstBomb, BombFighter secondBomb) : base(caster, centercell, entitycell, shapetype, radius,
+            associatedspellid, spellgrade, markcolor)
         {
             this.FirstBomb = firstBomb;
             this.SecondBomb = secondBomb;
@@ -29,7 +24,7 @@ namespace Symbioz.World.Models.Fights.Marks
             get { return GameActionMarkTypeEnum.WALL; }
         }
 
-      
+
         [Interaction(FighterEventType.AFTER_MOVE)]
         public void AfterMove(Fighter fighter, object arg1, object arg2, object arg3)
         {
@@ -44,7 +39,7 @@ namespace Symbioz.World.Models.Fights.Marks
         {
             foreach (var fighter in affecteds)
             {
-                fighter.TakeDamages(new Damages.TakenDamages(100, Damages.ElementType.Water),Caster.ContextualId);
+                fighter.TakeDamages(new Damages.TakenDamages(100, Damages.ElementType.Water), Caster.ContextualId);
             }
         }
     }

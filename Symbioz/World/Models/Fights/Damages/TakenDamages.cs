@@ -1,11 +1,5 @@
 ﻿using Symbioz.DofusProtocol.Messages;
-using Symbioz.World.Models.Fights.Damages;
 using Symbioz.World.Models.Fights.Fighters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Fights.Damages
 {
@@ -22,14 +16,14 @@ namespace Symbioz.World.Models.Fights.Damages
         }
         public short GetDeltaPercentage(sbyte percentage)
         {
-           return (short)((double)Delta * ((double)percentage / 100.0));
+            return (short)((double)Delta * ((double)percentage / 100.0));
         }
         /// <summary>
         ///  Dégâts subis =dégâts totaux - résistance fixe - (dégâts totaux / 100 / pourcentage de résistance) 
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
-        public void EvaluateWithResistances(Fighter source,Fighter target,bool pvp)
+        public void EvaluateWithResistances(Fighter source, Fighter target, bool pvp)
         {
             if (source == null)
                 return;
@@ -46,7 +40,7 @@ namespace Symbioz.World.Models.Fights.Damages
                 case ElementType.Air:
                     elementBonus = source.FighterStats.Stats.AirDamageBonus;
                     elementReduction = (short)(target.FighterStats.Stats.AirReduction + (pvp ? target.FighterStats.Stats.PvPAirReduction : 0));
-                    elementResistPercent = target.FighterStats.Stats.AirResistPercent + (pvp? target.FighterStats.Stats.PvPAirResistPercent : 0);
+                    elementResistPercent = target.FighterStats.Stats.AirResistPercent + (pvp ? target.FighterStats.Stats.PvPAirResistPercent : 0);
                     break;
                 case ElementType.Water:
                     elementBonus = source.FighterStats.Stats.WaterDamageBonus;
@@ -55,12 +49,12 @@ namespace Symbioz.World.Models.Fights.Damages
                     break;
                 case ElementType.Fire:
                     elementBonus = source.FighterStats.Stats.FireDamageBonus;
-                    elementReduction = (short)(target.FighterStats.Stats.FireReduction  + (pvp ? target.FighterStats.Stats.PvPFireReduction : 0));
+                    elementReduction = (short)(target.FighterStats.Stats.FireReduction + (pvp ? target.FighterStats.Stats.PvPFireReduction : 0));
                     elementResistPercent = target.FighterStats.Stats.FireResistPercent + (pvp ? target.FighterStats.Stats.PvPFireResistPercent : 0);
                     break;
                 case ElementType.Neutral:
                     elementBonus = source.FighterStats.Stats.NeutralDamageBonus;
-                    elementReduction = (short)(target.FighterStats.Stats.NeutralReduction + (pvp? target.FighterStats.Stats.PvPNeutralReduction : 0));
+                    elementReduction = (short)(target.FighterStats.Stats.NeutralReduction + (pvp ? target.FighterStats.Stats.PvPNeutralReduction : 0));
                     elementResistPercent = target.FighterStats.Stats.NeutralResistPercent + (pvp ? target.FighterStats.Stats.PvPNeutralResistPercent : 0);
                     break;
                 default:
@@ -70,7 +64,7 @@ namespace Symbioz.World.Models.Fights.Damages
             if (source.UsingWeapon)
                 Delta += (short)((source.FighterStats.Stats.WeaponDamagesBonusPercent / 100) * Delta);
             if (elementResistPercent != 0)
-                Delta = (short)(Delta - elementReduction - (elementResistPercent/ 100 * Delta));
+                Delta = (short)(Delta - elementReduction - (elementResistPercent / 100 * Delta));
             else
                 Delta -= elementReduction;
             if (target.FighterStats.Stats.GlobalDamageReduction > 0)

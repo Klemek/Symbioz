@@ -2,11 +2,7 @@
 using Symbioz.World.Models.Fights.Damages;
 using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.Records.Spells;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.SpellEffectsProvider
 {
@@ -167,7 +163,7 @@ namespace Symbioz.Providers.SpellEffectsProvider
         /// Pulsar Roublard
         /// </summary>
         [EffectHandler(EffectsEnum.Eff_1015)]
-        public static void FireDamageFunctionMP(Fighter fighter,SpellLevelRecord level,ExtendedSpellEffect effect,List<Fighter> affecteds,short castCellId)
+        public static void FireDamageFunctionMP(Fighter fighter, SpellLevelRecord level, ExtendedSpellEffect effect, List<Fighter> affecteds, short castCellId)
         {
             var jet = fighter.CalculateJet(effect, fighter.FighterStats.Stats.Intelligence);
             jet = (short)((double)jet * (double)fighter.FighterStats.MPPercentage / (double)100);

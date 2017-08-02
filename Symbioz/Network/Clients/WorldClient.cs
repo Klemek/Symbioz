@@ -2,12 +2,8 @@
 using Symbioz.Network.Servers;
 using Symbioz.World.Models;
 using Symbioz.World.Records;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Network.Clients
 {
@@ -17,7 +13,7 @@ namespace Symbioz.Network.Clients
 
         public List<CharacterRecord> Characters { get; set; }
 
-        public WorldClient(Socket socket):base(socket)
+        public WorldClient(Socket socket) : base(socket)
         {
             this.SSyncClient.OnClosed += SSyncClient_OnClosed;
             Send(new HelloGameMessage());
@@ -29,6 +25,6 @@ namespace Symbioz.Network.Clients
                 Character.Dispose();
             WorldServer.Instance.RemoveClient(this);
         }
-        
+
     }
 }

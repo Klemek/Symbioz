@@ -5,11 +5,7 @@ using Symbioz.Providers.SpellEffectsProvider.Buffs;
 using Symbioz.World.Models.Fights.Damages;
 using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.PathProvider;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.SpellEffectsProvider.Effects
 {
@@ -40,7 +36,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
 
         public override void RemoveBuff()
         {
-           
+
         }
         public override bool OnEventCalled(object arg1, object arg2, object arg3)
         {

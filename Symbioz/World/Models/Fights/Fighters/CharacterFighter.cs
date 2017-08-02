@@ -3,18 +3,12 @@ using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
 using Symbioz.Network.Clients;
 using Symbioz.Providers;
-using Symbioz.World.Handlers;
 using Symbioz.World.Models.Fights.Damages;
 using Symbioz.World.PathProvider;
-using Symbioz.World.Records;
 using Symbioz.World.Records.Items;
 using Symbioz.World.Records.Spells;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Fights.Fighters
 {
@@ -102,7 +96,7 @@ namespace Symbioz.World.Models.Fights.Fighters
                 return base.CastSpellOnTarget(spellid, targetid);
             }
         }
-        public override bool CastSpellOnCell(ushort spellid, short cellid,int targetId = 0)
+        public override bool CastSpellOnCell(ushort spellid, short cellid, int targetId = 0)
         {
             CompanionFighter companion = GetCompanion();
             if (companion != null && companion.IsPlaying)
@@ -128,7 +122,7 @@ namespace Symbioz.World.Models.Fights.Fighters
             {
                 Fight.Send(new GameFightRemoveTeamMemberMessage((short)Fight.Id, Team.Id, fighter.ContextualId));
                 if (Fight.FightType != FightTypeEnum.FIGHT_TYPE_PVP_ARENA)
-                Fight.Map.Instance.OnFighterRemoved(Fight.Id, Team.Id, fighter.ContextualId);
+                    Fight.Map.Instance.OnFighterRemoved(Fight.Id, Team.Id, fighter.ContextualId);
                 Team.RemoveFighter(fighter);
             }
             else
@@ -147,7 +141,7 @@ namespace Symbioz.World.Models.Fights.Fighters
                 RemoveCompanion();
                 Fight.Send(new GameFightRemoveTeamMemberMessage((short)Fight.Id, Team.Id, ContextualId));
                 if (Fight.FightType != FightTypeEnum.FIGHT_TYPE_PVP_ARENA)
-                Fight.Map.Instance.OnFighterRemoved(Fight.Id, Team.Id, ContextualId);
+                    Fight.Map.Instance.OnFighterRemoved(Fight.Id, Team.Id, ContextualId);
                 Team.RemoveFighter(this);
                 Fight.CheckFightEnd();
                 Client.Character.RejoinMap(Fight.SpawnJoin, false);
@@ -166,7 +160,7 @@ namespace Symbioz.World.Models.Fights.Fighters
                     Die();
                 HasLeft = true;
                 Fight.Synchronizer.Start(AknowlegeAndLeave);
-              
+
             }
 
         }
@@ -176,9 +170,9 @@ namespace Symbioz.World.Models.Fights.Fighters
             {
                 if (IsPlaying)
                     EndTurn();
-                Fight.CheckFightEnd(); 
+                Fight.CheckFightEnd();
                 Fight.Send(new GameFightLeaveMessage(ContextualId));
-        
+
                 if (Fight.Started && Fight.FightType != FightTypeEnum.FIGHT_TYPE_PVP_ARENA)
                     Fight.ShowFightResults(Fight.GetFightResults(GetOposedTeam().TeamColor), Client);
                 if (Fight.FightType == FightTypeEnum.FIGHT_TYPE_PVP_ARENA)
@@ -186,7 +180,7 @@ namespace Symbioz.World.Models.Fights.Fighters
                     Client.Send(new GameRolePlayArenaRegistrationStatusMessage(false, (sbyte)PvpArenaStepEnum.ARENA_STEP_UNREGISTER, ArenaProvider.FIGHTERS_PER_TEAM));
                 }
                 Client.Character.RejoinMap(Fight.SpawnJoin, false);
-                
+
             }
             catch { }
 
@@ -216,7 +210,7 @@ namespace Symbioz.World.Models.Fights.Fighters
         }
         public override void RefreshStats()
         {
- 
+
             this.FighterInformations = new GameFightCharacterInformations(ContextualId, FighterLook,
                 new EntityDispositionInformations(CellId, Direction), (sbyte)Team.TeamColor,
                 0, !Dead, FighterStats.GetMinimalStats(), new ushort[0], Client.Character.Record.Name, new PlayerStatus(0),

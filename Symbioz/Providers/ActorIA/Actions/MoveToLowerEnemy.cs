@@ -1,10 +1,6 @@
 ﻿using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.PathProvider;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.ActorIA.Actions
 {
@@ -24,7 +20,7 @@ namespace Symbioz.Providers.ActorIA.Actions
                 return;
             cells.Remove(cells.Last());
             cells.Insert(0, fighter.CellId);
-            cells = cells.Take(fighter.FighterStats.Stats.MovementPoints+1).ToList();
+            cells = cells.Take(fighter.FighterStats.Stats.MovementPoints + 1).ToList();
             sbyte direction = PathParser.GetDirection(cells.Last());
             fighter.Move(cells, cells.Last(), direction);
         }

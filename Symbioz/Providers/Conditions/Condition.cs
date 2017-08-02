@@ -1,9 +1,5 @@
 ﻿using Symbioz.Network.Clients;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.Conditions
 {
@@ -14,7 +10,7 @@ namespace Symbioz.Providers.Conditions
         public string ConditionFull { get; set; }
         public abstract bool Eval(WorldClient client);
 
-        public static bool BasicEval(string conditionvalue,char comparaisonsymbol,int delta)
+        public static bool BasicEval(string conditionvalue, char comparaisonsymbol, int delta)
         {
             int conditionalDelta = int.Parse(conditionvalue);
             switch (comparaisonsymbol)

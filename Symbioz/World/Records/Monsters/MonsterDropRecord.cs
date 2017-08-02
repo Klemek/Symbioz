@@ -1,9 +1,5 @@
 ﻿using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records.Monsters
 {
@@ -22,8 +18,8 @@ namespace Symbioz.World.Records.Monsters
         public double PercentDropForGrade5;
         public int Count;
         public ushort ProspectingLock;
-        public MonsterDropRecord(int dropid,ushort monsterid,ushort objectid,double pdf1,double pdf2,double pdf3,
-            double pdf4,double pdf5,int count,ushort prospetinglock)
+        public MonsterDropRecord(int dropid, ushort monsterid, ushort objectid, double pdf1, double pdf2, double pdf3,
+            double pdf4, double pdf5, int count, ushort prospetinglock)
         {
             this.DropId = dropid;
             this.MonsterId = monsterid;

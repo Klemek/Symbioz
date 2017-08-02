@@ -1,24 +1,22 @@
 ﻿using Symbioz.DofusProtocol.Types;
+using Symbioz.Enums;
+using Symbioz.Helper;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using Symbioz.Helper;
 using System.Text;
-using System.Threading.Tasks;
-using Symbioz.World.Records;
-using Symbioz.Enums;
 
 namespace Symbioz.World.Models
 {
     public class ContextActorLook : EntityLook
     {
         public const short AURA_SCALE = 100;
-        public bool IsRiding { get { return subentities.Find(x=>x.bindingPointCategory == (sbyte)SubEntityBindingPointCategoryEnum.HOOK_POINT_CATEGORY_MOUNT_DRIVER) != null;} }
+        public bool IsRiding { get { return subentities.Find(x => x.bindingPointCategory == (sbyte)SubEntityBindingPointCategoryEnum.HOOK_POINT_CATEGORY_MOUNT_DRIVER) != null; } }
         public ContextActorLook() { }
-        public ContextActorLook(ushort bonesid,List<ushort> skins,List<int> colors,List<short> scales,List<SubEntity> subentities):base(bonesid,skins,colors,scales,subentities)
+        public ContextActorLook(ushort bonesid, List<ushort> skins, List<int> colors, List<short> scales, List<SubEntity> subentities) : base(bonesid, skins, colors, scales, subentities)
         {
-           
+
         }
         public SubEntity RiderSubEntity()
         {
@@ -26,7 +24,7 @@ namespace Symbioz.World.Models
         }
         public ContextActorLook CloneContextActorLook()
         {
-            return new ContextActorLook(bonesId, new List<ushort>(skins), new List<int>(indexedColors),new List<short>(scales), new List<SubEntity>(subentities.ConvertAll<SubEntity>(x=>CloneSubEntity(x))));
+            return new ContextActorLook(bonesId, new List<ushort>(skins), new List<int>(indexedColors), new List<short>(scales), new List<SubEntity>(subentities.ConvertAll<SubEntity>(x => CloneSubEntity(x))));
         }
         public SubEntity CloneSubEntity(SubEntity subentity)
         {
@@ -64,7 +62,7 @@ namespace Symbioz.World.Models
             {
                 var look = RiderSubEntity().subEntityLook;
                 if (!look.skins.Contains(id))
-                look.skins.Add(id);
+                    look.skins.Add(id);
             }
             else
                 skins.Add(id);
@@ -75,7 +73,7 @@ namespace Symbioz.World.Models
         }
         public void SetAura(ushort bonesid)
         {
-            subentities.Add(new SubEntity((sbyte)SubEntityBindingPointCategoryEnum.HOOK_POINT_CATEGORY_BASE_FOREGROUND, 0, SimpleBonesLook(bonesid,AURA_SCALE)));
+            subentities.Add(new SubEntity((sbyte)SubEntityBindingPointCategoryEnum.HOOK_POINT_CATEGORY_BASE_FOREGROUND, 0, SimpleBonesLook(bonesid, AURA_SCALE)));
         }
         public ContextActorLook CharacterToRider(ushort bonesid, List<ushort> rskins, List<int> rcolors, short rscale)
         {
@@ -245,18 +243,18 @@ namespace Symbioz.World.Models
             stringBuilder.Append("}");
             return stringBuilder.ToString();
         }
-     
+
         public static ContextActorLook FromEntityLook(EntityLook look)
         {
             return new ContextActorLook(look.bonesId, look.skins, look.indexedColors, look.scales, look.subentities);
         }
-        public static ContextActorLook SimpleBonesLook(ushort bonesid,short scale = 100)
+        public static ContextActorLook SimpleBonesLook(ushort bonesid, short scale = 100)
         {
-            return new ContextActorLook(bonesid,new List<ushort>(),new List<int>(),new List<short>(){scale},new List<SubEntity>());
+            return new ContextActorLook(bonesid, new List<ushort>(), new List<int>(), new List<short>() { scale }, new List<SubEntity>());
         }
         public static ContextActorLook SimpleSkinLook(ushort skinid, short scale = 100)
         {
-            return new ContextActorLook(1, new List<ushort>(){skinid}, new List<int>(), new List<short>() { scale }, new List<SubEntity>());
+            return new ContextActorLook(1, new List<ushort>() { skinid }, new List<int>(), new List<short>() { scale }, new List<SubEntity>());
         }
 
         public static List<int> GetDofusColors(List<int> colors)
@@ -269,6 +267,6 @@ namespace Symbioz.World.Models
             }
             return col.ToList();
         }
-       
+
     }
 }

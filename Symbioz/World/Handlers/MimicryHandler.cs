@@ -1,15 +1,8 @@
-﻿using Symbioz.Network.Messages;
-using Symbioz.DofusProtocol.Messages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Symbioz.Network.Clients;
-using Symbioz.World.Models;
-using Symbioz.World.Records;
+﻿using Symbioz.DofusProtocol.Messages;
 using Symbioz.Enums;
-using Symbioz.ORM;
+using Symbioz.Network.Clients;
+using Symbioz.Network.Messages;
+using Symbioz.World.Models;
 
 namespace Symbioz.World.Handlers
 {
@@ -72,10 +65,10 @@ namespace Symbioz.World.Handlers
                 client.Character.RefreshOnMapInstance();
                 client.Character.RefreshStats();
             }
-           
+
             item.RemoveAllEffect(EffectsEnum.Eff_Mimicry);
             var newItem = item.CloneAndGetNewUID();
-            client.Character.Inventory.RemoveItem(item.UID, item.Quantity,false);
+            client.Character.Inventory.RemoveItem(item.UID, item.Quantity, false);
             client.Character.Inventory.Add(newItem);
         }
     }

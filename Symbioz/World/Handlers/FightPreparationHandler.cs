@@ -6,12 +6,6 @@ using Symbioz.Network.Messages;
 using Symbioz.Network.Servers;
 using Symbioz.Providers;
 using Symbioz.World.Models.Fights;
-using Symbioz.World.Models.Fights.Fighters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Handlers
 {
@@ -147,7 +141,7 @@ namespace Symbioz.World.Handlers
             }
             try
             {
-           
+
                 client.Character.FighterInstance.Leave();
             }
             catch

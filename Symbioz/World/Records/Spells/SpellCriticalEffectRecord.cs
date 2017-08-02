@@ -1,20 +1,16 @@
 ﻿using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records.Spells
 {
     [Table("SpellsEffectsCritical")]
-    public class SpellCriticalEffectRecord :  AbstractSpellEffectRecord,ITable
+    public class SpellCriticalEffectRecord : AbstractSpellEffectRecord, ITable
     {
         public static List<SpellCriticalEffectRecord> SpellsEffectsCritical = new List<SpellCriticalEffectRecord>();
 
-        
-        public SpellCriticalEffectRecord(int effectuid,int spelllevelid,short effectid, string rawzone, string targetmask, short dicenum, short diceside,
-            short duration,int value,int delay,int random)
+
+        public SpellCriticalEffectRecord(int effectuid, int spelllevelid, short effectid, string rawzone, string targetmask, short dicenum, short diceside,
+            short duration, int value, int delay, int random)
         {
             this.SpellLevelId = spelllevelid;
             this.EffectId = effectid;

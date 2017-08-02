@@ -1,14 +1,11 @@
 ﻿using Symbioz.Core.Startup;
 using Symbioz.Enums;
-using Symbioz.Providers.SpellEffectsProvider.CustomSpellsEffectsProvider;
 using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.Records.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.SpellEffectsProvider.CustomSpellsEffectsProvider
 {
@@ -32,10 +29,10 @@ namespace Symbioz.Providers.SpellEffectsProvider.CustomSpellsEffectsProvider
             else
                 return false;
         }
-        public static void Handle(ushort spellid,List<ExtendedSpellEffect> effects,Fighter fighter)
+        public static void Handle(ushort spellid, List<ExtendedSpellEffect> effects, Fighter fighter)
         {
             var handler = Handlers.FirstOrDefault(x => x.Key == (SpellIdEnum)spellid);
-            handler.Value.Cast(fighter,effects);
+            handler.Value.Cast(fighter, effects);
         }
     }
 }

@@ -1,15 +1,11 @@
 ﻿using Symbioz.DofusProtocol.Types;
 using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using Symbioz.Helper;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
-    [Table("SpellsShortcuts",true)]
+    [Table("SpellsShortcuts", true)]
     public class SpellShortcutRecord : ITable
     {
         public static List<SpellShortcutRecord> SpellsShortcuts = new List<SpellShortcutRecord>();
@@ -21,7 +17,7 @@ namespace Symbioz.World.Records
         [Update]
         public sbyte SlotId;
 
-        public SpellShortcutRecord(int id,int characterid,ushort spellid,sbyte slotid)
+        public SpellShortcutRecord(int id, int characterid, ushort spellid, sbyte slotid)
         {
             this.Id = id;
             this.CharacterId = characterid;
@@ -36,7 +32,7 @@ namespace Symbioz.World.Records
         {
             return SpellsShortcuts.FindAll(x => x.CharacterId == characterid).ConvertAll<ShortcutSpell>(x => new ShortcutSpell(x.SlotId, x.SpellId));
         }
-        static SpellShortcutRecord GetShorcut(int characterid,sbyte slotid)
+        static SpellShortcutRecord GetShorcut(int characterid, sbyte slotid)
         {
             return SpellsShortcuts.Find(x => x.CharacterId == characterid && x.SlotId == slotid);
         }
@@ -44,7 +40,7 @@ namespace Symbioz.World.Records
         {
             SaveTask.RemoveElement(GetShorcut(characterid, slot));
         }
-        public static void SwapSortcut(int characterid,sbyte firstslot,sbyte secondslot)
+        public static void SwapSortcut(int characterid, sbyte firstslot, sbyte secondslot)
         {
             var shortcut1 = GetShorcut(characterid, firstslot);
             var shortcut2 = GetShorcut(characterid, secondslot);
@@ -65,12 +61,12 @@ namespace Symbioz.World.Records
                 shortcut1.SlotId = secondslot;
             SaveTask.UpdateElement(shortcut1);
         }
-        public static void AddShortcut(int characterid,sbyte slotid,ushort spellid)
+        public static void AddShortcut(int characterid, sbyte slotid, ushort spellid)
         {
             var existing = GetShorcut(characterid, slotid);
             if (existing != null)
                 RemoveShortcut(existing.CharacterId, existing.SlotId);
-            SaveTask.AddElement(new SpellShortcutRecord(SpellsShortcuts.PopNextId<SpellShortcutRecord>(x=>x.Id), characterid, spellid, slotid));
+            SaveTask.AddElement(new SpellShortcutRecord(SpellsShortcuts.PopNextId<SpellShortcutRecord>(x => x.Id), characterid, spellid, slotid));
         }
         public static sbyte GetFreeSlotId(int characterid)
         {

@@ -1,10 +1,6 @@
 ﻿using Symbioz.Core.Startup;
 using Symbioz.DofusProtocol.D2I;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Core
 {
@@ -19,7 +15,7 @@ namespace Symbioz.Core
         }
         private static D2IFile D2IFile { get; set; }
 
-        [StartupInvoke("D2I File",StartupInvokeType.Base)]
+        [StartupInvoke("D2I File", StartupInvokeType.Base)]
         public static void Intialize()
         {
             D2IFile = new D2IFile();

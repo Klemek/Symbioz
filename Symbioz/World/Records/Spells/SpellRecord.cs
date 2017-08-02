@@ -1,14 +1,10 @@
 ﻿using Symbioz.ORM;
 using Symbioz.Providers.ActorIA;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
-    [Table("Spells",true)]
+    [Table("Spells", true)]
     public class SpellRecord : ITable
     {
         public static List<SpellRecord> Spells = new List<SpellRecord>();
@@ -22,7 +18,7 @@ namespace Symbioz.World.Records
         [Ignore]
         public SpellCategoryEnum Category;
 
-        public SpellRecord(ushort id,string name,string description,sbyte typeid,short iconid,List<int> spelllevels)
+        public SpellRecord(ushort id, string name, string description, sbyte typeid, short iconid, List<int> spelllevels)
         {
             this.Id = id;
             this.Name = name;

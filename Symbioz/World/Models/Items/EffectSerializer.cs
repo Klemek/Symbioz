@@ -1,9 +1,5 @@
 ﻿using Symbioz.DofusProtocol.Types;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using YAXLib;
 
 namespace Symbioz.World.Models.Items
@@ -14,8 +10,8 @@ namespace Symbioz.World.Models.Items
         {
             foreach (var effect in effects)
             {
-                 YAXSerializer serializer = new YAXSerializer(effect.GetType());
-                 string contents = serializer.Serialize(effect);
+                YAXSerializer serializer = new YAXSerializer(effect.GetType());
+                string contents = serializer.Serialize(effect);
             }
         }
     }

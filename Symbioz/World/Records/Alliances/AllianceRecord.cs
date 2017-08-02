@@ -5,18 +5,14 @@ using Symbioz.Network.Servers;
 using Symbioz.ORM;
 using Symbioz.World.Models;
 using Symbioz.World.Models.Alliances;
-using Symbioz.World.Models.Guilds;
 using Symbioz.World.Records.Guilds;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records.Alliances
 {
-    [Table("Alliances",true)]
+    [Table("Alliances", true)]
     public class AllianceRecord : ITable
     {
 
@@ -54,22 +50,22 @@ namespace Symbioz.World.Records.Alliances
         {
             return new BasicAllianceInformations((uint)Id, Tag);
         }
-        public bool KickFromAlliance(int guildId,WorldClient by)
+        public bool KickFromAlliance(int guildId, WorldClient by)
         {
-            if(GuildRecord.GetGuild(guildId) != null)
+            if (GuildRecord.GetGuild(guildId) != null)
             {
                 GuildAllianceRecord member = GuildAllianceRecord.GetCharacterAlliance(guildId);
-                if(member != null || member.AllianceId == this.Id)
+                if (member != null || member.AllianceId == this.Id)
                 {
                     List<CharacterGuildRecord> charactersGuildRecord = CharacterGuildRecord.CharactersGuilds.FindAll(x => x.GuildId == guildId);
-                    foreach(CharacterGuildRecord characterGuild in charactersGuildRecord)
+                    foreach (CharacterGuildRecord characterGuild in charactersGuildRecord)
                     {
                         Character character = WorldServer.Instance.GetOnlineClient(characterGuild.CharacterId).Character;
                         AllianceRecord.OnCharacterLeftAlliance(character);
                     }
                     member.RemoveElement();
                     Logger.Log(AllianceRecord.CountGuildInAlliance(member.AllianceId));
-                    if(AllianceRecord.CountGuildInAlliance(member.AllianceId) < 1)
+                    if (AllianceRecord.CountGuildInAlliance(member.AllianceId) < 1)
                     {
                         AllianceRecord.DeleteAlliance(member.AllianceId);
                     }
@@ -102,7 +98,7 @@ namespace Symbioz.World.Records.Alliances
                 WorldClient client = WorldServer.Instance.GetOnlineClient(character.Id);
                 client.Send(new AllianceJoinedMessage(alliance.GetAllianceInformations(), true));
                 client.Character.LearnEmote(AllianceProvider.EMOTE_ID);
-                client.Character.HumanOptions.Add(new HumanOptionAlliance(alliance.GetAllianceInformations(),(sbyte)0));
+                client.Character.HumanOptions.Add(new HumanOptionAlliance(alliance.GetAllianceInformations(), (sbyte)0));
                 client.Character.RefreshOnMapInstance();
             }
             else
@@ -134,9 +130,10 @@ namespace Symbioz.World.Records.Alliances
         {
             AllianceRecord alliance = AllianceRecord.GetAlliance(allianceId);
             List<GuildAllianceRecord> members = GuildAllianceRecord.GuildsAlliances.FindAll(x => x.AllianceId == allianceId);
-            foreach(GuildAllianceRecord member in members)
+            foreach (GuildAllianceRecord member in members)
             {
-                foreach(WorldClient client in WorldServer.Instance.GetAllClientsOnline().FindAll(x=>x.Character.GuildId == member.GuildId)){
+                foreach (WorldClient client in WorldServer.Instance.GetAllClientsOnline().FindAll(x => x.Character.GuildId == member.GuildId))
+                {
                     AllianceRecord.OnCharacterLeftAlliance(client.Character);
                 }
                 member.RemoveElement();

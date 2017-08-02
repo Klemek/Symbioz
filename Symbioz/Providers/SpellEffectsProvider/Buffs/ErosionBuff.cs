@@ -1,11 +1,4 @@
-﻿using Symbioz.DofusProtocol.Messages;
-using Symbioz.DofusProtocol.Types;
-using Symbioz.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Symbioz.Enums;
 
 namespace Symbioz.Providers.SpellEffectsProvider.Buffs
 {

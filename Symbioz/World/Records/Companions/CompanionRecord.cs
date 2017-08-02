@@ -4,8 +4,6 @@ using Symbioz.World.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records.Companions
 {
@@ -18,7 +16,7 @@ namespace Symbioz.World.Records.Companions
         public string Name;
         public string Look;
         [Ignore]
-        public ContextActorLook RealLook {get{return ContextActorLook.Parse(Look);}}
+        public ContextActorLook RealLook { get { return ContextActorLook.Parse(Look); } }
         public List<ushort> Characteristics;
         public List<int> Spells;
         public int StartingSpellLevelId;
@@ -27,7 +25,7 @@ namespace Symbioz.World.Records.Companions
         [Ignore]
         public List<CompanionCharacteristic> RealCharacteristics = new List<CompanionCharacteristic>();
 
-        public CompanionRecord(sbyte id,string name,string look,List<ushort> characteristics,List<int> spells,int startingspelllevelid)
+        public CompanionRecord(sbyte id, string name, string look, List<ushort> characteristics, List<int> spells, int startingspelllevelid)
         {
             this.Id = id;
             this.Name = name;
@@ -64,7 +62,7 @@ namespace Symbioz.World.Records.Companions
                 grade++;
             return grade;
         }
-        public short GetStatData(Character character,string name)
+        public short GetStatData(Character character, string name)
         {
             short delta = 0;
             var characteristic = RealCharacteristics.Find(x => x.CharacteristicTemplate.Keyword == name);
@@ -80,10 +78,10 @@ namespace Symbioz.World.Records.Companions
             }
             return delta;
         }
-        public FighterStats GetFighterStats(Character master) 
+        public FighterStats GetFighterStats(Character master)
         {
             List<object> constructorDatas = new List<object>();
-            foreach (var field in typeof(StatsRecord).GetFields().ToList().FindAll(x=>!x.IsStatic).OrderBy(x=>x.MetadataToken))
+            foreach (var field in typeof(StatsRecord).GetFields().ToList().FindAll(x => !x.IsStatic).OrderBy(x => x.MetadataToken))
             {
                 constructorDatas.Add(GetStatData(master, field.Name));
             }
@@ -93,7 +91,7 @@ namespace Symbioz.World.Records.Companions
             stats.Agility = master.StatsRecord.Agility;
             stats.Intelligence = master.StatsRecord.Intelligence;
             stats.Chance = master.StatsRecord.Chance;
-         
+
             return new FighterStats(stats);
         }
         public static CompanionRecord GetCompanion(int id)

@@ -1,15 +1,12 @@
 ﻿using Symbioz.DofusProtocol.Types;
 using Symbioz.ORM;
 using Symbioz.World.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
-    [Table("CharactersJobs",true)]
+    [Table("CharactersJobs", true)]
 
     class CharacterJobRecord : ITable
     {
@@ -24,18 +21,18 @@ namespace Symbioz.World.Records
         [Update]
         public ulong JobExp;
 
-        public CharacterJobRecord(int id,int characterid,sbyte jobid,byte joblevel,ulong jobexp)
+        public CharacterJobRecord(int id, int characterid, sbyte jobid, byte joblevel, ulong jobexp)
         {
             this.Id = id;
             this.CharacterId = characterid;
             this.JobId = jobid;
-            this.JobLevel=joblevel;
-            this.JobExp =jobexp;
+            this.JobLevel = joblevel;
+            this.JobExp = jobexp;
         }
         int GetNextId()
         {
             if (CharactersJobs.Count() > 0)
-               return CharactersJobs.Last().Id + 1;
+                return CharactersJobs.Last().Id + 1;
             else
                 return 1;
         }
@@ -62,17 +59,17 @@ namespace Symbioz.World.Records
 
         public static JobsDetailedDatas GetCharacterJobsDatas(int characterid)
         {
-           var jobs = CharactersJobs.FindAll(x => x.CharacterId == characterid);
-           JobsDetailedDatas result = new JobsDetailedDatas();
-           foreach (var job in jobs)
-           {
-               result.JobsDescriptions.Add(job.GetJobDescription());
-               result.JobsExperiences.Add(job.GetJobExperience());
-               result.JobSettings.Add(job.GetDirectorySettings());
-           }
-           return result;
+            var jobs = CharactersJobs.FindAll(x => x.CharacterId == characterid);
+            JobsDetailedDatas result = new JobsDetailedDatas();
+            foreach (var job in jobs)
+            {
+                result.JobsDescriptions.Add(job.GetJobDescription());
+                result.JobsExperiences.Add(job.GetJobExperience());
+                result.JobSettings.Add(job.GetDirectorySettings());
+            }
+            return result;
         }
-        public static CharacterJobRecord GetJob(int characterid,sbyte jobid)
+        public static CharacterJobRecord GetJob(int characterid, sbyte jobid)
         {
             return CharactersJobs.Find(x => x.CharacterId == characterid && x.JobId == jobid);
         }
@@ -80,6 +77,6 @@ namespace Symbioz.World.Records
         {
             CharactersJobs.FindAll(x => x.CharacterId == characterid).ForEach(x => x.RemoveElement());
         }
-      
+
     }
 }

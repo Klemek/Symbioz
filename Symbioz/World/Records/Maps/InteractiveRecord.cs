@@ -1,20 +1,15 @@
 ﻿using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
 using Symbioz.ORM;
-using Symbioz.World.PathProvider;
 using Symbioz.World.Records;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Maps
 {
-    [Table("Interactives",true)]
+    [Table("Interactives", true)]
     public class InteractiveRecord : ITable
     {
-        public static List< InteractiveRecord> Interactive = new List<InteractiveRecord>();
+        public static List<InteractiveRecord> Interactive = new List<InteractiveRecord>();
         [Primary]
         public int Id;
         public int MapId;
@@ -25,7 +20,7 @@ namespace Symbioz.World.Models.Maps
         public string OptionalValue1;
         public string OptionalValue2;
 
-        public InteractiveRecord(int id,int mapid,int skillid, int elementid, int elementtype, string actiontype, string optionalvalue1, string optionalvalue2)
+        public InteractiveRecord(int id, int mapid, int skillid, int elementid, int elementtype, string actiontype, string optionalvalue1, string optionalvalue2)
         {
             this.Id = id;
             this.MapId = mapid;
@@ -52,7 +47,7 @@ namespace Symbioz.World.Models.Maps
         {
             return Interactive.FindAll(x => x.MapId == mapid);
         }
-        public static ushort GetTeleporterCellId(int mapid,TeleporterTypeEnum tptype)
+        public static ushort GetTeleporterCellId(int mapid, TeleporterTypeEnum tptype)
         {
             var map = MapRecord.GetMap(mapid);
             string actionType = string.Empty;
@@ -78,7 +73,7 @@ namespace Symbioz.World.Models.Maps
                 return (ushort)map.CloseCell((short)ele.CellId);
             }
             return (ushort)map.RandomWalkableCell();
-          
+
         }
     }
 }

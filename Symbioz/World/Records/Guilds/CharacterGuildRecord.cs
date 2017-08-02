@@ -3,11 +3,7 @@ using Symbioz.Enums;
 using Symbioz.Network.Clients;
 using Symbioz.Network.Servers;
 using Symbioz.ORM;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records.Guilds
 {
@@ -113,6 +109,6 @@ namespace Symbioz.World.Records.Guilds
         {
             CharactersGuilds.FindAll(x => x.CharacterId == characterId).ForEach(x => x.RemoveElement());
         }
-       
+
     }
 }

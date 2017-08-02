@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Network.Messages
 {
@@ -14,7 +12,7 @@ namespace Symbioz.Network.Messages
 
         public static string RawRepertory = Environment.CurrentDirectory + "/SWF/";
 
-        [StartupInvoke("RawDatas",StartupInvokeType.Internal)]
+        [StartupInvoke("RawDatas", StartupInvokeType.Internal)]
         public static void Initialize()
         {
             Raws.Clear();

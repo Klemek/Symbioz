@@ -1,14 +1,8 @@
-﻿using Symbioz.DofusProtocol.Messages;
-using Symbioz.DofusProtocol.Types;
+﻿using Symbioz.DofusProtocol.Types;
 using Symbioz.World.Models.Fights.Marks;
 using Symbioz.World.Records.Monsters;
 using Symbioz.World.Records.Spells;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Fights.Fighters
 {
@@ -24,7 +18,7 @@ namespace Symbioz.World.Models.Fights.Fighters
 
         public List<Wall> Walls = new List<Wall>();
 
-        public BombFighter(Fighter master,FightTeam team,MonsterRecord monsterTemplate,short cellid,sbyte grade) : base(team) 
+        public BombFighter(Fighter master, FightTeam team, MonsterRecord monsterTemplate, short cellid, sbyte grade) : base(team)
         {
             this.MonsterTemplate = monsterTemplate;
             this.ReadyToFight = true;
@@ -45,7 +39,7 @@ namespace Symbioz.World.Models.Fights.Fighters
         }
         public override void BeforeMove(List<short> cells)
         {
-           
+
         }
         public override SpellLevelRecord GetSpellLevel(ushort spellid)
         {
@@ -61,7 +55,7 @@ namespace Symbioz.World.Models.Fights.Fighters
             this.FighterStats = MonsterTemplate.GetFighterStats(Grade, true, summonerid);
             this.FighterInformations = new GameFightMonsterInformations(ContextualId, FighterLook,
               new EntityDispositionInformations(CellId, Direction),
-              (sbyte)Team.TeamColor, 0, true, FighterStats.GetMinimalStats(), new ushort[0], MonsterTemplate.Id,Grade);
+              (sbyte)Team.TeamColor, 0, true, FighterStats.GetMinimalStats(), new ushort[0], MonsterTemplate.Id, Grade);
 
         }
         public override int GetInitiative()
@@ -89,7 +83,7 @@ namespace Symbioz.World.Models.Fights.Fighters
         }
         public void CheckWalls()
         {
-           
+
             var createdWalls = MarksHelper.Instance.GetPotentialWalls(Fight, this);
 
             foreach (var wall in createdWalls)
@@ -106,7 +100,7 @@ namespace Symbioz.World.Models.Fights.Fighters
                     Fight.RemoveMarkTrigger(wall.Caster, wall);
                     Walls.Remove(wall);
                 }
-               
+
             }
 
         }
@@ -124,11 +118,11 @@ namespace Symbioz.World.Models.Fights.Fighters
         }
         public void Detonate()
         {
-            
-            MarksHelper.Instance.CastDetonation(Master,this, BombWallRecord.DetonationSpellId, BombWallRecord.BombMonsterId,5);
+
+            MarksHelper.Instance.CastDetonation(Master, this, BombWallRecord.DetonationSpellId, BombWallRecord.BombMonsterId, 5);
             Die();
-           
+
         }
-       
+
     }
 }

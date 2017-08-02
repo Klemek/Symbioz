@@ -1,14 +1,10 @@
 ﻿using Symbioz.ORM;
 using Symbioz.World.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Records
 {
-    [Table("Mounts",true)]
+    [Table("Mounts", true)]
     public class MountRecord : ITable
     {
         public static List<MountRecord> Mounts = new List<MountRecord>();
@@ -18,7 +14,7 @@ namespace Symbioz.World.Records
         public ushort CertificateGID;
         [Ignore]
         public ContextActorLook RealLook { get; set; }
-        public MountRecord(uint id,string name,string look,ushort certificategid)
+        public MountRecord(uint id, string name, string look, ushort certificategid)
         {
             this.Id = id;
             this.Name = name;

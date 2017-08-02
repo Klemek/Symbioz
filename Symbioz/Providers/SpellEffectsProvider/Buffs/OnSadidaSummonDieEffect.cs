@@ -1,9 +1,4 @@
 ﻿using Symbioz.World.Models.Fights.Fighters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.Providers.SpellEffectsProvider.Buffs
 {
@@ -11,7 +6,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.Buffs
     {
         public sbyte SpellGrade { get; set; }
 
-        public OnSadidaSummonDieEffect(uint uid, short delta, short duration, int sourceid, short sourcespellid,sbyte spellGrade, int delay)
+        public OnSadidaSummonDieEffect(uint uid, short delta, short duration, int sourceid, short sourcespellid, sbyte spellGrade, int delay)
             : base(uid, delta, duration, sourceid, sourcespellid, delay)
         {
             this.SpellGrade = spellGrade;
@@ -25,7 +20,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.Buffs
         }
         public override void SetBuff()
         {
-            
+
         }
         public override bool OnEventCalled(object arg1, object arg2, object arg3)
         {
@@ -34,7 +29,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.Buffs
         }
         public override void RemoveBuff()
         {
-           
+
         }
         /// <summary>
         /// Sadida, invocation arbre apres la mort

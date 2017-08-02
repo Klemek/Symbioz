@@ -3,11 +3,7 @@ using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
 using Symbioz.Network.Clients;
 using Symbioz.World.Records;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Symbioz.World.Models.Exchanges
 {
@@ -28,7 +24,7 @@ namespace Symbioz.World.Models.Exchanges
 
         public ushort TokenId { get; set; }
 
-        public NpcBuySellExchange(WorldClient client,NpcActionsRecord action,NpcSpawnRecord npc)
+        public NpcBuySellExchange(WorldClient client, NpcActionsRecord action, NpcSpawnRecord npc)
         {
             this.Action = action;
             this.Client = client;
@@ -40,22 +36,22 @@ namespace Symbioz.World.Models.Exchanges
         }
         public void OpenPanel()
         {
-     
+
             Client.Character.CurrentDialogType = DialogTypeEnum.DIALOG_EXCHANGE;
             Client.Character.ExchangeType = ExchangeType;
 
-            Client.Send(new ExchangeStartOkNpcShopMessage(-this.Npc.Id,TokenId,GetItemsToSellInNpcShop()));
+            Client.Send(new ExchangeStartOkNpcShopMessage(-this.Npc.Id, TokenId, GetItemsToSellInNpcShop()));
         }
         public List<ObjectItemToSellInNpcShop> GetItemsToSellInNpcShop()
         {
             return Items.ConvertAll<ObjectItemToSellInNpcShop>(x => new ObjectItemToSellInNpcShop((ushort)x.Id, x.RealEffects.ObjectEffects, (uint)x.Price, string.Empty));
         }
 
-        public void Buy(ushort objectGID,uint quantity)
+        public void Buy(ushort objectGID, uint quantity)
         {
             ItemRecord template = ItemRecord.GetItem((int)objectGID);
 
-            if (TokenId == 0)  
+            if (TokenId == 0)
             {
                 if (!Client.Character.RemoveKamas((int)(template.Price * quantity), true))
                     return;

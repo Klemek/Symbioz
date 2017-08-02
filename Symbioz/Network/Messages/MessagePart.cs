@@ -129,7 +129,7 @@ namespace Symbioz.Network.Messages
                             }
                         }
                         arg_CC_0 = true;
-                    IL_CC:
+                        IL_CC:
                         if (!arg_CC_0)
                         {
                             if (this.LengthBytesCount < 0 || this.LengthBytesCount > 3)
