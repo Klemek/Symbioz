@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Symbioz.World.Records.Alliances
 {
-    [Table("alliances",true)]
+    [Table("Alliances",true)]
     public class AllianceRecord : ITable
     {
 

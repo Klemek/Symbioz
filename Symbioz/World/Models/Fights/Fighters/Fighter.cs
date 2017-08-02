@@ -166,7 +166,7 @@ namespace Symbioz.World.Models.Fights.Fighters
             if (Fight.Ended)
                 return;
             ApplyFighterEvent(FighterEventType.ON_TURN_ENDED, null);
-          
+
             Fight.Send(new GameFightTurnEndMessage(ContextualId));
             IsPlaying = false;
             m_turnEngine.EndTurn();
@@ -175,7 +175,7 @@ namespace Symbioz.World.Models.Fights.Fighters
             RefreshStats();
             Fight.Synchronizer.Start(Fight.NewTurn);
         }
-        public void Teleport(short cellid,bool save = true)
+        public void Teleport(short cellid, bool save = true)
         {
             if (Fight.Ended)
                 return;
@@ -392,12 +392,12 @@ namespace Symbioz.World.Models.Fights.Fighters
                 if (target != null)
                     targetId = target.ContextualId;
             }
-            if (!SpellHistory.CanCast(spellLevl,targetId))
+            if (!SpellHistory.CanCast(spellLevl, targetId))
             {
                 OnSpellCastFailed(CastFailedReason.CAST_LIMIT, spellLevl);
                 return false;
             }
-            
+
             this.Fight.TryStartSequence(this.ContextualId, 1);
             FightSpellCastCriticalEnum critical = RollCriticalDice(spellLevl);
 
@@ -688,10 +688,10 @@ namespace Symbioz.World.Models.Fights.Fighters
         /// <param name="sourceid"></param>
         public virtual void TakeDamages(TakenDamages damages, int sourceid)
         {
-            if (CharacterRecord.GetCharacterRecordById(this.ContextualId).GodMod)
+            /*if (CharacterRecord.GetCharacterRecordById(this.ContextualId).GodMod)
                 return;
             if (ApplyFighterEvent(FighterEventType.BEFORE_ATTACKED, sourceid, damages))
-                return;
+                return;*/
             LoseLife(damages, sourceid);
         }
         public virtual void OnMoved(List<short> cells)
@@ -773,7 +773,8 @@ namespace Symbioz.World.Models.Fights.Fighters
 
         public void AddToLastPosition(List<short> path)
         {
-            foreach (short pos in path) {
+            foreach (short pos in path)
+            {
                 LastPosition.Add(pos);
             }
         }

@@ -14,7 +14,7 @@ namespace Symbioz.World.Models
         {
             ObjectEffects = new List<ObjectEffectDice>();
             if (str != string.Empty)
-            Parse(str);
+                Parse(str);
         }
         public string ConvertToString()
         {
@@ -44,10 +44,38 @@ namespace Symbioz.World.Models
                 {
                     try
                     {
-                        eff.actionId = ushort.Parse(splited[0]);
-                        eff.diceNum = ushort.Parse(splited[1]);
-                        eff.diceSide = ushort.Parse(splited[2]);
-                        eff.diceConst = ushort.Parse(splited[3]);
+                        if ((ushort.Parse(splited[0]) > 249) && (ushort.Parse(splited[0]) < 255)) // Convertir les %PvP en %global
+                        {
+                            splited[0] = (ushort.Parse(splited[0]) - 40).ToString();
+                        }
+                        if ((ushort.Parse(splited[0]) > 259) && (ushort.Parse(splited[0]) < 265)) // Convertir les PvP (fixe) en global (fixe)
+                        {
+                            splited[0] = (ushort.Parse(splited[0]) - 20).ToString();
+                        }
+                        if (splited[2] == "0")
+                        {
+                            eff.actionId = ushort.Parse(splited[0]);
+                            eff.diceNum = ushort.Parse(splited[1]);
+                            eff.diceSide = ushort.Parse(splited[2]);
+                            eff.diceConst = ushort.Parse(splited[3]);
+                        }
+                        else
+                        {
+                            if (int.Parse(splited[2]) < 0)
+                            {
+                                eff.actionId = ushort.Parse(splited[0]);
+                                eff.diceNum = ushort.Parse(splited[1]);
+                                eff.diceSide = ushort.Parse(splited[1]);
+                                eff.diceConst = ushort.Parse(splited[3]);
+                            }
+                            else
+                            {
+                                eff.actionId = ushort.Parse(splited[0]);
+                                eff.diceNum = ushort.Parse(splited[2]);
+                                eff.diceSide = ushort.Parse(splited[2]);
+                                eff.diceConst = ushort.Parse(splited[3]);
+                            }
+                        }
                     }
                     catch (Exception e)
                     {

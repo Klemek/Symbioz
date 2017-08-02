@@ -3,6 +3,13 @@
 ################################################################################
 
 /.vs
-/Symbioz/.vs/Symbioz/v15
-/Symbioz/.vs/Symbioz/v15
-/Symbioz/.vs/Symbioz/v15/.suo
+/Symbioz/.vs
+/Symbioz/.vs
+/Symbioz/.vs
+/Symbioz/bin
+!/Symbioz/bin/Debug/config.xml
+!/Symbioz/bin/Debug/lang.d2i
+!/Symbioz/bin/Debug/SWF
+/Symbioz/obj
+/Symbioz.D2O/bin
+/Symbioz.D2O/obj

@@ -31,9 +31,9 @@ namespace Symbioz.World.Records.Monsters
         public ushort DamageReflect;
         public short Power;
 
-        public MonsterGradeRecord(int gradeid,ushort monsterid,short level,int lifepoints,ushort actionpoints,short movementpoints,
-            short padodge,short pmdodge,ushort wisdom,short earthresist,short airresist,short fireresist,short waterresist,
-            short neutralresist,ulong gradexp,ushort damagereflect,short power)
+        public MonsterGradeRecord(int gradeid, ushort monsterid, short level, int lifepoints, ushort actionpoints, short movementpoints,
+            short padodge, short pmdodge, ushort wisdom, short earthresist, short airresist, short fireresist, short waterresist,
+            short neutralresist, ulong gradexp, ushort damagereflect, short power)
         {
             this.GradeId = gradeid;
             this.MonsterId = monsterid;
@@ -41,8 +41,8 @@ namespace Symbioz.World.Records.Monsters
             this.LifePoints = lifepoints;
             this.ActionPoints = actionpoints;
             this.MovementPoints = movementpoints;
-            this.PaDodge = padodge;
-            this.PmDodge = pmdodge;
+            this.PaDodge = (short)(wisdom / 10);
+            this.PmDodge = (short)(wisdom / 10);
             this.Wisdom = wisdom;
             this.EarthResistance = earthresist;
             this.AirResistance = airresist;

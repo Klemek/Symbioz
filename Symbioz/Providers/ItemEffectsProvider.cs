@@ -27,6 +27,7 @@ namespace Symbioz.Provider
             Functions.Add(EffectsEnum.Eff_AddMP_128, AddMp);
             Functions.Add(EffectsEnum.Eff_AddTitle, Title);
             Functions.Add(EffectsEnum.Eff_AddCriticalHit, CritHit);
+            Functions.Add(EffectsEnum.Eff_AddRange, AddRange);
             Functions.Add(EffectsEnum.Eff_AddSummonLimit, SummonLimit);
             Functions.Add(EffectsEnum.Eff_AddDamageBonus, DmgsBonus);
             Functions.Add(EffectsEnum.Eff_AddDamageBonusPercent, DmgsBonusPercent);
@@ -43,7 +44,8 @@ namespace Symbioz.Provider
             Functions.Add(EffectsEnum.Eff_AddInitiative, Initiative);
             Functions.Add(EffectsEnum.Eff_10, Emote);
             Functions.Add(EffectsEnum.Eff_SubMP, SubMp);
-            Functions.Add(EffectsEnum.Eff_Companion,Companion);
+            Functions.Add(EffectsEnum.Eff_SubRange, SubRange);
+            Functions.Add(EffectsEnum.Eff_Companion, Companion);
             Functions.Add(EffectsEnum.Eff_AddWaterDamageBonus, WaterDamagesBonus);
             Functions.Add(EffectsEnum.Eff_AddAirDamageBonus, AirDamagesBonus);
             Functions.Add(EffectsEnum.Eff_AddEarthDamageBonus, EarthDamagesBonus);
@@ -100,18 +102,18 @@ namespace Symbioz.Provider
         {
             client.Character.StatsRecord.FireDamageBonus += value;
         }
-        static void WaterDamagesBonus(WorldClient client,short value)
+        static void WaterDamagesBonus(WorldClient client, short value)
         {
             client.Character.StatsRecord.WaterDamageBonus += value;
         }
-        private static void Companion(WorldClient client,short value)
+        private static void Companion(WorldClient client, short value)
         {
             if (value > 0)
                 client.Character.EquipCompanion(value);
             else
                 client.Character.UnequipCompanion();
         }
-        private static void Emote(WorldClient client,short value)
+        private static void Emote(WorldClient client, short value)
         {
             if (value > 0)
                 client.Character.LearnEmote((byte)value);
@@ -119,11 +121,11 @@ namespace Symbioz.Provider
                 client.Character.ForgetEmote((byte)-value);
 
         }
-        private static void DmgsBonusPercent(WorldClient client,short value)
+        private static void DmgsBonusPercent(WorldClient client, short value)
         {
             client.Character.StatsRecord.AllDamagesBonusPercent += value;
         }
-        private static void Initiative(WorldClient client,short value)
+        private static void Initiative(WorldClient client, short value)
         {
             client.Character.StatsRecord.Initiative += value;
         }
@@ -144,7 +146,7 @@ namespace Symbioz.Provider
         {
             client.Character.StatsRecord.WaterResistPercent += value;
         }
-        private static void EarthResist(WorldClient client,short value)
+        private static void EarthResist(WorldClient client, short value)
         {
             client.Character.StatsRecord.EarthResistPercent += value;
         }
@@ -160,15 +162,15 @@ namespace Symbioz.Provider
         {
             client.Character.StatsRecord.EarthReduction += value;
         }
-        private static void AirReduction(WorldClient client,short value)
+        private static void AirReduction(WorldClient client, short value)
         {
             client.Character.StatsRecord.AirReduction += value;
         }
-        private static void Prospecting(WorldClient client,short value)
+        private static void Prospecting(WorldClient client, short value)
         {
             client.Character.StatsRecord.Prospecting += value;
         }
-        private static void DmgsBonus(WorldClient client,short value)
+        private static void DmgsBonus(WorldClient client, short value)
         {
             client.Character.StatsRecord.AllDamagesBonus += value;
         }
@@ -191,7 +193,7 @@ namespace Symbioz.Provider
         {
             client.Character.StatsRecord.CriticalHit += value;
         }
-        private static void SubMp(WorldClient client,short value)
+        private static void SubMp(WorldClient client, short value)
         {
             client.Character.StatsRecord.MovementPoints -= value;
         }
@@ -201,7 +203,7 @@ namespace Symbioz.Provider
         }
         private static void Ap(WorldClient client, short value)
         {
-            client.Character.StatsRecord.ActionPoints  += value;
+            client.Character.StatsRecord.ActionPoints += value;
         }
         private static void Chance(WorldClient client, short value)
         {
@@ -250,7 +252,7 @@ namespace Symbioz.Provider
         {
             client.Character.StatsRecord.ContextChance -= value;
         }
-        private static void SubVitality(WorldClient client,short value)
+        private static void SubVitality(WorldClient client, short value)
         {
             client.Character.StatsRecord.ContextVitality -= value;
             client.Character.CurrentStats.LifePoints -= (uint)value;
@@ -267,6 +269,14 @@ namespace Symbioz.Provider
         private static void APReduction(WorldClient client, short value)
         {
             client.Character.StatsRecord.ContextAPReduction += value;
+        }
+        private static void AddRange(WorldClient client, short value)
+        {
+            client.Character.StatsRecord._Range += value;
+        }
+        private static void SubRange(WorldClient client, short value)
+        {
+            client.Character.StatsRecord._Range -= value;
         }
     }
 }

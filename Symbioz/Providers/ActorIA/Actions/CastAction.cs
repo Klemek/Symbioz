@@ -15,15 +15,15 @@ namespace Symbioz.Providers.ActorIA.Actions
     [IAAction(IAActionsEnum.AgressivSpellCast)]
     public class CastAction : AbstractIAAction
     {
-        public static void TryCast(MonsterFighter fighter, ushort spellid,Fighter target)
+        public static void TryCast(MonsterFighter fighter, ushort spellid, Fighter target)
         {
             var level = fighter.GetSpellLevel(spellid);
-          
+            fighter.Fight.Send(new GameActionFightDodgePointLossMessage((ushort)ActionsEnum.ACTION_FIGHT_SPELL_DODGED_PA, fighter.ContextualId, fighter.ContextualId, (ushort)(fighter.Template.GetGrade((sbyte)(fighter.ContextualId)).Power)));
             if (target != null && fighter.FighterStats.Stats.ActionPoints - level.ApCost >= 0)
             {
-                var refreshedTarget =  fighter.Fight.GetFighter(target.CellId);
-                if (refreshedTarget != null && !fighter.HaveCooldown((short)spellid) && fighter.CanCast(target.CellId, level,refreshedTarget))
-                    fighter.CastSpellOnCell(spellid,target.CellId);
+                var refreshedTarget = fighter.Fight.GetFighter(target.CellId);
+                if (refreshedTarget != null && !fighter.HaveCooldown((short)spellid) && fighter.CanCast(target.CellId, level, refreshedTarget))
+                    fighter.CastSpellOnCell(spellid, target.CellId);
             }
         }
         public override void Execute(MonsterFighter fighter)
@@ -33,18 +33,18 @@ namespace Symbioz.Providers.ActorIA.Actions
                 return;
             var spells = fighter.Template.Spells.ConvertAll<SpellRecord>(x => SpellRecord.GetSpell(x));
 
-            
+
             foreach (var spell in spells.FindAll(x => x.Category == SpellCategoryEnum.Damages))
             {
-                TryCast(fighter, spell.Id,lower);
+                TryCast(fighter, spell.Id, lower);
             }
             foreach (var spell in spells.FindAll(x => x.Category == SpellCategoryEnum.Agress))
             {
-                TryCast(fighter, spell.Id,lower);
+                TryCast(fighter, spell.Id, lower);
             }
             foreach (var spell in spells.FindAll(x => x.Category == SpellCategoryEnum.Undefined))
             {
-                TryCast(fighter, spell.Id,lower);
+                TryCast(fighter, spell.Id, lower);
             }
 
         }

@@ -1,4 +1,5 @@
 ﻿using Symbioz.Enums;
+using Symbioz.DofusProtocol.Messages;
 using Symbioz.Providers.SpellEffectsProvider.Buffs;
 using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.Records.Spells;
@@ -21,21 +22,45 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
         [EffectHandler(EffectsEnum.Eff_RemoveAP)]
         public static void RemoveAP(Fighter fighter, SpellLevelRecord level, ExtendedSpellEffect effect, List<Fighter> affecteds, short castcellid)
         {
+
             foreach (var affected in affecteds)
             {
-
-
                 // TODO ALGO
+                int ap = affected.FighterStats.Stats.ActionPoints;
+                int loss = 0;
+                ushort dodge = 0;
 
-                //if (loss == 0)
-                //{
-                //    fighter.Fight.Send(new GameActionFightDodgePointLossMessage((ushort)ActionsEnum.ACTION_FIGHT_SPELL_DODGED_PA, fighter.ContextualId, affected.ContextualId,(ushort)maxLost));
-                //}
-                //else 
-                //{
-                //    var buff = new APBuff((uint)affected.BuffIdProvider.Pop(),loss, effect.BaseEffect.Duration, fighter.ContextualId, (short)level.SpellId, effect.BaseEffect.EffectType);
-                //    affected.AddBuff(buff);
-                //}
+                for (int i = 0; i < effect.BaseEffect.DiceNum; i++)
+                {
+                    if (affected.FighterStats.Stats.DodgePA == 0 && ap > 0)
+                    {
+                        loss++;
+                        ap--;
+                    }
+                    else if (ap > 0)
+                    {
+                        Random rnd = new Random();
+                        int rand = rnd.Next(1, 100);
+                        int percentage = (int)(50 * (fighter.FighterStats.Stats.APAttack / affected.FighterStats.Stats.DodgePA) * (ap / affected.FighterStats.Stats.ActionPoints));
+                        if (rand < percentage)
+                        {
+                            loss++;
+                            ap--;
+                        }
+                        else
+                        {
+                            dodge++;
+                        }
+                    }
+                }
+
+                if (dodge > 0)
+                {
+                    fighter.Fight.Send(new GameActionFightDodgePointLossMessage((ushort)ActionsEnum.ACTION_FIGHT_SPELL_DODGED_PA, fighter.ContextualId, affected.ContextualId, dodge));
+                }
+
+                var buff = new APBuff((uint)affected.BuffIdProvider.Pop(), (short)loss, effect.BaseEffect.Duration, fighter.ContextualId, (short)level.SpellId, effect.BaseEffect.EffectType, effect.BaseEffect.Delay);
+                affected.AddBuff(buff);
             }
         }
         [EffectHandler(EffectsEnum.Eff_SubAP)]
@@ -43,7 +68,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
         {
             foreach (var affected in affecteds)
             {
-                var buff = new APBuff((uint)affected.BuffIdProvider.Pop(), effect.BaseEffect.DiceNum, effect.BaseEffect.Duration, fighter.ContextualId, (short)level.SpellId, effect.BaseEffect.EffectType,effect.BaseEffect.Delay);
+                var buff = new APBuff((uint)affected.BuffIdProvider.Pop(), effect.BaseEffect.DiceNum, effect.BaseEffect.Duration, fighter.ContextualId, (short)level.SpellId, effect.BaseEffect.EffectType, effect.BaseEffect.Delay);
                 affected.AddBuff(buff);
 
             }
@@ -53,7 +78,7 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
         {
             foreach (var affected in affecteds)
             {
-                var buff = new APBuff((uint)affected.BuffIdProvider.Pop(), effect.BaseEffect.DiceNum, effect.BaseEffect.Duration, fighter.ContextualId, (short)level.SpellId, effect.BaseEffect.EffectType,effect.BaseEffect.Delay);
+                var buff = new APBuff((uint)affected.BuffIdProvider.Pop(), effect.BaseEffect.DiceNum, effect.BaseEffect.Duration, fighter.ContextualId, (short)level.SpellId, effect.BaseEffect.EffectType, effect.BaseEffect.Delay);
                 affected.AddBuff(buff);
 
             }
@@ -90,16 +115,42 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
             foreach (var affected in affecteds)
             {
                 // TODO, ALGO
+                int mp = affected.FighterStats.Stats.MovementPoints;
+                int loss = 0;
+                ushort dodge = 0;
 
-                //if (loss == 0)
-                //{
-                //    fighter.Fight.Send(new GameActionFightDodgePointLossMessage((ushort)ActionsEnum.ACTION_FIGHT_SPELL_DODGED_PM, fighter.ContextualId, affected.ContextualId, (ushort)maxLost));
-                //}
-                //else
-                //{
-                //    var buff = new MPBuff((uint)affected.BuffIdProvider.Pop(), loss, effect.BaseEffect.Duration, fighter.ContextualId, (short)level.SpellId, effect.BaseEffect.EffectType);
-                //    affected.AddBuff(buff);
-                //}
+                for (int i = 0; i < effect.BaseEffect.DiceNum; i++)
+                {
+                    if (affected.FighterStats.Stats.DodgePM == 0 && mp > 0)
+                    {
+                        loss++;
+                        mp--;
+                    }
+                    else if (mp > 0)
+                    {
+                        Random rnd = new Random();
+                        int rand = rnd.Next(1, 100);
+                        int percentage = (int)(50 * (fighter.FighterStats.Stats.MPAttack / affected.FighterStats.Stats.DodgePM) * (mp / affected.FighterStats.Stats.MovementPoints));
+                        if (rand < percentage)
+                        {
+                            loss++;
+                            mp--;
+                        }
+                        else
+                        {
+                            dodge++;
+                        }
+
+                    }
+                }
+
+                if (dodge > 0)
+                {
+                    fighter.Fight.Send(new GameActionFightDodgePointLossMessage((ushort)ActionsEnum.ACTION_FIGHT_SPELL_DODGED_PM, fighter.ContextualId, affected.ContextualId, dodge));
+                }
+
+                var buff = new MPBuff((uint)affected.BuffIdProvider.Pop(), (short)loss, effect.BaseEffect.Duration, fighter.ContextualId, (short)level.SpellId, effect.BaseEffect.EffectType, effect.BaseEffect.Delay);
+                affected.AddBuff(buff);
             }
         }
         #endregion

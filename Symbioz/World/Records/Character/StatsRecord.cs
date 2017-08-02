@@ -173,12 +173,12 @@ namespace Symbioz.World.Records
         public short Vitality { get { return (short)(ContextVitality + BaseVitality + PermanentVitality); } set { ContextVitality = value; } }
         public short Intelligence { get { return (short)(ContextIntelligence + BaseIntelligence + PermanentIntelligence); } set { ContextIntelligence = value; } }
         public short Wisdom { get { return (short)(ContextWisdom + BaseWisdom + PermanentWisdom); } set { BaseWisdom = value; } }
-        [Ignore]
+
         public short APReduction { get { return (short)(Wisdom / 10); } }
-        [Ignore]
+
         public short APAttack { get { return (short)(Wisdom / 10); } }
-        [Ignore]
-        public short MPAttack { get { return (short)(Agility / 10); } }
+
+        public short MPAttack { get { return (short)(Wisdom / 10); } }
         public StatsRecord Clone()
         {
             return new StatsRecord(CharacterId, LifePoints, MaxEnergyPoints, Initiative, Prospecting,
@@ -191,8 +191,8 @@ namespace Symbioz.World.Records
                 FireResistPercent, NeutralReduction, EarthReduction, WaterReduction, AirReduction, FireReduction,
                 PushDamageReduction, CriticalDamageReduction, PvPNeutralResistPercent, PvPEarthResistPercent,
                 PvPWaterResistPercent, PvPAirResistPercent, PvPFireResistPercent, PvPNeutralReduction,
-                PvPEarthReduction, PvPWaterReduction, PvPAirReduction, PvPFireReduction, GlobalDamageReduction,BaseStrength,BaseAgility,
-                BaseChance,BaseVitality,BaseIntelligence,BaseWisdom,PermanentStrenght,PermanentAgility,PermanentChance,PermanentVitality,PermanentWisdom,PermanentIntelligence,ContextAPReduction);
+                PvPEarthReduction, PvPWaterReduction, PvPAirReduction, PvPFireReduction, GlobalDamageReduction, BaseStrength, BaseAgility,
+                BaseChance, BaseVitality, BaseIntelligence, BaseWisdom, PermanentStrenght, PermanentAgility, PermanentChance, PermanentVitality, PermanentWisdom, PermanentIntelligence, ContextAPReduction);
         }
         public StatsRecord(int characterid, short lifePoints, short maxenegryPoints, short initiative, short prospecting, short ap, short mp, short strenght, short vitality,
             short wisdom, short chance, short agility, short shortelligence, short range, short summonablecboos, short reflect, short criticalhit, short criticalhitweapon, short healbonus,
@@ -201,7 +201,7 @@ namespace Symbioz.World.Records
             short dodgepm, short neutralresistpercent, short earthresistpercent, short waterresistpercent, short airresistpercent, short fireresistpercent,
             short neutralreduc, short earthreduc, short waterreduc, short airreduc, short firereduc, short pushdamagereduc, short criticaldamagereduc, short pvpneutralresistpercent,
             short pvpearthresistpercent, short pvpwaterresistpercent, short pvpairresistpercent, short pvpfireresistpercent, short pvpneutralreduc, short pvpearthreduc, short pvpwaterreduc,
-            short pvpairreduc, short pvpfirereduc, short globaldamagereduction,short basestrenght,short baseagility,short basechance,short basevitality,short basewisdom,short baseintelligence, short permanentStrenght, short permanentAgility, short permanentChance, short permanentVitality, short permanentWisdom, short permanentIntelligence,short contextAPReduction)
+            short pvpairreduc, short pvpfirereduc, short globaldamagereduction, short basestrenght, short baseagility, short basechance, short basevitality, short basewisdom, short baseintelligence, short permanentStrenght, short permanentAgility, short permanentChance, short permanentVitality, short permanentWisdom, short permanentIntelligence, short contextAPReduction)
         {
             this.CharacterId = characterid;
             this.LifePoints = lifePoints;
@@ -273,7 +273,7 @@ namespace Symbioz.World.Records
             this.PermanentWisdom = permanentWisdom;
             this.PermanentIntelligence = permanentIntelligence;
             this.ContextAPReduction = contextAPReduction;
-    }
+        }
         public static CharacterCharacteristicsInformations GetCharacterCharacteristics(StatsRecord stats, Character character) // voir les GetBase(0)
         {
             var align = character.GetActorExtendedAlignement();
@@ -281,21 +281,21 @@ namespace Symbioz.World.Records
 
             var mpMax = character.StatsRecord.MovementPoints;
             var apMax = character.StatsRecord.ActionPoints;
-          
+
 
             if (character.FighterInstance != null)
             {
                 mpMax = character.FighterInstance.FighterStats.RealStats.MovementPoints;
                 apMax = character.FighterInstance.FighterStats.RealStats.ActionPoints;
-           
+
             }
             var expNextFloor = ExperienceRecord.GetExperienceForLevel((uint)(character.Record.Level + 1));
             var detailedstats = new CharacterCharacteristicsInformations(character.Record.Exp, expFloor, expNextFloor, character.Record.Kamas, character.Record.StatsPoints, 0, character.Record.SpellPoints, align,
                 (uint)(character.CurrentStats.LifePoints), (uint)stats.LifePoints, character.CurrentStats.Energy, (ushort)stats.MaxEnergyPoints, stats.ActionPoints, stats.MovementPoints, GetBase((short)character.Initiative), GetBase(stats.Prospecting),
-                GetBase((short)apMax), GetBase((short)mpMax), GetBase(stats.BaseStrength,stats.ContextStrength,stats.PermanentStrenght), GetBase(stats.BaseVitality,stats.ContextVitality,stats.PermanentVitality), GetBase(stats.BaseWisdom,stats.ContextWisdom,stats.PermanentWisdom), GetBase(stats.BaseChance,stats.ContextChance,stats.PermanentChance), GetBase(stats.BaseAgility,stats.ContextAgility,stats.PermanentAgility), GetBase(stats.BaseIntelligence,stats.ContextIntelligence,stats.PermanentIntelligence),
+                GetBase((short)apMax), GetBase((short)mpMax), GetBase(stats.BaseStrength, stats.ContextStrength, stats.PermanentStrenght), GetBase(stats.BaseVitality, stats.ContextVitality, stats.PermanentVitality), GetBase(stats.BaseWisdom, stats.ContextWisdom, stats.PermanentWisdom), GetBase(stats.BaseChance, stats.ContextChance, stats.PermanentChance), GetBase(stats.BaseAgility, stats.ContextAgility, stats.PermanentAgility), GetBase(stats.BaseIntelligence, stats.ContextIntelligence, stats.PermanentIntelligence),
                 GetBase(stats._Range), GetBase(stats.SummonableCreaturesBoost), GetBase(stats.Reflect), GetBase(stats.CriticalHit), (ushort)stats.CriticalHitWeapon, GetBase(0), GetBase(stats.HealBonus), GetBase(stats.AllDamagesBonus),
                 GetBase(stats.WeaponDamagesBonusPercent), GetBase(stats.AllDamagesBonusPercent), GetBase(stats.TrapBonus), GetBase(stats.TrapBonusPercent), GetBase(stats.GlyphBonusPercent), GetBase(0),
-                GetBase(0), GetBase(0), GetBase(stats.APReduction,stats.ContextAPReduction), GetBase(0), GetBase(stats.PushDamageBonus), GetBase(stats.CriticalDamageBonus), GetBase(stats.NeutralDamageBonus), GetBase(stats.EarthDamageBonus),
+                GetBase(0), GetBase(0), GetBase(stats.APReduction, stats.ContextAPReduction), GetBase(0), GetBase(stats.PushDamageBonus), GetBase(stats.CriticalDamageBonus), GetBase(stats.NeutralDamageBonus), GetBase(stats.EarthDamageBonus),
                 GetBase(stats.WaterDamageBonus), GetBase(stats.AirDamageBonus), GetBase(stats.FireDamageBonus), GetBase(stats.DodgePA), GetBase(stats.DodgePM), GetBase(stats.NeutralResistPercent),
                 GetBase(stats.EarthResistPercent), GetBase(stats.WaterResistPercent), GetBase(stats.AirResistPercent), GetBase(stats.FireResistPercent), GetBase(stats.NeutralReduction),
                 GetBase(stats.EarthReduction), GetBase(stats.WaterReduction), GetBase(stats.AirReduction), GetBase(stats.FireReduction), GetBase(stats.PushDamageReduction),
@@ -305,7 +305,7 @@ namespace Symbioz.World.Records
             return detailedstats;
 
         }
-        static CharacterBaseCharacteristic GetBase(short @base,short context, short permanent = 0)
+        static CharacterBaseCharacteristic GetBase(short @base, short context, short permanent = 0)
         {
             return new CharacterBaseCharacteristic(@base, permanent, context, 0, 0);
         }
@@ -322,7 +322,7 @@ namespace Symbioz.World.Records
             var breed = BreedRecord.GetBreed(character.Record.Breed);
             character.Record.SpellPoints = (ushort)ConfigurationManager.Instance.StartLevel;
             character.Record.StatsPoints = 0;
-            var stats = new StatsRecord(character.Id, breed.StartLifePoints, (short)(ConfigurationManager.Instance.StartLevel * 10), breed.StartLifePoints, breed.StartProspecting, 6, 3, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+            var stats = new StatsRecord(character.Id, breed.StartLifePoints, (short)(ConfigurationManager.Instance.StartLevel * 10), breed.StartLifePoints, breed.StartProspecting, 6, 3, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             character.CurrentStats = new BasicStats((ushort)stats.MaxEnergyPoints, (uint)stats.LifePoints);
             SaveTask.AddElement(stats);
         }
@@ -337,7 +337,7 @@ namespace Symbioz.World.Records
         }
         public static FieldInfo GetFieldInfo(string name)
         {
-            var field= typeof(StatsRecord).GetField(name);
+            var field = typeof(StatsRecord).GetField(name);
             if (field == null)
                 throw new Exception("Field " + name + " dosent exist in StatRecord");
             return field;

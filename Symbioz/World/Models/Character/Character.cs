@@ -114,7 +114,7 @@ namespace Symbioz.World.Models
             if (HasAlliance)
             {
                 Client.Send(new AllianceMembershipMessage(GetAlliance().GetAllianceInformations(), true));
-                this.HumanOptions.Add(new HumanOptionAlliance(GetAlliance().GetAllianceInformations(),(sbyte)0));
+                this.HumanOptions.Add(new HumanOptionAlliance(GetAlliance().GetAllianceInformations(), (sbyte)0));
                 Client.Character.RefreshOnMapInstance();
             }
         }
@@ -426,6 +426,44 @@ namespace Symbioz.World.Models
             if (sendpackets)
                 RefreshStats();
         }
+
+        public void SubXp(ulong amount, bool sendpackets = true)
+        {
+            if (Record.Level == 1)
+                return;
+            var exp = ExperienceRecord.GetExperienceForLevel((uint)Record.Level);
+            if (Record.Exp - amount <= exp)
+            {
+                Record.Level--;
+                if (Record.Level == 99)
+                {
+                    StatsRecord.ActionPoints--;
+                }
+                StatsRecord.LifePoints -= 5;
+                CurrentStats.LifePoints -= 5;
+                Record.SpellPoints -= 1;
+                Record.StatsPoints -= 5;
+                UpdateBreedSpells(sendpackets);
+                if (sendpackets)
+                {
+                    Client.Character.SendMap(new CharacterLevelUpInformationMessage(Record.Level, Record.Name, (uint)Id));
+                    Client.Send(new CharacterLevelUpMessage(Record.Level));
+                }
+                if (Record.Level == 1)
+                {
+                    Record.Exp = exp;
+                    if (sendpackets)
+                        RefreshStats();
+                    return;
+                }
+                SubXp(amount, sendpackets);
+            }
+            else
+                Record.Exp -= amount;
+            if (sendpackets)
+                RefreshStats();
+        }
+
         public void AddHonor(ushort amount)
         {
             if (Record.AlignmentGrade == 10)
@@ -645,7 +683,7 @@ namespace Symbioz.World.Models
             }
             else
             {
-                Reply("Vous ne possedez pas asser de kamas");
+                Reply("Vous ne possedez pas assez de kamas");
                 return false;
             }
 
@@ -786,12 +824,14 @@ namespace Symbioz.World.Models
             return HasAlliance ? AllianceRecord.GetAlliance(AllianceId) : null;
         }
 
-        public bool HasAlliance {
+        public bool HasAlliance
+        {
             get
             {
                 if (HasGuild)
                 {
-                    if (GuildAllianceRecord.GuildsAlliances.Find(x => x.GuildId == GetGuild().Id) != null){
+                    if (GuildAllianceRecord.GuildsAlliances.Find(x => x.GuildId == GetGuild().Id) != null)
+                    {
                         return true;
                     }
                 }
