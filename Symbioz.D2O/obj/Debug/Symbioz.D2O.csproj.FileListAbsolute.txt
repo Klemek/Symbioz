@@ -25,3 +25,12 @@ C:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz.D2O\bin\Debug\Shader.Protocol.p
 C:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz.D2O\obj\Debug\Symbioz.D2O.csprojResolveAssemblyReference.cache
 C:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz.D2O\obj\Debug\Shader.D2O.dll
 C:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz.D2O\obj\Debug\Shader.D2O.pdb
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.D2O\bin\Debug\Shader.D2O.dll
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.D2O\bin\Debug\Shader.D2O.pdb
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.D2O\bin\Debug\Shader.Helper.dll
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.D2O\bin\Debug\Shader.Protocol.dll
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.D2O\bin\Debug\Shader.Helper.pdb
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.D2O\bin\Debug\Shader.Protocol.pdb
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.D2O\obj\Debug\Symbioz.D2O.csprojResolveAssemblyReference.cache
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.D2O\obj\Debug\Shader.D2O.dll
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.D2O\obj\Debug\Shader.D2O.pdb

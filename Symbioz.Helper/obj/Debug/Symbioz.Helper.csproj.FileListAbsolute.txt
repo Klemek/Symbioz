@@ -23,3 +23,8 @@ C:\Users\Skinz\Desktop\SymbiozRepo\Symbioz.Helper\bin\Debug\Shader.Helper.pdb
 C:\Users\Skinz\Desktop\SymbiozRepo\Symbioz.Helper\obj\Debug\Symbioz.Helper.csprojResolveAssemblyReference.cache
 C:\Users\Skinz\Desktop\SymbiozRepo\Symbioz.Helper\obj\Debug\Shader.Helper.dll
 C:\Users\Skinz\Desktop\SymbiozRepo\Symbioz.Helper\obj\Debug\Shader.Helper.pdb
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.Helper\bin\Debug\Shader.Helper.dll
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.Helper\bin\Debug\Shader.Helper.pdb
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.Helper\obj\Debug\Symbioz.Helper.csprojResolveAssemblyReference.cache
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.Helper\obj\Debug\Shader.Helper.dll
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.Helper\obj\Debug\Shader.Helper.pdb

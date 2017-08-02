@@ -20,3 +20,8 @@ C:\Users\Skinz\Desktop\SymbiozRepo\Symbioz.SSync\bin\Debug\Layout.Accordion.dll
 C:\Users\Skinz\Desktop\SymbiozRepo\Symbioz.SSync\obj\Debug\Symbioz.SSync.csprojResolveAssemblyReference.cache
 C:\Users\Skinz\Desktop\SymbiozRepo\Symbioz.SSync\obj\Debug\Shader.SSync.dll
 C:\Users\Skinz\Desktop\SymbiozRepo\Symbioz.SSync\obj\Debug\Shader.SSync.pdb
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.SSync\bin\Debug\Shader.SSync.dll
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.SSync\bin\Debug\Shader.SSync.pdb
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.SSync\obj\Debug\Symbioz.SSync.csprojResolveAssemblyReference.cache
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.SSync\obj\Debug\Shader.SSync.dll
+D:\Users\Kleme\workspaces\C#\Symbioz\Symbioz.SSync\obj\Debug\Shader.SSync.pdb
