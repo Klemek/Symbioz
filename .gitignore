@@ -14,3 +14,12 @@
 /Symbioz/obj
 /Symbioz.D2O/bin
 /Symbioz.D2O/obj
+/Symbioz.Helper/bin
+/Symbioz.Helper/obj
+/Symbioz.ORM/bin
+!/Symbioz.ORM/bin/Debug/MySql.Data.dll
+/Symbioz.ORM/obj
+/Symbioz.Protocol/bin
+/Symbioz.Protocol/obj
+/Symbioz.SSync/bin
+/Symbioz.SSync/obj
