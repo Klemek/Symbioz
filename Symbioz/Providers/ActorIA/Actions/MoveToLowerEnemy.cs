@@ -1,5 +1,6 @@
 ﻿using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.PathProvider;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Symbioz.Providers.ActorIA.Actions
@@ -10,14 +11,35 @@ namespace Symbioz.Providers.ActorIA.Actions
         public override void Execute(MonsterFighter fighter)
         {
             if (fighter.FighterStats.Stats.MovementPoints <= 0)
+            {
                 return;
+            }
 
-            Fighter lower = fighter.GetOposedTeam().LowerFighter();
+            List<Fighter> fighters = new List<Fighter>();
+            int shorterPath = 9999;
+            fighters = fighter.GetOposedTeam().GetFighters();
             var path = new Pathfinder(fighter.Fight.Map, fighter.CellId);
             path.PutEntities(fighter.Fight.GetAllFighters());
-            var cells = path.FindPath(lower.CellId);
-            if (cells == null || cells.Count() <= 1)
-                return;
+            var cells = path.FindPath(fighters[0].CellId);
+
+            foreach (Fighter fighterTest in fighters)
+            {
+                path = new Pathfinder(fighter.Fight.Map, fighter.CellId);
+                path.PutEntities(fighter.Fight.GetAllFighters());
+                var cellsTemp = path.FindPath(fighterTest.CellId);
+
+                if (cellsTemp == null || cellsTemp.Count() <= 1)
+                {
+                    return;
+                }
+
+                if (cellsTemp.Count() < shorterPath)
+                {
+                    cells = cellsTemp;
+                    shorterPath = cells.Count();
+                }
+            }
+
             cells.Remove(cells.Last());
             cells.Insert(0, fighter.CellId);
             cells = cells.Take(fighter.FighterStats.Stats.MovementPoints + 1).ToList();

@@ -8,15 +8,14 @@ namespace Symbioz.Providers
     /// </summary>
     class MonsterPowerFixer
     {
-        public const int MAX_POWER = 400;
+        public const int MAX_POWER = 1500;
 
         [StartupInvoke("Monsters Power Fix", StartupInvokeType.Internal)]
         public static void FixMonsters()
         {
             foreach (var monster in MonsterGradeRecord.MonstersGrades)
             {
-                monster.Power = (short)(monster.Level * monster.GradeId);
-
+                monster.Power = (short)(monster.Level * 2 + 300);
                 if (monster.Power > MAX_POWER)
                     monster.Power = MAX_POWER;
             }
