@@ -44,7 +44,7 @@ namespace Symbioz.ORM
             return this.m_provider;
         }
 
-        public void LoadTables(Type[] tables)
+        public void LoadTables(Type[] tables, List<String> selected = null)
         {
             var orderedTables = new Type[tables.Length];
             var dontCatch = new List<Type>();
@@ -87,15 +87,20 @@ namespace Symbioz.ORM
 
                 var reader = Activator.CreateInstance(typeof(DatabaseReader<>).MakeGenericType(type));
                 var tableName = (string)reader.GetType().GetProperty("TableName").GetValue(reader);
-                Logger.Log("[Sql] Loading " + tableName + " ...");
-                var method = reader.GetType().GetMethods().FirstOrDefault(x => x.Name == "Read" && x.GetParameters().Length == 1);
-                method.Invoke(reader, new object[] { this.UseProvider() });
 
-                var elements = reader.GetType().GetProperty("Elements").GetValue(reader);
+                if (selected == null || selected.Contains(tableName))
+                {
 
-                var field = type.GetFields().FirstOrDefault(x => x.IsStatic && x.FieldType.IsGenericType && x.FieldType.GetGenericArguments()[0] == type);
-                if (field != null)
-                    field.SetValue(null, elements);
+                    Logger.Log("[Sql] Loading " + tableName + " ...");
+                    var method = reader.GetType().GetMethods().FirstOrDefault(x => x.Name == "Read" && x.GetParameters().Length == 1);
+                    method.Invoke(reader, new object[] { this.UseProvider() });
+
+                    var elements = reader.GetType().GetProperty("Elements").GetValue(reader);
+
+                    var field = type.GetFields().FirstOrDefault(x => x.IsStatic && x.FieldType.IsGenericType && x.FieldType.GetGenericArguments()[0] == type);
+                    if (field != null)
+                        field.SetValue(null, elements);
+                }
                 
             }
         }

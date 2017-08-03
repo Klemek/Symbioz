@@ -4,6 +4,7 @@ using Symbioz.ORM;
 using System;
 using System.Linq;
 using System.Reflection;
+using System.Collections.Generic;
 
 namespace Symbioz.Core
 {
@@ -32,6 +33,16 @@ namespace Symbioz.Core
         {
             _database.LoadTables(GetTypes());
         }
+
+        /// <summary>
+        /// Reload npcs during game (does not add or remove npcs, update their dialogues and actions)
+        /// </summary>
+        [StartupInvoke("!Sql Npcs",StartupInvokeType.Sql)]
+        public static void LoadNpcs()
+        {
+            _database.LoadTables(GetTypes(), new List<string>(new string[] { "NpcsActions", "NpcsReplies", "NpcsSpawns", "NpcsTemplates" }));
+        }
+
         public static void Disconnect()
         {
             _database.CloseProvider();

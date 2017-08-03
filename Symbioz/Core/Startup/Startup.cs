@@ -14,13 +14,14 @@ namespace Symbioz.Core.Startup
     class Startup
     {
 
-        public static void Initialize()
+        public static void Initialize(String keyname = null)
         {
             Logger.Init2("-- Initialisation --");
             Stopwatch watch = Stopwatch.StartNew();
             Assembly assembly = Assembly.GetAssembly(typeof(Startup));
             foreach (var pass in Enum.GetValues(typeof(StartupInvokeType)))
             {
+
                 foreach (var item in assembly.GetTypes())
                 {
                     var methods = item.GetMethods().ToList().FindAll(x => x.GetCustomAttribute(typeof(StartupInvoke), false) != null);
@@ -29,31 +30,33 @@ namespace Symbioz.Core.Startup
                     var concerned = attributes.FindAll(x => x.Key.Type == (StartupInvokeType)pass);
                     foreach (var data in concerned)
                     {
-                        if (!data.Key.Hided)
+                        if (keyname == null && (data.Key.Hided || !data.Key.Name.StartsWith("!")) || (data.Key.Name == keyname))
                         {
-                            Logger.Log("[" + pass + "] Loading " + data.Key.Name + " ...");
-                        }
-                        Delegate del = Delegate.CreateDelegate(typeof(Action), data.Value);
-                        try
-                        {
-                            del.DynamicInvoke();
+
+                            if (!data.Key.Hided)
+                            {
+                                Logger.Log("[" + pass + "] Loading " + data.Key.Name + " ...");
+                            }
+                            Delegate del = Delegate.CreateDelegate(typeof(Action), data.Value);
+                            try
+                            {
+                                del.DynamicInvoke();
 
 
-                        }
-                        catch (Exception e)
-                        {
-                            Logger.Error(e.InnerException.Message);
-                            Logger.Init("Unable to start Symbioz! Press any touch to view full error");
-                            Console.ReadKey();
-                            Logger.Error(e.InnerException.ToString());
-                            Logger.Init("Press any key to exit!");
-                            Console.ReadKey();
-                            Environment.Exit(0);
-                            return;
+                            }
+                            catch (Exception e)
+                            {
+                                Logger.Error(e.InnerException.Message);
+                                Logger.Init("Unable to start Symbioz! Press any touch to view full error");
+                                Console.ReadKey();
+                                Logger.Error(e.InnerException.ToString());
+                                Logger.Init("Press any key to exit!");
+                                Console.ReadKey();
+                                Environment.Exit(0);
+                                return;
+                            }
                         }
                     }
-
-
                 }
             }
             watch.Stop();

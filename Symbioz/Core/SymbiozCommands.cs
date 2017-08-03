@@ -34,6 +34,7 @@ namespace Symbioz.Core
             commands.Add("loadraws", ReloadRaws);
             commands.Add("maxco", MaxCo);
             commands.Add("shutdown", Shutdown);
+            commands.Add("reloadnpcs", ReloadNpcs);
         }
         public static void HandleCommands()
         {
@@ -126,6 +127,14 @@ namespace Symbioz.Core
         {
             WorldServer.Instance.SetServerState(ServerStatusEnum.ONLINE);
             Logger.World("Le serveur est a présent en ligne");
+        }
+
+        /// <summary>
+        /// Reload npcs during game (does not add or remove npcs, update their dialogues and actions)
+        /// </summary>
+        public static void ReloadNpcs()
+        {
+            Startup.Startup.Initialize("!Sql Npcs");
         }
     }
 
