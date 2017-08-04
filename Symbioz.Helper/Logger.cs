@@ -11,21 +11,21 @@ namespace Symbioz
     {
         static void Logo()
         {
-            Init(@"_______ __   __ _______ ______  _____  _____  ______", false);
-            Init2(@"|______   \_/   |  |  | |_____]   |   |     |  ____/", false);
-            Init(@"______|    |    |  |  | |_____] __|__ |_____| /_____",false);
+            Init(@"_______ _______ _______  ______  ______          _______ ", false);
+            Init2(@"|______ |______ |______ |     |  |___   |      | |______ ", false);
+            Init(@"|______ ______| |______ |_____|  |       \____/  ______| ", false);
 
         }
         public const string LogSymbol = "))";
 
         public static void OnStartup()
         {
-            Console.Title = "Symbioz";
+            Console.Title = "Eseofus";
             Logo();
             Logger.Init2("Version " + ConstantsRepertory.VERSION);
             Logger.NewLine();
-            Logger.Init2("Written by Skinz");
-            Logger.Init2("Contributor(s): Matspyder");
+            Logger.Init2("Written by Skinz / Xeos / Klemek");
+            Logger.Init2("Contributor(s): Matspyder / Jikiwa / Relmar");
             Logger.NewLine();
         }
         public static void NewLine()
