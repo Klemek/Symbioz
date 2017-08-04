@@ -53,7 +53,7 @@ namespace Symbioz.World.Models.Fights.Damages
                     elementResistPercent = target.FighterStats.Stats.FireResistPercent + (pvp ? target.FighterStats.Stats.PvPFireResistPercent : 0);
                     break;
                 case ElementType.Neutral:
-                    elementBonus = source.FighterStats.Stats.NeutralDamageBonus;
+                    elementBonus = source.FighterStats.Stats.EarthDamageBonus;
                     elementReduction = (short)(target.FighterStats.Stats.NeutralReduction + (pvp ? target.FighterStats.Stats.PvPNeutralReduction : 0));
                     elementResistPercent = target.FighterStats.Stats.NeutralResistPercent + (pvp ? target.FighterStats.Stats.PvPNeutralResistPercent : 0);
                     break;

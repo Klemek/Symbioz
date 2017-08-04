@@ -8,6 +8,7 @@ namespace Symbioz.World.Models.Fights
     {
         public delegate void NewRoundDelegate(uint round);
         public event NewRoundDelegate OnNewRound;
+        public int memory = 0;
 
         internal List<Fighter> m_fighters = new List<Fighter>();
 
@@ -27,7 +28,73 @@ namespace Symbioz.World.Models.Fights
         }
         public void Sort()
         {
-            m_fighters = m_fighters.OrderByDescending(x => x.GetInitiative()).ToList();
+            Logger.Log("memory = " + memory);
+            Logger.Log("m_fighters.Count = " + m_fighters.Count);
+            if (memory == m_fighters.Count)
+            {
+                List<Fighter> m_fighters_1 = new List<Fighter>();
+                List<Fighter> m_fighters_2 = new List<Fighter>();
+
+                for (int i = 0; i < m_fighters.Count; i++)
+                {
+                    if (m_fighters[i].Team.TeamColor == TeamColorEnum.BLUE_TEAM)
+                    {
+                        m_fighters_1.Add(m_fighters[i]);
+                    }
+                }
+                for (int i = 0; i < m_fighters.Count; i++)
+                {
+                    if (m_fighters[i].Team.TeamColor == TeamColorEnum.RED_TEAM)
+                    {
+                        m_fighters_2.Add(m_fighters[i]);
+                    }
+                }
+
+                m_fighters_1 = m_fighters_1.OrderByDescending(x => x.GetInitiative()).ToList();
+                m_fighters_2 = m_fighters_2.OrderByDescending(x => x.GetInitiative()).ToList();
+                int aux = 0;
+                int aux1 = 0;
+                int aux2 = 0;
+                int num1;
+                int num2;
+
+                if (m_fighters_1[0].GetInitiative() > m_fighters_2[0].GetInitiative())
+                {
+                    num1 = 0;
+                    num2 = 1;
+                }
+                else
+                {
+                    num1 = 1;
+                    num2 = 0;
+                }
+
+                for (int i = 0; i < m_fighters.Count ; i++)
+                {
+                    if ((i % 2 == num1) && (aux1 < m_fighters_1.Count))
+                    {
+                        Logger.Log("aux = " + aux + "size = " + m_fighters.Count);
+                        Logger.Log("aux1 = " + aux1 + "size1 = " + m_fighters_1.Count);
+                        m_fighters[aux] = m_fighters_1[aux1];
+                        aux++;
+                        aux1++;
+                    }
+                    if ((i % 2 == num2) && (aux2 < m_fighters_2.Count))
+                    {
+                        Logger.Log("aux = " + aux + "size = " + m_fighters.Count);
+                        Logger.Log("aux2 = " + aux2 + "size2 = " + m_fighters_2.Count);
+                        m_fighters[aux] = m_fighters_2[aux2];
+                        aux++;
+                        aux2++;
+                    }
+                }
+            }
+            else
+            {
+                m_fighters = m_fighters.OrderByDescending(x => x.GetInitiative()).ToList();
+            }
+            memory = m_fighters.Count;
+            
         }
         public Fighter GetPlayingFighter()
         {

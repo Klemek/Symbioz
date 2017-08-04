@@ -11,7 +11,7 @@ namespace Symbioz.Providers.ActorIA.Actions
         public static void TryCast(MonsterFighter fighter, ushort spellid, Fighter target)
         {
             var level = fighter.GetSpellLevel(spellid);
-            fighter.Fight.Send(new GameActionFightDodgePointLossMessage((ushort)ActionsEnum.ACTION_FIGHT_SPELL_DODGED_PA, fighter.ContextualId, fighter.ContextualId, (ushort)(fighter.Template.GetGrade((sbyte)(fighter.ContextualId)).Power)));
+            
             if (target != null && fighter.FighterStats.Stats.ActionPoints - level.ApCost >= 0)
             {
                 var refreshedTarget = fighter.Fight.GetFighter(target.CellId);

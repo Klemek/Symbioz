@@ -37,7 +37,7 @@ namespace Symbioz.World.Records
             this.TypeId = typeid;
             this.AppearanceId = appearanceid;
             this.Level = level;
-            this.Price = price;
+            this.Price = level;
             this.Weight = weight;
             this.Effects = effects;
             this.Name = name;
