@@ -18,7 +18,6 @@ namespace Symbioz.World.Handlers
         [MessageHandler]
         public static void HandleNpcDialogReply(NpcDialogReplyMessage message, WorldClient client)
         {
-            client.Character.LeaveDialog();
             NpcsRepliesProvider.Handle(client, NpcReplyRecord.GetNpcRepliesData(message.replyId));
         }
     }

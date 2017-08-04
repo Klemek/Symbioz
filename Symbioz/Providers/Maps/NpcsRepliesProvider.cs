@@ -22,9 +22,11 @@ namespace Symbioz.Providers
             NpcReplyActions.Add("Cinematic", Cinematic);
             NpcReplyActions.Add("Align", Align);
             NpcReplyActions.Add("Reset", Reset);
+            NpcReplyActions.Add("Talk", Talk);
         }
         public static void Handle(WorldClient client, List<NpcReplyRecord> records)
         {
+            bool leaveDialog = true;
             if (records.Count == 0)
             {
                 client.Character.NotificationError("No Reply action finded for this npc...");
@@ -32,13 +34,16 @@ namespace Symbioz.Providers
             }
             foreach (var record in records)
             {
+                if (record.ActionType == "Talk")
+                    leaveDialog = false;
                 var handler = NpcReplyActions.FirstOrDefault(x => x.Key == record.ActionType);
                 if (handler.Value != null)
                     handler.Value(client, record);
                 else
                     client.Character.Reply("No reply action finded for this npc... with action " + record.ActionType);
             }
-
+            if(leaveDialog)
+                client.Character.LeaveDialog();
         }
 
         public static List<NpcReplyRecord> GetPossibleReply(WorldClient client, List<NpcReplyRecord> replies)
@@ -112,6 +117,15 @@ namespace Symbioz.Providers
         {
             AlignmentSideEnum side = (AlignmentSideEnum)(sbyte.Parse(reply.OptionalValue1));
             client.Character.SetAlign(side);
+        }
+        static void Talk(WorldClient client, NpcReplyRecord reply)
+        {
+            ushort messageId = ushort.Parse(reply.OptionalValue1);
+
+            List<NpcReplyRecord> replies = NpcsRepliesProvider.GetPossibleReply(client, NpcReplyRecord.GetNpcReplies(messageId));
+            client.Character.CurrentDialogType = DialogTypeEnum.DIALOG_DIALOG;
+
+            client.Send(new NpcDialogQuestionMessage(messageId, new string[] { "0" }, replies.ConvertAll<ushort>(x => (ushort)x.ReplyId)));
         }
 
 
