@@ -776,5 +776,60 @@ namespace Symbioz.World.Models.Fights.Fighters
                 LastPosition.Add(pos);
             }
         }
+
+        public Fighter CloserEnnemy(Fighter fighter)
+        {
+            List<Fighter> fighters = new List<Fighter>();
+            int shorterPath = 9999;
+            fighters = fighter.GetOposedTeam().GetFighters();
+            var path = new Pathfinder(fighter.Fight.Map, fighter.CellId);
+            path.PutEntities(this.Fight.GetAllFighters());
+            var cells = path.FindPath(fighters[0].CellId);
+            Fighter fighterMem = fighter;
+            foreach (Fighter fighterTest in fighters)
+            {
+                path = new Pathfinder(fighter.Fight.Map, fighter.CellId);
+                path.PutEntities(fighter.Fight.GetAllFighters());
+                var cellsTemp = path.FindPath(fighterTest.CellId);
+
+                if (cellsTemp != null && cellsTemp.Count() > 0)
+                {
+                    if (cellsTemp.Count() < shorterPath)
+                    {
+                        cells = cellsTemp;
+                        shorterPath = cells.Count();
+                        fighterMem = fighterTest;
+                    }
+                }
+            }
+            return fighterMem;
+        }
+        public Fighter CloserAlly(Fighter fighter)
+        {
+            List<Fighter> fighters = new List<Fighter>();
+            int shorterPath = 9999;
+            fighters = fighter.Team.GetFighters();
+            var path = new Pathfinder(fighter.Fight.Map, fighter.CellId);
+            path.PutEntities(this.Fight.GetAllFighters());
+            var cells = path.FindPath(fighters[0].CellId);
+            Fighter fighterMem = fighter;
+            foreach (Fighter fighterTest in fighters)
+            {
+                path = new Pathfinder(fighter.Fight.Map, fighter.CellId);
+                path.PutEntities(fighter.Fight.GetAllFighters());
+                var cellsTemp = path.FindPath(fighterTest.CellId);
+
+                if (cellsTemp != null && cellsTemp.Count() > 0)
+                {
+                    if (cellsTemp.Count() < shorterPath)
+                    {
+                        cells = cellsTemp;
+                        shorterPath = cells.Count();
+                        fighterMem = fighterTest;
+                    }
+                }
+            }
+            return fighterMem;
+        }
     }
 }

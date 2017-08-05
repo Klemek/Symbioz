@@ -21,8 +21,9 @@ namespace Symbioz.Providers.ActorIA
 
         protected void NextAction()
         {
-                //try
+            //try
             {
+                Logger.Log("IA joue");
                 Actions[m_action_Index].Execute(m_fighter);
             }
                  //catch (Exception ex)

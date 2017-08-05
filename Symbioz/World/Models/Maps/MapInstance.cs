@@ -13,8 +13,8 @@ namespace Symbioz.World.Models
 {
     public class MapInstance
     {
-        public const sbyte MAX_MONSTERGROUP_PER_MAP = 4;
-        public const sbyte MAX_MONSTER_PER_GROUP = 6;
+        public const sbyte MAX_MONSTERGROUP_PER_MAP = 3;
+        public const sbyte MAX_MONSTER_PER_GROUP = 8;
 
         public List<FightCommonInformations> Fights = new List<FightCommonInformations>();
         public List<InteractiveRecord> Interactives = new List<InteractiveRecord>();

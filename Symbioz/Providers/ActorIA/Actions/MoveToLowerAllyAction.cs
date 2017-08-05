@@ -10,15 +10,16 @@ namespace Symbioz.Providers.ActorIA.Actions
         public override void Execute(MonsterFighter fighter)
         {
             if (fighter.FighterStats.Stats.MovementPoints <= 0)
+            {
                 return;
-
-            Fighter lower = fighter.Team.LowerFighter();
+            }
+            Logger.Log("IA Bouge vers copaing");
+            Fighter closest = fighter.CloserAlly(fighter);
             var path = new Pathfinder(fighter.Fight.Map, fighter.CellId);
             path.PutEntities(fighter.Fight.GetAllFighters());
-            var cells = path.FindPath(lower.CellId);
-            if (cells == null || cells.Count() <= 1)
-                return;
-            cells.Remove(cells.Last());
+            var cells = path.FindPath(closest.CellId);
+            if (cells.Count > 0)
+                cells.Remove(cells.Last());
             cells.Insert(0, fighter.CellId);
             cells = cells.Take(fighter.FighterStats.Stats.MovementPoints + 1).ToList();
             sbyte direction = PathParser.GetDirection(cells.Last());

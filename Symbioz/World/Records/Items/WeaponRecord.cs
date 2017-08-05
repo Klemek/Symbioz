@@ -55,8 +55,8 @@ namespace Symbioz.World.Records.Items
             this.RealWeight = realweight;
             this.Criteria = criteria;
             this.CriticalHitProbability = criticalhitprobability;
-            this.TwoHanded = twohanded;
-            this.Price = price;
+            this.TwoHanded = false;
+            this.Price = level;
             this.ApCost = apcost;
             this.CastInLine = castinline;
             this.Effects = effects;

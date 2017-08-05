@@ -11,9 +11,9 @@ namespace Symbioz.World.Models
 {
     public class MonsterGroup
     {
-        public static int STARS_BONUS_INTERVAL = 300;
-        public static short STARS_BONUS_INCREMENTATION = 15;
-        public static short STARS_BONUS_LIMIT = 100;
+        public static int STARS_BONUS_INTERVAL = 1;
+        public static short STARS_BONUS_INCREMENTATION = 20;
+        public static short STARS_BONUS_LIMIT = 200;
         public const int START_ID = 100000000;
 
         public MonsterGroup(int monstergroupid, List<MonsterSpawnMapRecord> monsters, ushort cellid)

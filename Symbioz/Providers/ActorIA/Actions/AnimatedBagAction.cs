@@ -8,7 +8,7 @@ namespace Symbioz.Providers.ActorIA.Actions
         public override void Execute(MonsterFighter fighter)
         {
             var martyrSpell = fighter.Template.Spells[0];
-            Fighter lower = fighter.Team.LowerFighter();
+            Fighter lower = fighter.CloserAlly(fighter);
             fighter.CastSpellOnTarget(martyrSpell, lower.ContextualId);
         }
     }

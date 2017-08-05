@@ -37,8 +37,8 @@ namespace Symbioz.Providers.Maps
         }
         public void Effectuate()
         {
-            PlacementCells.BlueCells = GetRandomPlacementCells(new List<short>());
-            PlacementCells.RedCells = GetRandomPlacementCells(PlacementCells.BlueCells);
+            PlacementCells.RedCells = GetRandomPlacementCells(new List<short>());
+            PlacementCells.BlueCells = GetRandomPlacementCells(PlacementCells.RedCells);
         }
     }
     public class PlacementCells

@@ -21,7 +21,7 @@ namespace Symbioz.Providers.ActorIA.Actions
         }
         public override void Execute(MonsterFighter fighter)
         {
-            Fighter lower = fighter.GetOposedTeam().LowerFighter();
+            Fighter lower = fighter.CloserEnnemy(fighter);
             if (lower == null)
                 return;
             var spells = fighter.Template.Spells.ConvertAll<SpellRecord>(x => SpellRecord.GetSpell(x));
